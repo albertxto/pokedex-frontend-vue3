@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onMounted, reactive } from 'vue'
 import { useStore } from 'vuex'
-import TableDropdown from '@/components/shared/TableDropdown.vue'
+import { PencilAltIcon, TrashIcon } from '@heroicons/vue/solid'
 
 const store = useStore()
 
@@ -66,8 +66,26 @@ onMounted(() => {
             <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
               {{ user.isEmailVerified }}
             </td>
-            <td class="flex justify-center p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-              <TableDropdown />
+            <td class="flex p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 justify-evenly whitespace-nowrap">
+              <router-link
+                v-slot="{ navigate }"
+                :to="{ name: 'usersEdit', params: { id: user.id } }"
+              >
+                <AppButton
+                  color="info"
+                  size="xs"
+                  @click="navigate"
+                >
+                  <PencilAltIcon class="w-4 h-4" />
+                </AppButton>
+              </router-link>
+
+              <AppButton
+                color="danger"
+                size="xs"
+              >
+                <TrashIcon class="w-4 h-4" />
+              </AppButton>
             </td>
           </tr>
         </template>

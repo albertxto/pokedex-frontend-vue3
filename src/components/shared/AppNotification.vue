@@ -48,11 +48,11 @@ const hasRightSlot = computed(() => slots.right)
         <div class="flex flex-col items-center md:flex-row">
           <CheckCircleIcon
             v-if="isColorSuccess"
-            class="w-10 h-10 md:mr-2"
+            class="w-5 h-5 md:mr-2"
           />
           <ExclamationCircleIcon
             v-if="isColorDanger"
-            class="w-10 h-10 md:mr-2"
+            class="w-5 h-5 md:mr-2"
           />
           <span class="text-center md:text-left">
             <slot />

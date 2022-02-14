@@ -68,7 +68,7 @@ const componentClass = computed(() => {
 </script>
 
 <template>
-  <div class="flex mt-1 rounded-md shadow-sm">
+  <div class="flex rounded-md shadow-sm">
     <span
       v-if="hasLeftSlot"
       class="inline-flex items-center px-3 text-sm text-gray-500 bg-gray-100 border border-r-0 border-gray-300 dark:bg-gray-800 dark:border-gray-400 rounded-l-md"
