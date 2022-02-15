@@ -60,9 +60,9 @@ onMounted(() => {
       </template>
 
       <!-- Name -->
-      <div class="relative w-full mb-3">
+      <div class="relative w-full">
         <label
-          class="block mb-2 text-xs font-bold"
+          class="block mb-4 text-sm font-bold"
           htmlFor="grid-name"
         >
           Name
@@ -75,9 +75,9 @@ onMounted(() => {
       </div>
 
       <!-- Email -->
-      <div class="relative w-full mb-3">
+      <div class="relative w-full mt-6">
         <label
-          class="block mb-2 text-xs font-bold"
+          class="block mb-4 text-sm font-bold"
           htmlFor="grid-email"
         >
           Email
@@ -92,6 +92,7 @@ onMounted(() => {
       <!-- Success Notification -->
       <AppNotification
         v-if="successMessage"
+        class="mt-6"
         color="success"
         @dismiss="dismissSuccessNotification"
       >
@@ -101,6 +102,7 @@ onMounted(() => {
       <!-- Error Notification -->
       <AppNotification
         v-if="errorMessage"
+        class="mt-6"
         color="danger"
         @dismiss="dismissErrorNotification"
       >
@@ -122,7 +124,6 @@ onMounted(() => {
           :to="{ name: 'users' }"
         >
           <AppButton
-            class="ml-3"
             color="danger"
             size="sm"
             @click="navigate"

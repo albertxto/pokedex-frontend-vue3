@@ -35,8 +35,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="flex flex-wrap mt-4">
-    <div class="w-full px-4 mb-12">
+  <div class="flex flex-wrap">
+    <div class="w-full">
       <AppTable
         title="User List"
         :columns="columns"

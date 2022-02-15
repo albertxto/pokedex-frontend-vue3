@@ -14,7 +14,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="relative flex flex-col w-full min-w-0 mb-6 break-words bg-white rounded shadow-lg dark:bg-slate-900">
+  <div class="relative flex flex-col w-full min-w-0 break-words bg-white rounded shadow-lg dark:bg-slate-900">
     <div class="px-4 py-3 mb-0 border-0 rounded-t">
       <div class="flex flex-wrap items-center">
         <div class="relative flex-1 flex-grow w-full max-w-full px-4">

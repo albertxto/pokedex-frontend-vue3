@@ -10,7 +10,7 @@ import HeaderStats from '@/components/headers/HeaderStats.vue'
     <div class="relative md:ml-64">
       <AdminNavbar />
       <HeaderStats />
-      <div class="w-full px-4 py-4 mx-auto h-fit md:px-10">
+      <div class="w-full p-6 mx-auto h-fit md:p-10">
         <router-view />
       </div>
     </div>

@@ -51,9 +51,9 @@ const onSubmit = async () => {
       </template>
 
       <!-- Password -->
-      <div class="relative w-full mb-3">
+      <div class="relative w-full">
         <label
-          class="block mb-2 text-xs font-bold"
+          class="block mb-4 text-sm font-bold"
           htmlFor="grid-password"
         >
           Password
@@ -66,9 +66,9 @@ const onSubmit = async () => {
       </div>
 
       <!-- Confirm Password -->
-      <div class="relative w-full mb-3">
+      <div class="relative w-full mt-6">
         <label
-          class="block mb-2 text-xs font-bold"
+          class="block mb-4 text-sm font-bold"
           htmlFor="grid-confirm-password"
         >
           Confirm Password
@@ -83,6 +83,7 @@ const onSubmit = async () => {
       <!-- Success Notification -->
       <AppNotification
         v-if="successMessage"
+        class="mt-6"
         color="success"
         @dismiss="dismissSuccessNotification"
       >
@@ -92,6 +93,7 @@ const onSubmit = async () => {
       <!-- Error Notification -->
       <AppNotification
         v-if="errorMessage"
+        class="mt-6"
         color="danger"
         @dismiss="dismissErrorNotification"
       >
@@ -107,20 +109,6 @@ const onSubmit = async () => {
         >
           Submit
         </AppButton>
-
-        <router-link
-          v-slot="{ navigate }"
-          :to="{ name: 'users' }"
-        >
-          <AppButton
-            class="ml-3"
-            color="danger"
-            size="sm"
-            @click="navigate"
-          >
-            Back
-          </AppButton>
-        </router-link>
       </template>
     </AppCard>
   </form>

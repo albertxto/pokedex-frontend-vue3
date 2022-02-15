@@ -25,7 +25,7 @@ const hasHeaderSlot = computed(() => slots.header)
       v-if="hasFooterSlot"
       class="flex items-stretch border-t border-gray-100 dark:border-gray-800"
     >
-      <div class="flex items-center px-6 py-3 font-bold grow">
+      <div class="flex items-center gap-3 px-6 py-3 font-bold grow">
         <slot name="footer" />
       </div>
     </footer>
