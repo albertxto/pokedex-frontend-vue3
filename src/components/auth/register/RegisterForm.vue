@@ -1,17 +1,20 @@
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
 import { useStore } from 'vuex'
 
-const router = useRouter()
 const store = useStore()
 
 const name = ref('')
 const email = ref('')
 const password = ref('')
+const successMessage = ref('')
 const errorMessage = ref('')
 
-const dismissNotification = () => {
+const dismissSuccessNotification = () => {
+  successMessage.value = ''
+}
+
+const dismissErrorNotification = () => {
   errorMessage.value = ''
 }
 
@@ -23,14 +26,16 @@ const onSubmit = async () => {
   }
 
   try {
-    const response = await store.dispatch('auth/register', payload)
-    if (response.message) {
-      errorMessage.value = response.message
-    } else {
-      router.push({ name: 'login' })
-    }
+    await store.dispatch('auth/register', payload)
+    name.value = ''
+    email.value = ''
+    password.value = ''
+    errorMessage.value = ''
+    successMessage.value = 'Successfully registered'
   } catch (error) {
-    console.error(error)
+    if (error.response?.data?.message) {
+      errorMessage.value = error.response.data.message
+    }
   }
 }
 </script>
@@ -90,9 +95,17 @@ const onSubmit = async () => {
         class="mt-6"
       >
         <AppNotification
+          v-if="successMessage"
+          color="success"
+          @dismiss="dismissSuccessNotification"
+        >
+          {{ successMessage }}
+        </AppNotification>
+
+        <AppNotification
           v-if="errorMessage"
           color="danger"
-          @dismiss="dismissNotification"
+          @dismiss="dismissErrorNotification"
         >
           {{ errorMessage }}
         </AppNotification>

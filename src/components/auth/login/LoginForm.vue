@@ -21,14 +21,12 @@ const onSubmit = async () => {
   }
 
   try {
-    const response = await store.dispatch('auth/login', payload)
-    if (response.message) {
-      errorMessage.value = response.message
-    } else {
-      router.push({ name: 'users' })
-    }
+    await store.dispatch('auth/login', payload)
+    router.push({ name: 'users' })
   } catch (error) {
-    console.error(error)
+    if (error.response?.data?.message) {
+      errorMessage.value = error.response.data.message
+    }
   }
 }
 </script>
