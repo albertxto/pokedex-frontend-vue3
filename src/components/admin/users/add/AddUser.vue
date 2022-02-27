@@ -1,11 +1,12 @@
 <script setup>
 import { ref } from 'vue'
-import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 
-const route = useRoute()
 const store = useStore()
 
+const email = ref('')
+const name = ref('')
+const role = ref('')
 const password = ref('')
 const confirmPassword = ref('')
 
@@ -34,15 +35,20 @@ const onSubmit = async () => {
   }
 
   const payload = {
-    id: route.params.id,
-    password: password.value
+    email: email.value,
+    name: name.value,
+    password: password.value,
+    role: role.value
   }
   try {
-    const response = await store.dispatch('user/changePasswordById', payload)
+    const response = await store.dispatch('user/addUser', payload)
     if (response?.id) {
-      successMessage.value = 'Password changed successfully'
+      successMessage.value = 'Successfully added user'
 
       // Reset form
+      email.value = ''
+      name.value = ''
+      role.value = ''
       password.value = ''
       confirmPassword.value = ''
     }
@@ -58,11 +64,56 @@ const onSubmit = async () => {
   <form @submit.prevent="onSubmit">
     <AppCard>
       <template #header>
-        Change Password
+        Add User
       </template>
 
-      <!-- Password -->
+      <!-- Name -->
       <div class="relative w-full">
+        <label
+          class="block mb-4 text-sm font-bold"
+          htmlFor="grid-name"
+        >
+          Name
+        </label>
+        <AppInput
+          v-model="name"
+          placeholder="Name"
+          type="text"
+        />
+      </div>
+
+      <!-- Email -->
+      <div class="relative w-full mt-6">
+        <label
+          class="block mb-4 text-sm font-bold"
+          htmlFor="grid-email"
+        >
+          Email
+        </label>
+        <AppInput
+          v-model="email"
+          placeholder="Email"
+          type="text"
+        />
+      </div>
+
+      <!-- Role -->
+      <div class="relative w-full mt-6">
+        <label
+          class="block mb-4 text-sm font-bold"
+          htmlFor="grid-role"
+        >
+          Role
+        </label>
+        <AppInput
+          v-model="role"
+          placeholder="Role"
+          type="text"
+        />
+      </div>
+
+      <!-- Password -->
+      <div class="relative w-full mt-6">
         <label
           class="block mb-4 text-sm font-bold"
           htmlFor="grid-password"
@@ -80,7 +131,7 @@ const onSubmit = async () => {
       <div class="relative w-full mt-6">
         <label
           class="block mb-4 text-sm font-bold"
-          htmlFor="grid-confirm-password"
+          htmlFor="grid-password"
         >
           Confirm Password
         </label>
@@ -120,6 +171,19 @@ const onSubmit = async () => {
         >
           Submit
         </AppButton>
+
+        <router-link
+          v-slot="{ navigate }"
+          :to="{ name: 'users' }"
+        >
+          <AppButton
+            color="danger"
+            size="sm"
+            @click="navigate"
+          >
+            Back
+          </AppButton>
+        </router-link>
       </template>
     </AppCard>
   </form>

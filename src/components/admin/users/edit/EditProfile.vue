@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 
@@ -26,6 +26,10 @@ const name = computed({
 const successMessage = ref('')
 const errorMessage = ref('')
 
+const dismissNotification = () => {
+  successMessage.value = ''
+  errorMessage.value = ''
+}
 const dismissSuccessNotification = () => {
   successMessage.value = ''
 }
@@ -33,15 +37,10 @@ const dismissErrorNotification = () => {
   errorMessage.value = ''
 }
 
-const getUserById = async () => {
-  try {
-    await store.dispatch('user/getUserById', route.params.id)
-  } catch (error) {
-    console.error(error)
-  }
-}
-
 const onSubmit = async () => {
+  // Dismiss all notifications
+  dismissNotification()
+
   const payload = {
     id: route.params.id,
     email: email.value,
@@ -50,7 +49,7 @@ const onSubmit = async () => {
   try {
     const response = await store.dispatch('user/editUser', payload)
     if (response?.id) {
-      successMessage.value = 'Successfully edit user'
+      successMessage.value = 'Successfully updated user'
     }
   } catch (error) {
     if (error.response?.data?.message) {
@@ -58,10 +57,6 @@ const onSubmit = async () => {
     }
   }
 }
-
-onMounted(() => {
-  getUserById()
-})
 </script>
 
 <template>

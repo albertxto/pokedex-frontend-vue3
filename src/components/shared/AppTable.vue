@@ -5,10 +5,6 @@ defineProps({
     default () {
       return []
     }
-  },
-  title: {
-    type: String,
-    default: null
   }
 })
 </script>
@@ -16,16 +12,12 @@ defineProps({
 <template>
   <div class="relative flex flex-col w-full min-w-0 break-words bg-white rounded shadow-lg dark:bg-slate-900">
     <div class="px-4 py-3 mb-0 border-0 rounded-t">
-      <div class="flex flex-wrap items-center">
-        <div class="relative flex-1 flex-grow w-full max-w-full px-4">
-          <h3 class="text-lg font-semibold">
-            {{ title }}
-          </h3>
-        </div>
+      <div class="relative flex flex-wrap items-center w-full max-w-full px-4">
+        <slot name="header" />
       </div>
     </div>
+
     <div class="block w-full overflow-x-auto">
-      <!-- Projects table -->
       <table class="items-center w-full bg-transparent border-collapse">
         <thead>
           <tr>
@@ -40,7 +32,7 @@ defineProps({
           </tr>
         </thead>
         <tbody>
-          <slot name="body" />
+          <slot />
         </tbody>
       </table>
     </div>

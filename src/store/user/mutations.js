@@ -1,3 +1,11 @@
+export function RESET (state) {
+  state.email = ''
+  state.id = ''
+  state.isLoading = false
+  state.name = ''
+  state.role = ''
+}
+
 export function SET_EMAIL (state, payload) {
   if (typeof payload === 'string' && payload) {
     state.email = payload

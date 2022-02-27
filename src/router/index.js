@@ -40,6 +40,11 @@ const routes = [
         component: () => import('@/views/admin/users/index.vue')
       },
       {
+        path: '/admin/users/add',
+        name: 'usersAdd',
+        component: () => import('@/views/admin/users/add.vue')
+      },
+      {
         path: '/admin/users/edit/:id',
         name: 'usersEdit',
         component: () => import('@/views/admin/users/edit.vue')

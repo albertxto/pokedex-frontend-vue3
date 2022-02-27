@@ -2,6 +2,31 @@ import endpoints from '@/config/endpoints'
 import { axiosInstance } from '@/plugins/axios'
 import authHeader from '@/plugins/auth-header'
 
+export function addUser ({ commit, rootGetters }, { email = '', name = '', password = '', role = '' }) {
+  commit('SET_IS_LOADING', true)
+  const accessToken = rootGetters['auth/accessToken']
+  const payload = {
+    email,
+    name,
+    password,
+    role
+  }
+  return new Promise((resolve, reject) => axiosInstance
+    .post('/users', payload, {
+      headers: authHeader(accessToken)
+    })
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      reject(error)
+    })
+    .finally(() => {
+      commit('SET_IS_LOADING', false)
+    })
+  )
+}
+
 export function changePasswordById ({ commit, rootGetters }, { id = '', password = '' }) {
   commit('SET_IS_LOADING', true)
   const accessToken = rootGetters['auth/accessToken']

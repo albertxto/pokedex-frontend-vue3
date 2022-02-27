@@ -1,7 +1,7 @@
 <script setup>
 import { computed, onMounted, reactive } from 'vue'
 import { useStore } from 'vuex'
-import { PencilAltIcon, TrashIcon } from '@heroicons/vue/solid'
+import { PencilAltIcon, PlusIcon, TrashIcon } from '@heroicons/vue/solid'
 
 const store = useStore()
 
@@ -37,11 +37,32 @@ onMounted(() => {
 <template>
   <div class="flex flex-wrap">
     <div class="w-full">
-      <AppTable
-        title="User List"
-        :columns="columns"
-      >
-        <template #body>
+      <AppTable :columns="columns">
+        <template #header>
+          <div class="w-1/2">
+            <h3 class="text-lg font-semibold">
+              User List
+            </h3>
+          </div>
+
+          <div class="w-1/2 text-right">
+            <router-link
+              v-slot="{ navigate }"
+              :to="{ name: 'usersAdd' }"
+            >
+              <AppButton
+                color="success"
+                size="xs"
+                @click="navigate"
+              >
+                <PlusIcon class="w-4 h-4 mr-1" />
+                Add
+              </AppButton>
+            </router-link>
+          </div>
+        </template>
+
+        <template #default>
           <tr v-if="!users.length">
             <td
               class="p-4 px-6 text-xs"
