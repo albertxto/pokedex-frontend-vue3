@@ -1,9 +1,10 @@
+import endpoints from '@/config/endpoints'
 import { axiosInstance } from '@/plugins/axios'
 
 export function getPokemonById ({ commit }, id) {
   commit('SET_IS_LOADING', true)
   return new Promise((resolve, reject) => axiosInstance
-    .get(`${import.meta.env.VITE_API_BASE_URL}/pokedex/${id}`)
+    .get(`${endpoints.POKEDEX}/${id}`)
     .then((response) => {
       const { data } = response
       if (data[0]?.id) commit('SET_ID', data[0].id)

@@ -1,3 +1,4 @@
+import endpoints from '@/config/endpoints'
 import { axiosInstance } from '@/plugins/axios'
 import authHeader from '@/plugins/auth-header'
 
@@ -8,7 +9,7 @@ export function changePasswordById ({ commit, rootGetters }, { id = '', password
     password
   }
   return new Promise((resolve, reject) => axiosInstance
-    .patch(`/users/${id}`, payload, {
+    .patch(`${endpoints.USERS}/${id}`, payload, {
       headers: authHeader(accessToken)
     })
     .then((response) => {
@@ -31,7 +32,7 @@ export function editUser ({ commit, rootGetters }, { email = '', id = '', name =
     name
   }
   return new Promise((resolve, reject) => axiosInstance
-    .patch(`/users/${id}`, payload, {
+    .patch(`${endpoints.USERS}/${id}`, payload, {
       headers: authHeader(accessToken)
     })
     .then((response) => {
@@ -50,7 +51,7 @@ export function getUserById ({ commit, rootGetters }, id) {
   commit('SET_IS_LOADING', true)
   const accessToken = rootGetters['auth/accessToken']
   return new Promise((resolve, reject) => axiosInstance
-    .get(`${import.meta.env.VITE_API_BASE_URL}/users/${id}`, {
+    .get(`${endpoints.USERS}/${id}`, {
       headers: authHeader(accessToken)
     })
     .then((response) => {
@@ -75,7 +76,7 @@ export function getUserList ({ commit, rootGetters }) {
   commit('SET_IS_LOADING', true)
   const accessToken = rootGetters['auth/accessToken']
   return new Promise((resolve, reject) => axiosInstance
-    .get('/users', {
+    .get(endpoints.USERS, {
       headers: authHeader(accessToken)
     })
     .then((response) => {

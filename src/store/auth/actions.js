@@ -1,9 +1,10 @@
+import endpoints from '@/config/endpoints'
 import { axiosInstance } from '@/plugins/axios'
 
 export function login ({ commit }, payload = { email: '', password: '' }) {
   commit('SET_IS_LOADING', true)
   return new Promise((resolve, reject) => axiosInstance
-    .post(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, payload)
+    .post(endpoints.AUTH.LOGIN, payload)
     .then((response) => {
       if (response.data.tokens && response.data.user) {
         const { access, refresh } = response.data.tokens
@@ -30,7 +31,7 @@ export function login ({ commit }, payload = { email: '', password: '' }) {
 export function register ({ commit }, payload) {
   commit('SET_IS_LOADING', true)
   return new Promise((resolve, reject) => axiosInstance
-    .post(`${import.meta.env.VITE_API_BASE_URL}/auth/register`, payload)
+    .post(endpoints.AUTH.REGISTER, payload)
     .then((response) => {
       resolve(response.data)
     })
