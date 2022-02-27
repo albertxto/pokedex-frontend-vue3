@@ -8,7 +8,7 @@ export function changePasswordById ({ commit, rootGetters }, { id = '', password
     password
   }
   return new Promise((resolve, reject) => axiosInstance
-    .patch(`${import.meta.env.VITE_API_BASE_URL}/users/${id}`, payload, {
+    .patch(`/users/${id}`, payload, {
       headers: authHeader(accessToken)
     })
     .then((response) => {
@@ -23,7 +23,7 @@ export function changePasswordById ({ commit, rootGetters }, { id = '', password
   )
 }
 
-export function editProfileById ({ commit, rootGetters }, { email = '', id = '', name = '' }) {
+export function editUser ({ commit, rootGetters }, { email = '', id = '', name = '' }) {
   commit('SET_IS_LOADING', true)
   const accessToken = rootGetters['auth/accessToken']
   const payload = {
@@ -31,7 +31,7 @@ export function editProfileById ({ commit, rootGetters }, { email = '', id = '',
     name
   }
   return new Promise((resolve, reject) => axiosInstance
-    .patch(`${import.meta.env.VITE_API_BASE_URL}/users/${id}`, payload, {
+    .patch(`/users/${id}`, payload, {
       headers: authHeader(accessToken)
     })
     .then((response) => {
@@ -54,7 +54,7 @@ export function getUserById ({ commit, rootGetters }, id) {
       headers: authHeader(accessToken)
     })
     .then((response) => {
-      const { data } = response.data
+      const { data } = response
       if (data?.id) commit('SET_ID', data.id)
       if (data?.name) commit('SET_NAME', data.name)
       if (data?.email) commit('SET_EMAIL', data.email)
@@ -75,7 +75,7 @@ export function getUserList ({ commit, rootGetters }) {
   commit('SET_IS_LOADING', true)
   const accessToken = rootGetters['auth/accessToken']
   return new Promise((resolve, reject) => axiosInstance
-    .get(`${import.meta.env.VITE_API_BASE_URL}/users`, {
+    .get('/users', {
       headers: authHeader(accessToken)
     })
     .then((response) => {

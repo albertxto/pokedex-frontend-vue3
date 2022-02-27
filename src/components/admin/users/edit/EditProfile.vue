@@ -1,29 +1,41 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 
 const route = useRoute()
 const store = useStore()
 
-const errorMessage = ref('')
-const email = ref('')
-const name = ref('')
-const successMessage = ref('')
+const email = computed({
+  get () {
+    return store.getters['user/email']
+  },
+  set (value) {
+    store.commit('user/SET_EMAIL', value)
+  }
+})
+const name = computed({
+  get () {
+    return store.getters['user/name']
+  },
+  set (value) {
+    store.commit('user/SET_NAME', value)
+  }
+})
 
-const dismissErrorNotification = () => {
-  errorMessage.value = ''
-}
+const successMessage = ref('')
+const errorMessage = ref('')
 
 const dismissSuccessNotification = () => {
   successMessage.value = ''
 }
+const dismissErrorNotification = () => {
+  errorMessage.value = ''
+}
 
 const getUserById = async () => {
   try {
-    const response = await store.dispatch('user/getUserById', route.params.id)
-    if (response?.email) email.value = response.email
-    if (response?.name) name.value = response.name
+    await store.dispatch('user/getUserById', route.params.id)
   } catch (error) {
     console.error(error)
   }
@@ -36,14 +48,14 @@ const onSubmit = async () => {
     name: name.value
   }
   try {
-    const response = await store.dispatch('user/editProfileById', payload)
-    if (response?.message) {
-      errorMessage.value = response.message
-    } else if (response?.id) {
-      successMessage.value = 'Successfully edit profile'
+    const response = await store.dispatch('user/editUser', payload)
+    if (response?.id) {
+      successMessage.value = 'Successfully edit user'
     }
   } catch (error) {
-    console.error(error)
+    if (error.response?.data?.message) {
+      errorMessage.value = error.response.data.message
+    }
   }
 }
 

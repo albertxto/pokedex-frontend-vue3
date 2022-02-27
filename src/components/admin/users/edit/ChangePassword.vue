@@ -6,22 +6,23 @@ import { useStore } from 'vuex'
 const route = useRoute()
 const store = useStore()
 
-const confirmPassword = ref('')
-const errorMessage = ref('')
 const password = ref('')
-const successMessage = ref('')
+const confirmPassword = ref('')
 
-const dismissErrorNotification = () => {
-  errorMessage.value = ''
-}
+const successMessage = ref('')
+const errorMessage = ref('')
 
 const dismissSuccessNotification = () => {
   successMessage.value = ''
+}
+const dismissErrorNotification = () => {
+  errorMessage.value = ''
 }
 
 const onSubmit = async () => {
   if (password.value !== confirmPassword.value) {
     errorMessage.value = 'Password must be the same as confirm password'
+    return
   }
 
   const payload = {
@@ -30,15 +31,16 @@ const onSubmit = async () => {
   }
   try {
     const response = await store.dispatch('user/changePasswordById', payload)
-    if (response?.message) {
-      errorMessage.value = response.message
-    } else if (response?.id) {
+    if (response?.id) {
       successMessage.value = 'Successfully change password'
       confirmPassword.value = ''
       password.value = ''
+      errorMessage.value = ''
     }
   } catch (error) {
-    console.error(error)
+    if (error.response?.data?.message) {
+      errorMessage.value = error.response.data.message
+    }
   }
 }
 </script>
