@@ -105,10 +105,17 @@ const onSubmit = async () => {
         >
           Role
         </label>
-        <AppInput
+        <AppRadio
           v-model="role"
-          placeholder="Role"
-          type="text"
+          name="role"
+          label="Admin"
+          val="admin"
+        />
+        <AppRadio
+          v-model="role"
+          name="role"
+          label="User"
+          val="user"
         />
       </div>
 
