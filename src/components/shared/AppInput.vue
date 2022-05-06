@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref, useSlots } from 'vue'
 import { EyeIcon, EyeOffIcon } from '@heroicons/vue/solid'
-import { colorRingFocus } from '@/config/colors'
+import { colorsRingFocus } from '@/config/colors'
 
 const props = defineProps({
   borderless: {
@@ -53,7 +53,7 @@ const isTypePassword = computed(() => props.type === 'password')
 
 const componentClass = computed(() => {
   const base = [
-    colorRingFocus,
+    colorsRingFocus.primary,
     props.borderless ? 'border-0' : 'border',
     props.transparent ? 'bg-transparent' : 'bg-white'
   ]

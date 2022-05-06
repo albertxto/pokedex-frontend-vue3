@@ -14,6 +14,10 @@ export function isLoading (state) {
   return state.isLoading
 }
 
+export function isShowModal (state) {
+  return state.isShowModal
+}
+
 export function list (state) {
   return state.list
 }

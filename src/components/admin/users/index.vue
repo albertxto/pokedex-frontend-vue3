@@ -1,9 +1,12 @@
 <script setup>
-import { computed, onMounted, reactive } from 'vue'
-import { useStore } from 'vuex'
+import { computed, defineAsyncComponent, reactive } from 'vue'
 import { PencilAltIcon, PlusIcon, TrashIcon } from '@heroicons/vue/solid'
+import { useUser } from '@/composables/user.js'
+import store from '@/store'
 
-const store = useStore()
+const DeleteUserModal = defineAsyncComponent(() => import('@/components/admin/users/delete/DeleteUserModal.vue'))
+
+const { getUserList, openModal, users } = useUser()
 
 const columns = reactive([
   {
@@ -23,15 +26,13 @@ const columns = reactive([
   }
 ])
 
-const users = computed(() => store.getters['user/list'])
+const currentUser = computed(() => store.getters['auth/currentUser'])
 
-const getUserList = async () => {
-  await store.dispatch('user/getUserList')
+const isShowDeleteButton = (userId = '') => {
+  return currentUser.value.id !== userId
 }
 
-onMounted(() => {
-  getUserList()
-})
+getUserList()
 </script>
 
 <template>
@@ -87,7 +88,7 @@ onMounted(() => {
             <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
               {{ user.isEmailVerified }}
             </td>
-            <td class="flex p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 justify-evenly whitespace-nowrap">
+            <td class="flex gap-3 p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
               <router-link
                 v-slot="{ navigate }"
                 :to="{ name: 'usersEdit', params: { id: user.id } }"
@@ -102,8 +103,10 @@ onMounted(() => {
               </router-link>
 
               <AppButton
+                v-if="isShowDeleteButton(user.id)"
                 color="danger"
                 size="xs"
+                @click="openModal(user.id, user.email)"
               >
                 <TrashIcon class="w-4 h-4" />
               </AppButton>
@@ -113,4 +116,6 @@ onMounted(() => {
       </AppTable>
     </div>
   </div>
+
+  <DeleteUserModal />
 </template>

@@ -8,11 +8,14 @@ import AppButton from '@/components/shared/AppButton.vue'
 import AppCard from '@/components/shared/AppCard.vue'
 import AppCheckbox from '@/components/shared/AppCheckbox.vue'
 import AppInput from '@/components/shared/AppInput.vue'
+import AppModal from '@/components/shared/AppModal.vue'
 import AppNotification from '@/components/shared/AppNotification.vue'
 import AppRadio from '@/components/shared/AppRadio.vue'
 import AppTab from '@/components/shared/AppTab.vue'
 import AppTable from '@/components/shared/AppTable.vue'
 import AppTabs from '@/components/shared/AppTabs.vue'
+
+import { parseJwt } from '@/utils/stringFormat.js'
 
 // Init dark mode
 if ((!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches) || localStorage.getItem('darkMode') === 'true') {
@@ -21,7 +24,15 @@ if ((!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-sche
 
 // Init access token
 if (localStorage.getItem('accessToken')) {
-  store.commit('auth/SET_ACCESS_TOKEN', localStorage.getItem('accessToken'))
+  const accessToken = localStorage.getItem('accessToken')
+  store.commit('auth/SET_ACCESS_TOKEN', accessToken)
+
+  // Parse JWT payload
+  const currentUser = parseJwt(accessToken)
+  store.commit('auth/SET_CURRENT_USER_EMAIL', currentUser.email)
+  store.commit('auth/SET_CURRENT_USER_ID', currentUser.sub)
+  store.commit('auth/SET_CURRENT_USER_NAME', currentUser.name)
+  store.commit('auth/SET_CURRENT_USER_ROLE', currentUser.role)
 }
 
 // Init refresh token
@@ -42,6 +53,7 @@ app.component('AppButton', AppButton)
 app.component('AppCard', AppCard)
 app.component('AppCheckbox', AppCheckbox)
 app.component('AppInput', AppInput)
+app.component('AppModal', AppModal)
 app.component('AppNotification', AppNotification)
 app.component('AppRadio', AppRadio)
 app.component('AppTab', AppTab)

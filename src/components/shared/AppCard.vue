@@ -7,7 +7,7 @@ const hasHeaderSlot = computed(() => slots.header)
 </script>
 
 <template>
-  <div class="relative flex flex-col w-full min-w-0 break-words border-0 rounded-lg shadow-lg bg-slate-200 dark:bg-slate-900">
+  <div class="relative flex flex-col w-full min-w-0 break-words bg-white border-0 rounded-lg shadow-lg dark:bg-slate-900">
     <header
       v-if="hasHeaderSlot"
       class="flex items-stretch border-b border-gray-100 dark:border-gray-800"

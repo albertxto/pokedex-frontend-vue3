@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import { RefreshIcon } from '@heroicons/vue/outline'
 import { getButtonColor } from '@/config/colors'
 
 const props = defineProps({
@@ -8,6 +9,10 @@ const props = defineProps({
     default: 'white'
   },
   disabled: {
+    type: Boolean,
+    default: false
+  },
+  loading: {
     type: Boolean,
     default: false
   },
@@ -50,11 +55,15 @@ const componentClass = computed(() => {
 
 <template>
   <button
-    class="inline-flex items-center justify-center font-bold uppercase transition-colors duration-150 border rounded cursor-pointer whitespace-nowrap focus:outline-none focus:ring-1"
+    class="inline-flex items-center justify-center font-bold uppercase transition-colors duration-150 border rounded cursor-pointer whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2"
     :class="componentClass"
     :disabled="disabled"
     :type="type"
   >
-    <slot />
+    <RefreshIcon
+      v-if="loading"
+      class="w-4 h-4 animate-spin"
+    />
+    <slot v-else />
   </button>
 </template>

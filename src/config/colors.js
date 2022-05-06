@@ -64,13 +64,22 @@ export const colorsOutlineHover = {
   white: 'hover:bg-gray-100 hover:text-gray-900 dark:hover:text-gray-900'
 }
 
-export const colorRingFocus = 'focus:ring-indigo-500 focus:border-indigo-500'
+export const colorsRingFocus = {
+  danger: 'focus:ring-red-500',
+  dark: 'focus:ring-slate-700',
+  info: 'focus:ring-blue-500',
+  light: 'focus:ring-indigo-500',
+  primary: 'focus:ring-indigo-500',
+  success: 'focus:ring-emerald-500',
+  warning: 'focus:ring-yellow-500',
+  white: 'focus:ring-indigo-500'
+}
 
 export const getButtonColor = (color, isOutlined, hasHover) => {
   const base = [
     isOutlined ? colorsText[color] : colorsBg[color],
     colorsBorders[color],
-    colorRingFocus
+    colorsRingFocus[color]
   ]
 
   if (hasHover) {

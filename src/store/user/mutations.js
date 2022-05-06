@@ -2,6 +2,7 @@ export function RESET (state) {
   state.email = ''
   state.id = ''
   state.isLoading = false
+  state.isShowModal = false
   state.name = ''
   state.role = ''
 }
@@ -35,6 +36,14 @@ export function SET_IS_LOADING (state, payload) {
     state.isLoading = payload
   } else {
     state.isLoading = false
+  }
+}
+
+export function SET_IS_SHOW_MODAL (state, payload) {
+  if (typeof payload === 'boolean') {
+    state.isShowModal = payload
+  } else {
+    state.isShowModal = false
   }
 }
 

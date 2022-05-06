@@ -49,6 +49,25 @@ export function changePasswordById ({ commit, rootGetters }, { id = '', password
   )
 }
 
+export function deleteUser ({ commit, rootGetters }, id = '') {
+  commit('SET_IS_LOADING', true)
+  const accessToken = rootGetters['auth/accessToken']
+  return new Promise((resolve, reject) => axiosInstance
+    .delete(`${endpoints.USERS}/${id}`, {
+      headers: authHeader(accessToken)
+    })
+    .then((response) => {
+      resolve(response.data)
+    })
+    .catch((error) => {
+      reject(error)
+    })
+    .finally(() => {
+      commit('SET_IS_LOADING', false)
+    })
+  )
+}
+
 export function editUser ({ commit, rootGetters }, { email = '', id = '', name = '' }) {
   commit('SET_IS_LOADING', true)
   const accessToken = rootGetters['auth/accessToken']

@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { colorRingFocus } from '@/config/colors'
+import { colorsRingFocus } from '@/config/colors'
 
 const props = defineProps({
   modelValue: {
@@ -24,7 +24,7 @@ const computedValue = computed({
 
 const componentClass = computed(() => {
   const base = [
-    colorRingFocus
+    colorsRingFocus.primary
   ]
   return base
 })

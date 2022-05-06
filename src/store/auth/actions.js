@@ -8,10 +8,15 @@ export function login ({ commit }, payload = { email: '', password: '' }) {
     .then((response) => {
       if (response.data.tokens && response.data.user) {
         const { access, refresh } = response.data.tokens
+        const { email, id, name, role } = response.data.user
 
-        // Set token to store
+        // Set token and current user to store
         commit('SET_ACCESS_TOKEN', access.token)
         commit('SET_REFRESH_TOKEN', refresh.token)
+        commit('SET_CURRENT_USER_EMAIL', email)
+        commit('SET_CURRENT_USER_ID', id)
+        commit('SET_CURRENT_USER_NAME', name)
+        commit('SET_CURRENT_USER_ROLE', role)
 
         // Set token to local storage
         localStorage.setItem('accessToken', access.token)
