@@ -1,8 +1,10 @@
 export default {
   about: '',
+  height: 0,
   id: '',
   image: '',
   isLoading: true,
   name: '',
-  types: []
+  types: [],
+  weight: 0
 }

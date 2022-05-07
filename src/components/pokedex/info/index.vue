@@ -1,24 +1,13 @@
 <script setup>
-import { onMounted } from 'vue'
-import { useRoute } from 'vue-router'
-import { useStore } from 'vuex'
-import PokedexBackground from '@/components/pokedex/info/PokedexBackground.vue'
-import PokedexSlider from '@/components/pokedex/info/PokedexSlider.vue'
+import { defineAsyncComponent } from 'vue'
+import { usePokemon } from '@/composables/pokemon'
 
-const route = useRoute()
-const store = useStore()
+const PokedexBackground = defineAsyncComponent(() => import('@/components/pokedex/info/PokedexBackground.vue'))
+const PokedexSlider = defineAsyncComponent(() => import('@/components/pokedex/info/PokedexSlider.vue'))
 
-const getPokemonById = () => {
-  try {
-    store.dispatch('pokemon/getPokemonById', route.params.id)
-  } catch (error) {
-    console.error(error)
-  }
-}
+const { getPokemonById } = usePokemon()
 
-onMounted(() => {
-  getPokemonById()
-})
+getPokemonById()
 </script>
 
 <template>

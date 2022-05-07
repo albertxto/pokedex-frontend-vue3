@@ -6,6 +6,14 @@ export function SET_ABOUT (state, payload) {
   }
 }
 
+export function SET_HEIGHT (state, payload) {
+  if (typeof payload === 'number' && payload > 0) {
+    state.height = payload
+  } else {
+    state.height = 0
+  }
+}
+
 export function SET_ID (state, payload) {
   if (typeof payload === 'number' && payload > 0) {
     state.id = payload
@@ -43,5 +51,13 @@ export function SET_TYPES (state, payload) {
     state.types = payload
   } else {
     state.types = []
+  }
+}
+
+export function SET_WEIGHT (state, payload) {
+  if (typeof payload === 'number' && payload > 0) {
+    state.weight = payload
+  } else {
+    state.weight = 0
   }
 }

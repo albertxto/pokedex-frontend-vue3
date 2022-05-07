@@ -2,6 +2,10 @@ export function about (state) {
   return state.about
 }
 
+export function height (state) {
+  return state.height
+}
+
 export function id (state) {
   return state.id.toString().padStart(3, '0')
 }
@@ -20,4 +24,8 @@ export function name (state) {
 
 export function types (state) {
   return state.types
+}
+
+export function weight (state) {
+  return state.weight
 }

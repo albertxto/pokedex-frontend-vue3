@@ -16,6 +16,8 @@ export function getPokemonById ({ commit }, id) {
         const types = data[0].types.map((pokemonType) => pokemonType.type.name)
         commit('SET_TYPES', types)
       }
+      if (data[0]?.height) commit('SET_HEIGHT', data[0].height)
+      if (data[0]?.weight) commit('SET_WEIGHT', data[0].weight)
       if (data[1]?.flavor_text_entries.length) {
         const about = data[1].flavor_text_entries.find((flavorText) => (
           flavorText.language.name === 'en' &&

@@ -11,7 +11,6 @@ import AppInput from '@/components/shared/AppInput.vue'
 import AppModal from '@/components/shared/AppModal.vue'
 import AppNotification from '@/components/shared/AppNotification.vue'
 import AppRadio from '@/components/shared/AppRadio.vue'
-import AppTab from '@/components/shared/AppTab.vue'
 import AppTable from '@/components/shared/AppTable.vue'
 import AppTabs from '@/components/shared/AppTabs.vue'
 
@@ -56,7 +55,6 @@ app.component('AppInput', AppInput)
 app.component('AppModal', AppModal)
 app.component('AppNotification', AppNotification)
 app.component('AppRadio', AppRadio)
-app.component('AppTab', AppTab)
 app.component('AppTable', AppTable)
 app.component('AppTabs', AppTabs)
 
