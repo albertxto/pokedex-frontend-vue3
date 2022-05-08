@@ -17,7 +17,7 @@ export const usePokemon = () => {
   const pokemonWeight = computed(() => store.getters['pokemon/weight'])
 
   // Method
-  const calculatePokemonBaseStatPercentage = (stat = 0) => (stat * 100 / 255).toFixed(2)
+  const calculatePokemonBaseStatPercentage = (stat = 0) => parseFloat((stat * 100 / 255).toFixed(2))
 
   const getPokemonById = () => {
     try {
