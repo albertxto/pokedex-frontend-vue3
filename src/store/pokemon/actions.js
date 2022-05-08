@@ -48,6 +48,17 @@ export function getPokemonById ({ commit }, id) {
       if (data[0]?.base_experience) commit('SET_BASE_EXPERIENCE', data[0].base_experience)
       if (data[1]?.base_happiness) commit('SET_BASE_HAPPINESS', data[1].base_happiness)
 
+      // Base Stats
+      if (data[0]?.stats?.length) {
+        const baseStats = data[0].stats.map((status) => {
+          return {
+            label: status.stat.name,
+            value: status.base_stat
+          }
+        })
+        commit('SET_BASE_STATS', baseStats)
+      }
+
       resolve(response.data)
     })
     .catch((error) => {

@@ -10,6 +10,10 @@ export function baseHappiness (state) {
   return state.baseHappiness
 }
 
+export function baseStats (state) {
+  return state.baseStats
+}
+
 export function eggGroups (state) {
   return state.eggGroups.join(', ')
 }

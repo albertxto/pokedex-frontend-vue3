@@ -1,4 +1,13 @@
-export default {
+export const stats = {
+  hp: 'HP',
+  attack: 'Attack',
+  defense: 'Defense',
+  'special-attack': 'Sp. Atk',
+  'special-defense': 'Sp. Def',
+  speed: 'Speed'
+}
+
+export const types = {
   bug: {
     color: 'bg-lime-600'
   },

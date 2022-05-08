@@ -8,6 +8,7 @@ import AppButton from '@/components/shared/AppButton.vue'
 import AppCard from '@/components/shared/AppCard.vue'
 import AppCheckbox from '@/components/shared/AppCheckbox.vue'
 import AppInput from '@/components/shared/AppInput.vue'
+import AppLinearProgress from '@/components/shared/AppLinearProgress.vue'
 import AppModal from '@/components/shared/AppModal.vue'
 import AppNotification from '@/components/shared/AppNotification.vue'
 import AppRadio from '@/components/shared/AppRadio.vue'
@@ -52,6 +53,7 @@ app.component('AppButton', AppButton)
 app.component('AppCard', AppCard)
 app.component('AppCheckbox', AppCheckbox)
 app.component('AppInput', AppInput)
+app.component('AppLinearProgress', AppLinearProgress)
 app.component('AppModal', AppModal)
 app.component('AppNotification', AppNotification)
 app.component('AppRadio', AppRadio)

@@ -22,6 +22,14 @@ export function SET_BASE_HAPPINESS (state, payload) {
   }
 }
 
+export function SET_BASE_STATS (state, payload) {
+  if (Array.isArray(payload) && payload.length) {
+    state.baseStats = payload
+  } else {
+    state.baseStats = []
+  }
+}
+
 export function SET_EGG_GROUPS (state, payload) {
   if (Array.isArray(payload) && payload.length) {
     state.eggGroups = payload

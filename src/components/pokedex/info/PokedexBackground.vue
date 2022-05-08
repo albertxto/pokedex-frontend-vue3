@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import pokemonTypes from '@/config/pokemonTypes'
+import { types as pokemonTypes } from '@/config/pokemon'
 
 const store = useStore()
 

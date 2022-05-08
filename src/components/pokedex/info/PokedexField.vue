@@ -9,7 +9,7 @@ defineProps({
 
 <template>
   <div class="flex flex-wrap">
-    <div class="w-4/12 text-slate-400 sm:w-3/12">
+    <div class="w-4/12 capitalize text-slate-400 sm:w-3/12">
       {{ label }}
     </div>
 

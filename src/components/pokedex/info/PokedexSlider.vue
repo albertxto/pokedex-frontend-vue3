@@ -4,6 +4,7 @@ import { defineAsyncComponent, reactive, ref } from 'vue'
 const PokeballDecoration = defineAsyncComponent(() => import('@/components/pokedex/info/PokeballDecoration.vue'))
 const PokemonImage = defineAsyncComponent(() => import('@/components/pokedex/info/PokemonImage.vue'))
 const PokemonAbout = defineAsyncComponent(() => import('@/components/pokedex/info/about/index.vue'))
+const PokemonBaseStats = defineAsyncComponent(() => import('@/components/pokedex/info/baseStats/index.vue'))
 
 const tab = ref('ABOUT')
 const tabs = reactive([
@@ -30,6 +31,7 @@ const onChangeTab = (newValue = 'ABOUT') => {
 }
 
 const isShowTabAbout = () => tab.value === 'ABOUT'
+const isShowTabBaseStats = () => tab.value === 'STATS'
 </script>
 
 <template>
@@ -52,6 +54,7 @@ const isShowTabAbout = () => tab.value === 'ABOUT'
           <div class="flex flex-wrap justify-center mt-7 sm:mt-10">
             <div class="w-full lg:w-9/12">
               <PokemonAbout v-if="isShowTabAbout()" />
+              <PokemonBaseStats v-if="isShowTabBaseStats()" />
             </div>
           </div>
         </div>
