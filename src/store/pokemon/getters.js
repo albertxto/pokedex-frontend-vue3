@@ -2,8 +2,98 @@ export function about (state) {
   return state.about
 }
 
+export function baseExperience (state) {
+  return state.baseExperience
+}
+
+export function baseHappiness (state) {
+  return state.baseHappiness
+}
+
+export function eggGroups (state) {
+  return state.eggGroups.join(', ')
+}
+
+export function genders (state) {
+  const genderRate = state.genderRate
+  switch (genderRate) {
+    case 0:
+      return [
+        {
+          label: 'MALE',
+          value: '100%'
+        },
+        {
+          label: 'FEMALE',
+          value: '0%'
+        }
+      ]
+    case 1:
+      return [
+        {
+          label: 'MALE',
+          value: '87.5%'
+        },
+        {
+          label: 'FEMALE',
+          value: '12.5%'
+        }
+      ]
+    case 2:
+      return [
+        {
+          label: 'MALE',
+          value: '75%'
+        },
+        {
+          label: 'FEMALE',
+          value: '25%'
+        }
+      ]
+    case 4:
+      return [
+        {
+          label: 'MALE',
+          value: '50%'
+        },
+        {
+          label: 'FEMALE',
+          value: '50%'
+        }
+      ]
+    case 6:
+      return [
+        {
+          label: 'MALE',
+          value: '25%'
+        },
+        {
+          label: 'FEMALE',
+          value: '75%'
+        }
+      ]
+    case 8:
+      return [
+        {
+          label: 'MALE',
+          value: '0%'
+        },
+        {
+          label: 'FEMALE',
+          value: '100%'
+        }
+      ]
+    default:
+      return 'Genderless'
+  }
+}
+
+export function genderRate (state) {
+  return state.genderRate
+}
+
 export function height (state) {
-  return state.height
+  return `${state.height * 10} cm`
 }
 
 export function id (state) {
@@ -27,5 +117,5 @@ export function types (state) {
 }
 
 export function weight (state) {
-  return state.weight
+  return `${state.weight / 10} kg`
 }

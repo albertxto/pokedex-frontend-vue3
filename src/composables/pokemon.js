@@ -8,6 +8,10 @@ export const usePokemon = () => {
 
   // Computed
   const pokemonAbout = computed(() => store.getters['pokemon/about'])
+  const pokemonBaseExperience = computed(() => store.getters['pokemon/baseExperience'])
+  const pokemonBaseHappiness = computed(() => store.getters['pokemon/baseHappiness'])
+  const pokemonEggGroups = computed(() => store.getters['pokemon/eggGroups'])
+  const pokemonGenders = computed(() => store.getters['pokemon/genders'])
   const pokemonHeight = computed(() => store.getters['pokemon/height'])
   const pokemonWeight = computed(() => store.getters['pokemon/weight'])
 
@@ -23,6 +27,10 @@ export const usePokemon = () => {
   return {
     getPokemonById,
     pokemonAbout,
+    pokemonBaseExperience,
+    pokemonBaseHappiness,
+    pokemonEggGroups,
+    pokemonGenders,
     pokemonHeight,
     pokemonWeight
   }
