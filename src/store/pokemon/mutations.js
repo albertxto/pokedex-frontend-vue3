@@ -1,3 +1,9 @@
+export function PUSH_EVOLUTION (state, payload) {
+  if (typeof payload === 'object') {
+    state.evolutions.push(payload)
+  }
+}
+
 export function SET_ABOUT (state, payload) {
   if (typeof payload === 'string' && payload) {
     state.about = payload
@@ -38,6 +44,22 @@ export function SET_EGG_GROUPS (state, payload) {
   }
 }
 
+export function SET_EVOLUTION_CHAIN_ID (state, payload) {
+  if (typeof payload === 'number' && payload > 0) {
+    state.evolutionChainId = payload
+  } else {
+    state.evolutionChainId = 0
+  }
+}
+
+export function SET_EVOLUTIONS (state, payload) {
+  if (Array.isArray(payload) && payload.length) {
+    state.evolutions = payload
+  } else {
+    state.evolutions = []
+  }
+}
+
 export function SET_GENDER_RATE (state, payload) {
   if (typeof payload === 'number') {
     state.genderRate = payload
@@ -75,6 +97,14 @@ export function SET_IS_LOADING (state, payload) {
     state.isLoading = payload
   } else {
     state.isLoading = false
+  }
+}
+
+export function SET_IS_LOADING_EVOLUTION (state, payload) {
+  if (typeof payload === 'boolean') {
+    state.isLoadingEvolution = payload
+  } else {
+    state.isLoadingEvolution = false
   }
 }
 

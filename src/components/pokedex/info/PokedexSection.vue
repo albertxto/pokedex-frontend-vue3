@@ -1,9 +1,27 @@
 <script setup>
-defineProps({
+import { computed } from 'vue'
+
+const props = defineProps({
   label: {
     type: String,
     default: ''
+  },
+  size: {
+    type: String,
+    default: 'sm'
   }
+})
+
+const componentClass = computed(() => {
+  let size = ''
+  switch (props.size) {
+    case 'md':
+      size = 'gap-6'
+      break
+    default:
+      size = 'gap-3'
+  }
+  return size
 })
 </script>
 
@@ -13,7 +31,10 @@ defineProps({
       {{ label }}
     </div>
 
-    <div class="flex flex-col gap-3">
+    <div
+      class="flex flex-col"
+      :class="componentClass"
+    >
       <slot />
     </div>
   </div>

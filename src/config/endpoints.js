@@ -3,6 +3,7 @@ export default {
     LOGIN: '/auth/login',
     REGISTER: '/auth/register'
   },
+  EVOLUTION_CHAIN: '/pokedex/evolution-chain',
   POKEDEX: '/pokedex',
   USERS: '/users'
 }

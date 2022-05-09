@@ -5,6 +5,7 @@ const PokeballDecoration = defineAsyncComponent(() => import('@/components/poked
 const PokemonImage = defineAsyncComponent(() => import('@/components/pokedex/info/PokemonImage.vue'))
 const PokemonAbout = defineAsyncComponent(() => import('@/components/pokedex/info/about/index.vue'))
 const PokemonBaseStats = defineAsyncComponent(() => import('@/components/pokedex/info/baseStats/index.vue'))
+const PokemonEvolution = defineAsyncComponent(() => import('@/components/pokedex/info/evolution/index.vue'))
 
 const tab = ref('ABOUT')
 const tabs = reactive([
@@ -21,6 +22,7 @@ const tabs = reactive([
     value: 'EVOLUTION'
   },
   {
+    disable: true,
     label: 'Moves',
     value: 'MOVES'
   }
@@ -32,6 +34,7 @@ const onChangeTab = (newValue = 'ABOUT') => {
 
 const isShowTabAbout = () => tab.value === 'ABOUT'
 const isShowTabBaseStats = () => tab.value === 'STATS'
+const isShowTabEvolution = () => tab.value === 'EVOLUTION'
 </script>
 
 <template>
@@ -53,8 +56,11 @@ const isShowTabBaseStats = () => tab.value === 'STATS'
 
           <div class="flex flex-wrap justify-center mt-7 sm:mt-10">
             <div class="w-full lg:w-9/12">
-              <PokemonAbout v-if="isShowTabAbout()" />
-              <PokemonBaseStats v-if="isShowTabBaseStats()" />
+              <KeepAlive>
+                <PokemonAbout v-if="isShowTabAbout()" />
+                <PokemonBaseStats v-else-if="isShowTabBaseStats()" />
+                <PokemonEvolution v-else-if="isShowTabEvolution()" />
+              </KeepAlive>
             </div>
           </div>
         </div>

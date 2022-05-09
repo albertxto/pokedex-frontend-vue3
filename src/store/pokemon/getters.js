@@ -18,6 +18,14 @@ export function eggGroups (state) {
   return state.eggGroups.join(', ')
 }
 
+export function evolutionChainId (state) {
+  return state.evolutionChainId
+}
+
+export function evolutions (state) {
+  return state.evolutions
+}
+
 export function genders (state) {
   const genderRate = state.genderRate
   switch (genderRate) {
@@ -110,6 +118,10 @@ export function image (state) {
 
 export function isLoading (state) {
   return state.isLoading
+}
+
+export function isLoadingEvolution (state) {
+  return state.isLoadingEvolution
 }
 
 export function name (state) {
