@@ -1,6 +1,7 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
+import { getIdFromPokeApiUrl } from '@/utils/stringFormat'
 
 export const usePokemon = () => {
   const route = useRoute()
@@ -24,7 +25,9 @@ export const usePokemon = () => {
   const pokemonWeight = computed(() => store.getters['pokemon/weight'])
 
   // Method
-  const calculatePokemonBaseStatPercentage = (stat = 0) => parseFloat((stat * 100 / 255).toFixed(2))
+  const calculatePokemonBaseStatPercentage = (stat = 0) => {
+    return Number.parseFloat((stat * 100 / 255).toFixed(2))
+  }
 
   const getPokemonById = async () => {
     store.commit('pokemon/SET_IS_LOADING', true)
@@ -95,7 +98,7 @@ export const usePokemon = () => {
         // Evolution chain
         if (response[1]?.evolution_chain?.url) {
           store.commit('pokemon/SET_EVOLUTION_CHAIN_ID', Number.parseInt(
-            response[1].evolution_chain.url.split('/')[6]
+            getIdFromPokeApiUrl(response[1].evolution_chain.url)
           ))
         }
       }
