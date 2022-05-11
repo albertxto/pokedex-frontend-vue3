@@ -21,7 +21,7 @@ getPokemonEvolutionChain()
     <template v-else>
       <div
         v-if="!pokemonEvolutions.length"
-        class="text-center min-h-screen-75"
+        class="py-6 text-center"
       >
         No evolution
       </div>

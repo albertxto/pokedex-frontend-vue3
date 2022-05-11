@@ -8,7 +8,14 @@ defineProps({
   evolution: {
     type: Object,
     default () {
-      return {}
+      return {
+        fromId: null,
+        fromImage: null,
+        fromName: null,
+        toId: null,
+        toImage: null,
+        toName: null
+      }
     }
   }
 })
@@ -19,6 +26,7 @@ defineProps({
     <PokemonEvolutionImage
       :image="evolution.fromImage"
       :name="evolution.fromName"
+      :pokemon-id="evolution.fromId"
     />
 
     <div class="flex flex-col items-center w-4/12 gap-2">
@@ -31,6 +39,7 @@ defineProps({
     <PokemonEvolutionImage
       :image="evolution.toImage"
       :name="evolution.toName"
+      :pokemon-id="evolution.toId"
     />
   </div>
 </template>

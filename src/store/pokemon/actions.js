@@ -86,8 +86,10 @@ export function setPokemonEvolution ({ commit, dispatch, getters }, payload) {
 
       commit('PUSH_EVOLUTION', {
         detail: evolutionDetail.length ? `(${evolutionDetail.join(', ')})` : '',
+        fromId: pokemonIdEvolveFrom,
         fromImage: getPokemonImageUrlById(pokemonIdEvolveFrom),
         fromName: payload?.species?.name || '',
+        toId: pokemonIdEvolveTo,
         toImage: getPokemonImageUrlById(pokemonIdEvolveTo),
         toName: evolve?.species?.name || ''
       })

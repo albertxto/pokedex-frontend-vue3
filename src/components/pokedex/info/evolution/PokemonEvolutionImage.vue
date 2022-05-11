@@ -1,14 +1,23 @@
 <script setup>
-defineProps({
+import { computed } from 'vue'
+
+const props = defineProps({
   image: {
     type: String,
     default: null
   },
   name: {
     type: String,
-    default: ''
+    default: null
+  },
+  pokemonId: {
+    type: String,
+    default: null
   }
 })
+
+const isShowImage = computed(() => !!(props.image && props.pokemonId))
+const isShowName = computed(() => !!(props.name && props.pokemonId))
 </script>
 
 <template>
@@ -20,11 +29,15 @@ defineProps({
       />
 
       <div class="relative">
-        <img
-          v-if="image"
-          class="object-cover"
-          :src="image"
+        <router-link
+          v-if="isShowImage"
+          :to="{ name: 'pokedexInfo', params: { id: pokemonId } }"
         >
+          <img
+            class="object-cover"
+            :src="image"
+          >
+        </router-link>
         <div
           v-else
           class="h-16"
@@ -32,8 +45,12 @@ defineProps({
       </div>
     </div>
 
-    <div class="capitalize">
+    <router-link
+      v-if="isShowName"
+      class="capitalize"
+      :to="{ name: 'pokedexInfo', params: { id: pokemonId } }"
+    >
       {{ name }}
-    </div>
+    </router-link>
   </div>
 </template>
