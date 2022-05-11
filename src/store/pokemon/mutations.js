@@ -68,6 +68,14 @@ export function SET_GENDER_RATE (state, payload) {
   }
 }
 
+export function SET_GENUS (state, payload) {
+  if (typeof payload === 'string' && payload) {
+    state.genus = payload
+  } else {
+    state.genus = ''
+  }
+}
+
 export function SET_HEIGHT (state, payload) {
   if (typeof payload === 'number' && payload > 0) {
     state.height = payload

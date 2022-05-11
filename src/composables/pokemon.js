@@ -14,8 +14,13 @@ export const usePokemon = () => {
   const pokemonEggGroups = computed(() => store.getters['pokemon/eggGroups'])
   const pokemonEvolutions = computed(() => store.getters['pokemon/evolutions'])
   const pokemonGenders = computed(() => store.getters['pokemon/genders'])
+  const pokemonGenus = computed(() => store.getters['pokemon/genus'])
   const pokemonHeight = computed(() => store.getters['pokemon/height'])
+  const pokemonId = computed(() => store.getters['pokemon/id'])
+  const pokemonIsLoading = computed(() => store.getters['pokemon/isLoading'])
   const pokemonIsLoadingEvolution = computed(() => store.getters['pokemon/isLoadingEvolution'])
+  const pokemonName = computed(() => store.getters['pokemon/name'])
+  const pokemonTypes = computed(() => store.getters['pokemon/types'])
   const pokemonWeight = computed(() => store.getters['pokemon/weight'])
 
   // Method
@@ -35,6 +40,10 @@ export const usePokemon = () => {
         if (response[0]?.types?.length) {
           const types = response[0].types.map((pokemonType) => pokemonType.type.name)
           store.commit('pokemon/SET_TYPES', types)
+        }
+        if (response[1]?.genera.length) {
+          const genus = response[1].genera.find((genera) => genera.language.name === 'en').genus
+          store.commit('pokemon/SET_GENUS', genus)
         }
 
         // About
@@ -119,8 +128,13 @@ export const usePokemon = () => {
     pokemonEggGroups,
     pokemonEvolutions,
     pokemonGenders,
+    pokemonGenus,
     pokemonHeight,
+    pokemonId,
+    pokemonIsLoading,
     pokemonIsLoadingEvolution,
+    pokemonName,
+    pokemonTypes,
     pokemonWeight
   }
 }

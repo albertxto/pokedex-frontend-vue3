@@ -7,6 +7,7 @@ export default {
   evolutionChainId: 0,
   evolutions: [],
   genderRate: -1,
+  genus: '',
   height: 0,
   id: '',
   image: '',
