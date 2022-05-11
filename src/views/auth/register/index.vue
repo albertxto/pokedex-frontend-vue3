@@ -1,5 +1,7 @@
 <script setup>
-import Register from '@/components/auth/register/index.vue'
+import { defineAsyncComponent } from 'vue'
+
+const Register = defineAsyncComponent(() => import('@/components/auth/register/index.vue'))
 </script>
 
 <template>

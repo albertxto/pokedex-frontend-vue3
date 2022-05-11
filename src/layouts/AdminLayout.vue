@@ -1,7 +1,9 @@
 <script setup>
-import AdminNavbar from '@/components/navbars/AdminNavbar.vue'
-import AdminSidebar from '@/components/sidebar/AdminSidebar.vue'
-import HeaderStats from '@/components/headers/HeaderStats.vue'
+import { defineAsyncComponent } from 'vue'
+
+const AdminNavbar = defineAsyncComponent(() => import('@/components/navbars/AdminNavbar.vue'))
+const AdminSidebar = defineAsyncComponent(() => import('@/components/sidebar/AdminSidebar.vue'))
+const HeaderStats = defineAsyncComponent(() => import('@/components/headers/HeaderStats.vue'))
 </script>
 
 <template>

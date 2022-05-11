@@ -1,5 +1,7 @@
 <script setup>
-import PokedexInfo from '@/components/pokedex/info/index.vue'
+import { defineAsyncComponent } from 'vue'
+
+const PokedexInfo = defineAsyncComponent(() => import('@/components/pokedex/info/index.vue'))
 </script>
 
 <template>

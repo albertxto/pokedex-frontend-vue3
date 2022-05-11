@@ -1,5 +1,7 @@
 <script setup>
-import UserList from '@/components/admin/users/index.vue'
+import { defineAsyncComponent } from 'vue'
+
+const UserList = defineAsyncComponent(() => import('@/components/admin/users/index.vue'))
 </script>
 
 <template>

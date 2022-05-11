@@ -1,5 +1,7 @@
 <script setup>
-import UserAdd from '@/components/admin/users/add/index.vue'
+import { defineAsyncComponent } from 'vue'
+
+const UserAdd = defineAsyncComponent(() => import('@/components/admin/users/add/index.vue'))
 </script>
 
 <template>
