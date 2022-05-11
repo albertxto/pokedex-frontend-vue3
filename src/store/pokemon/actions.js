@@ -1,5 +1,6 @@
 import endpoints from '@/config/endpoints'
 import { axiosInstance } from '@/plugins/axios'
+import { getIdFromPokeApiUrl, getPokemonImageUrlById } from '@/utils/stringFormat'
 
 export function getPokemonById (_store, id) {
   return new Promise((resolve, reject) => axiosInstance
@@ -31,11 +32,10 @@ export function getPokemonEvolutionChain ({ dispatch, getters }) {
 
 export function setPokemonEvolution ({ commit, dispatch, getters }, payload) {
   if (payload?.evolves_to?.length) {
-    const evolveFromPokemonId = payload?.species?.url.split('/')[6] || ''
+    const pokemonIdEvolveFrom = getIdFromPokeApiUrl(payload?.species?.url)
 
     payload.evolves_to.forEach(async (evolve) => {
-      const evolveToPokemonId = evolve?.species?.url.split('/')[6] || ''
-      const response = await dispatch('getPokemonById', [evolveFromPokemonId, evolveToPokemonId])
+      const pokemonIdEvolveTo = getIdFromPokeApiUrl(evolve?.species?.url)
 
       // Evolution details
       const evolutionDetail = []
@@ -86,9 +86,9 @@ export function setPokemonEvolution ({ commit, dispatch, getters }, payload) {
 
       commit('PUSH_EVOLUTION', {
         detail: evolutionDetail.length ? `(${evolutionDetail.join(', ')})` : '',
-        fromImage: response[0][0]?.sprites?.other['official-artwork']?.front_default || null,
+        fromImage: getPokemonImageUrlById(pokemonIdEvolveFrom),
         fromName: payload?.species?.name || '',
-        toImage: response[0][1]?.sprites?.other['official-artwork']?.front_default || null,
+        toImage: getPokemonImageUrlById(pokemonIdEvolveTo),
         toName: evolve?.species?.name || ''
       })
 

@@ -1,3 +1,9 @@
+export const getIdFromPokeApiUrl = (url = '') => url.split('/')[6] || null
+
+export const getPokemonImageUrlById = (id = '') => {
+  return `${import.meta.env.VITE_POKEMON_IMAGE_URL}/${id}.png` || null
+}
+
 export const parseJwt = (token = '') => {
   const base64Url = token.split('.')[1]
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
