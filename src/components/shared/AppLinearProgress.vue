@@ -31,11 +31,12 @@ const componentClass = computed(() => {
 <template>
   <div class="relative">
     <div
-      class="flex overflow-hidden text-xs bg-red-200 rounded"
-      :class="componentClass"
+      class="flex overflow-hidden text-xs rounded"
+      :class="[componentClass, { 'bg-green-200': value >= 39, 'bg-red-200': value < 39 }]"
     >
       <div
-        class="flex flex-col justify-center text-center text-white bg-red-500 shadow-none whitespace-nowrap"
+        class="flex flex-col justify-center text-center text-white shadow-none whitespace-nowrap"
+        :class="{ 'bg-green-500': value >= 39, 'bg-red-500': value < 39 }"
         :style="{ width: `${value}%` }"
       />
     </div>
