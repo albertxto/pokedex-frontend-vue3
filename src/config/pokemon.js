@@ -1,3 +1,5 @@
+export const limit = 50
+
 export const stats = {
   hp: 'HP',
   attack: 'Attack',
