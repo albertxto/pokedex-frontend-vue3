@@ -36,7 +36,7 @@ getPokemonList()
         color="primary"
         size="sm"
         :loading="pokemonListIsLoading"
-        @click="!pokemonListIsLoading && getPokemonList(true)"
+        @click="getPokemonList(true)"
       >
         Load More
       </AppButton>

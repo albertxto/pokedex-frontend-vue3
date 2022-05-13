@@ -30,6 +30,8 @@ const props = defineProps({
   }
 })
 
+const isDisabled = computed(() => props.disabled || props.loading)
+
 const componentClass = computed(() => {
   let size = ''
   switch (props.size) {
@@ -44,9 +46,9 @@ const componentClass = computed(() => {
   }
   const base = [
     size,
-    getButtonColor(props.color, props.outline, !props.disabled)
+    getButtonColor(props.color, props.outline, !isDisabled.value)
   ]
-  if (props.disabled) {
+  if (isDisabled.value) {
     base.push('hover:cursor-not-allowed', props.outline ? 'opacity-50' : 'opacity-70')
   }
   return base
@@ -57,7 +59,7 @@ const componentClass = computed(() => {
   <button
     class="inline-flex items-center justify-center font-bold uppercase transition-colors duration-150 border rounded cursor-pointer whitespace-nowrap focus:outline-none focus:ring-2 focus:ring-offset-2"
     :class="componentClass"
-    :disabled="disabled"
+    :disabled="isDisabled"
     :type="type"
   >
     <RefreshIcon
