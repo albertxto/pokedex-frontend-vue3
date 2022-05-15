@@ -1,5 +1,7 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, defineAsyncComponent } from 'vue'
+
+const LazyImage = defineAsyncComponent(() => import('@/components/shared/LazyImage.vue'))
 
 const props = defineProps({
   image: {
@@ -42,10 +44,10 @@ const pokemonNameLabel = computed(() => props.name.replaceAll('-', ' '))
         />
 
         <div class="relative flex flex-row-reverse">
-          <img
+          <LazyImage
             class="w-32 h-auto"
             :src="image"
-          >
+          />
         </div>
       </div>
     </div>
