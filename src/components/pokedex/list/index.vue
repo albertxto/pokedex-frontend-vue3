@@ -6,7 +6,9 @@ const PokedexCard = defineAsyncComponent(() => import('@/components/pokedex/list
 
 const { getPokemonList, pokemonListIsLoading, pokemonListIsLoadMore, pokemonList } = usePokemonList()
 
-getPokemonList()
+if (!pokemonList.value.length) {
+  getPokemonList()
+}
 </script>
 
 <template>

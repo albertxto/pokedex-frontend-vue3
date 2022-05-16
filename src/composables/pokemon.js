@@ -7,6 +7,14 @@ export const usePokemon = () => {
   const store = useStore()
 
   // Computed
+  const isShowModal = computed({
+    get () {
+      return store.getters['pokemon/isShowModal']
+    },
+    set (value) {
+      store.commit('pokemon/SET_IS_SHOW_MODAL', value)
+    }
+  })
   const pokemonAbout = computed(() => store.getters['pokemon/about'])
   const pokemonBaseExperience = computed(() => store.getters['pokemon/baseExperience'])
   const pokemonBaseHappiness = computed(() => store.getters['pokemon/baseHappiness'])
@@ -18,6 +26,14 @@ export const usePokemon = () => {
   const pokemonGenus = computed(() => store.getters['pokemon/genus'])
   const pokemonHeight = computed(() => store.getters['pokemon/height'])
   const pokemonId = computed(() => store.getters['pokemon/id'])
+  const pokemonIsFavorite = computed({
+    get () {
+      return store.getters['pokemon/isFavorite']
+    },
+    set (value) {
+      store.commit('pokemon/SET_IS_FAVORITE', value)
+    }
+  })
   const pokemonIsLoading = computed(() => store.getters['pokemon/isLoading'])
   const pokemonIsLoadingEvolution = computed(() => store.getters['pokemon/isLoadingEvolution'])
   const pokemonName = computed(() => store.getters['pokemon/name'])
@@ -52,6 +68,7 @@ export const usePokemon = () => {
     calculatePokemonBaseStatPercentage,
     getPokemonById,
     getPokemonEvolutionChain,
+    isShowModal,
     pokemonAbout,
     pokemonBaseExperience,
     pokemonBaseHappiness,
@@ -63,6 +80,7 @@ export const usePokemon = () => {
     pokemonGenus,
     pokemonHeight,
     pokemonId,
+    pokemonIsFavorite,
     pokemonIsLoading,
     pokemonIsLoadingEvolution,
     pokemonName,

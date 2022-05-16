@@ -3,6 +3,7 @@ import { computed, defineAsyncComponent } from 'vue'
 import { usePokemon } from '@/composables/pokemon.js'
 import { types as pokemonTypesConfig } from '@/config/pokemon'
 
+const PokedexNavbar = defineAsyncComponent(() => import('@/components/navbars/PokedexNavbar.vue'))
 const PokemonType = defineAsyncComponent(() => import('@/components/pokedex/info/PokemonType.vue'))
 
 const { pokemonGenus, pokemonId, pokemonIsLoading, pokemonName, pokemonTypes } = usePokemon()
@@ -19,7 +20,9 @@ const componentClass = computed(() => pokemonIsLoading.value
       class="absolute top-0 w-full h-full bg-center bg-cover"
       :class="componentClass"
     >
-      <div class="px-6 mt-10 text-white md:px-20">
+      <PokedexNavbar />
+
+      <div class="px-6 text-white md:px-20">
         <div class="flex flex-wrap items-center justify-between">
           <h1 class="text-3xl font-bold capitalize">
             {{ pokemonName }}
