@@ -12,7 +12,9 @@ const { getPokemonById } = usePokemon()
 getPokemonById()
 
 watch(() => route.params.id, () => {
-  getPokemonById()
+  if (route.params.id) {
+    getPokemonById()
+  }
 })
 </script>
 

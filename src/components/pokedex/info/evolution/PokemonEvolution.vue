@@ -1,12 +1,21 @@
 <script setup>
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, watch } from 'vue'
 import { usePokemon } from '@/composables/pokemon'
 
 const PokemonEvolutionChain = defineAsyncComponent(() => import('@/components/pokedex/info/evolution/PokemonEvolutionChain.vue'))
 const PokedexSection = defineAsyncComponent(() => import('@/components/pokedex/info/PokedexSection.vue'))
 
-const { getPokemonEvolutionChain, pokemonEvolutions, pokemonIsLoadingEvolution } = usePokemon()
+const {
+  getPokemonEvolutionChain, pokemonEvolutionChainId, pokemonEvolutions, pokemonIsLoadingEvolution
+} = usePokemon()
+
 getPokemonEvolutionChain()
+
+watch(() => pokemonEvolutionChainId.value, () => {
+  if (pokemonEvolutionChainId.value) {
+    getPokemonEvolutionChain()
+  }
+})
 </script>
 
 <template>

@@ -10,8 +10,8 @@ defineProps({
 </script>
 
 <template>
-  <teleport to="body">
-    <transition name="modal">
+  <Teleport to="body">
+    <Transition name="modal">
       <div
         v-if="show"
         class="modal-mask"
@@ -23,8 +23,8 @@ defineProps({
           </AppCard>
         </div>
       </div>
-    </transition>
-  </teleport>
+    </Transition>
+  </Teleport>
 </template>
 
 <style lang="scss" scoped>

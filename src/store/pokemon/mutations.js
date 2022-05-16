@@ -4,6 +4,24 @@ export function PUSH_EVOLUTION (state, payload) {
   }
 }
 
+export function RESET (state) {
+  state.about = ''
+  state.baseExperience = 0
+  state.baseHappiness = 0
+  state.baseStats = []
+  state.eggGroups = []
+  state.genderRate = -1
+  state.genus = ''
+  state.height = 0
+  state.id = ''
+  state.image = ''
+  state.isLoading = true
+  state.isLoadingEvolution = false
+  state.name = ''
+  state.types = []
+  state.weight = 0
+}
+
 export function SET_ABOUT (state, payload) {
   if (typeof payload === 'string' && payload) {
     state.about = payload
