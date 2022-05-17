@@ -90,6 +90,7 @@ module.exports = {
         '95-px': '95px',
         '350-px': '350px',
         '500-px': '500px',
+        '550-px': '550px',
         '600-px': '600px'
       },
       maxHeight: {

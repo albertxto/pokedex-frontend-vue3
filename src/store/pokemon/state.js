@@ -11,7 +11,7 @@ export default {
   height: 0,
   id: '',
   image: '',
-  isFavorite: true,
+  isFavorite: false,
   isLoading: true,
   isLoadingEvolution: false,
   isShowModal: false,

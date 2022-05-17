@@ -1,6 +1,6 @@
 <template>
   <div
-    class="absolute bg-no-repeat bg-contain animate-spin-slow h-52 opacity-20 w-52 -mt-60"
+    class="absolute left-0 right-0 w-40 h-40 mx-auto bg-no-repeat bg-contain sm:w-60 sm:h-60 animate-spin-slow opacity-20"
     style="background-image: url('/src/assets/images/pokeball.png');"
   />
 </template>

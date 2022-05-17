@@ -6,7 +6,7 @@ const url = import.meta.env.VITE_GITHUB_URL
 
 <template>
   <a
-    class="flex items-center text-xs font-bold text-white uppercase hover:text-slate-200 lg:py-2"
+    class="flex items-center text-xs font-bold text-white uppercase hover:text-slate-200"
     :href="url"
     target="_blank"
   >

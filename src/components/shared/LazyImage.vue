@@ -2,6 +2,10 @@
 import { onMounted, ref } from 'vue'
 
 defineProps({
+  alt: {
+    type: String,
+    default: null
+  },
   src: {
     type: String,
     default: null
@@ -30,6 +34,7 @@ onMounted(() => {
   <img
     ref="imageRef"
     class="lazy-image"
+    :alt="alt"
     :data-src="src"
   >
 </template>

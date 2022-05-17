@@ -14,7 +14,7 @@ const goBack = () => {
 </script>
 
 <template>
-  <nav class="z-50 flex flex-wrap items-center justify-between px-6 py-6 md:px-20">
+  <nav class="z-50 flex flex-wrap items-center justify-between px-6 md:px-20">
     <div class="flex flex-wrap items-center justify-between w-full mx-auto">
       <!-- Box decoration -->
       <div class="absolute bg-white -top-16 w-52 h-36 -rotate-12 -left-20 rounded-3xl opacity-10" />

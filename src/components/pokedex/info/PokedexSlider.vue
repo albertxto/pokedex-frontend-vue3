@@ -1,8 +1,6 @@
 <script setup>
 import { defineAsyncComponent, reactive, ref } from 'vue'
 
-const PokeballDecoration = defineAsyncComponent(() => import('@/components/pokedex/info/PokeballDecoration.vue'))
-const PokemonImage = defineAsyncComponent(() => import('@/components/pokedex/info/PokemonImage.vue'))
 const PokemonAbout = defineAsyncComponent(() => import('@/components/pokedex/info/about/index.vue'))
 const PokemonBaseStats = defineAsyncComponent(() => import('@/components/pokedex/info/baseStats/index.vue'))
 const PokemonEvolution = defineAsyncComponent(() => import('@/components/pokedex/info/evolution/index.vue'))
@@ -38,17 +36,10 @@ const isShowTabEvolution = () => tab.value === 'EVOLUTION'
 </script>
 
 <template>
-  <section class="relative pt-16">
+  <section class="relative">
     <div class="container pokedex-slider">
-      <div class="relative flex flex-col w-full min-w-0 -mt-64 break-words shadow-xl bg-slate-100 rounded-t-3xl dark:bg-slate-900">
+      <div class="z-50 flex flex-col w-full min-w-0 -mt-48 break-words shadow-xl sm:-mt-32 bg-slate-100 rounded-t-3xl dark:bg-slate-900">
         <div class="p-6">
-          <div class="flex flex-wrap justify-center">
-            <div class="flex justify-center w-full px-4 lg:order-2 lg:w-3/12">
-              <PokeballDecoration />
-              <PokemonImage />
-            </div>
-          </div>
-
           <AppTabs
             :tabs="tabs"
             @change="onChangeTab"

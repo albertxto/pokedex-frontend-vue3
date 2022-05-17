@@ -46,6 +46,7 @@ export const usePokemon = () => {
   }
 
   const getPokemonById = async () => {
+    if (!route.params.id) return
     try {
       await store.dispatch('pokemon/getPokemonById', route.params.id)
     } catch (error) {

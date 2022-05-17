@@ -46,6 +46,7 @@ const pokemonNameLabel = computed(() => props.name.replaceAll('-', ' '))
         <div class="relative flex flex-row-reverse">
           <LazyImage
             class="w-32 h-auto"
+            :alt="name"
             :src="image"
           />
         </div>
