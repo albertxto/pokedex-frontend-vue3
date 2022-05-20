@@ -1,8 +1,5 @@
 <template>
-  <div
-    id="main"
-    class="overflow-x-hidden text-sm text-slate-900 bg-slate-100 sm:text-base dark:text-slate-200 dark:bg-slate-800"
-  >
+  <div class="overflow-x-hidden">
     <router-view />
   </div>
 </template>

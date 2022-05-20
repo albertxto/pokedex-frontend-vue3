@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-  <Teleport to="#main">
+  <Teleport to="body">
     <Transition name="modal">
       <div
         v-if="show"

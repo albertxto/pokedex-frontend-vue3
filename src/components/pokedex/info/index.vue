@@ -12,6 +12,8 @@ const router = useRouter()
 const { getPokemonById } = usePokemon()
 
 const validatePokemonId = () => {
+  if (!route.params.id) return
+
   let pokemonId = Number.parseInt(route.params.id)
 
   if (pokemonId <= 0 || pokemonId > pokemonCount) {
