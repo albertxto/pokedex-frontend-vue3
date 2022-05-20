@@ -29,15 +29,11 @@ const isShowName = computed(() => !!(props.name && props.pokemonId))
       />
 
       <div class="relative">
-        <router-link
+        <img
           v-if="isShowImage"
-          :to="{ name: 'pokedexInfo', params: { id: pokemonId } }"
+          class="object-cover"
+          :src="image"
         >
-          <img
-            class="object-cover"
-            :src="image"
-          >
-        </router-link>
         <div
           v-else
           class="h-16"
@@ -45,12 +41,11 @@ const isShowName = computed(() => !!(props.name && props.pokemonId))
       </div>
     </div>
 
-    <router-link
+    <div
       v-if="isShowName"
       class="capitalize"
-      :to="{ name: 'pokedexInfo', params: { id: pokemonId } }"
     >
       {{ name }}
-    </router-link>
+    </div>
   </div>
 </template>

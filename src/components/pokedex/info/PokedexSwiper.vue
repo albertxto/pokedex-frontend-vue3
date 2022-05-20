@@ -1,7 +1,8 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
-import { usePokemonList } from '@/composables/pokemonList'
+import { useRoute, useRouter } from 'vue-router'
+import { count as pokemonCount } from '@/config/pokemon'
+import { getPokemonImageUrlById } from '@/utils/stringFormat'
 
 // Import Swiper Vue.js components
 import { Swiper, SwiperSlide } from 'swiper/vue'
@@ -12,23 +13,21 @@ import 'swiper/css/pagination'
 import 'swiper/css/virtual'
 
 // Import Swiper core and required modules
-import { Keyboard, Pagination, Virtual } from 'swiper'
+import { Keyboard, Virtual } from 'swiper'
 
 // Composition API
 const route = useRoute()
-const { getPokemonList, pokemonList, pokemonListOffset } = usePokemonList()
+const router = useRouter()
 
 // Swiper props
-const modules = [Keyboard, Pagination, Virtual]
+const modules = [Keyboard, Virtual]
 const windowWidth = ref(0)
 const swiperHeight = computed(() => windowWidth.value >= 640 ? 240 : 160)
 const initialSlide = computed(() => route.params.id - 1)
 
-// Get next Pokemons if offset close to swiper active index
 const onSlideChange = (swiper) => {
-  if (pokemonListOffset.value - 1 === swiper.activeIndex) {
-    getPokemonList(true)
-  }
+  // Change url params to get current Pokemon
+  router.replace({ name: 'pokedexInfo', params: { id: swiper.activeIndex + 1 } })
 }
 
 // Set window inner width to ref
@@ -68,14 +67,14 @@ onBeforeUnmount(() => {
     @slide-change="onSlideChange"
   >
     <SwiperSlide
-      v-for="(pokemon, index) in pokemonList"
+      v-for="index in pokemonCount"
       :key="index"
       :virtual-index="index"
     >
       <img
         class="block object-fill w-40 h-40 sm:w-60 sm:h-60"
         loading="lazy"
-        :src="pokemon.image"
+        :src="getPokemonImageUrlById(index)"
       >
     </SwiperSlide>
   </Swiper>

@@ -5,9 +5,6 @@ import {
 } from '@/utils/stringFormat'
 
 export function getPokemonById ({ commit }, id) {
-  commit('SET_IS_LOADING', true)
-  commit('RESET')
-
   return new Promise((resolve, reject) => axiosInstance
     .get(`${endpoints.POKEDEX}/${id}`)
     .then((response) => {

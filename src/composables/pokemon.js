@@ -1,9 +1,7 @@
 import { computed } from 'vue'
-import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
 
 export const usePokemon = () => {
-  const route = useRoute()
   const store = useStore()
 
   // Computed
@@ -45,10 +43,9 @@ export const usePokemon = () => {
     return Number.parseFloat((stat * 100 / 255).toFixed(2))
   }
 
-  const getPokemonById = async () => {
-    if (!route.params.id) return
+  const getPokemonById = async (id = 1) => {
     try {
-      await store.dispatch('pokemon/getPokemonById', route.params.id)
+      await store.dispatch('pokemon/getPokemonById', id)
     } catch (error) {
       console.error(error)
     }
