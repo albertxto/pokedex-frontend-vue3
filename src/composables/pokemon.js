@@ -1,8 +1,12 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
+import { useRoute, useRouter } from 'vue-router'
+import { count as pokemonCount } from '@/config/pokemon'
 
 export const usePokemon = () => {
   const store = useStore()
+  const route = useRoute()
+  const router = useRouter()
 
   // Computed
   const isShowModal = computed({
@@ -70,6 +74,25 @@ export const usePokemon = () => {
     }
   }
 
+  const validatePokemonId = () => {
+    if (!route.params.id) return
+
+    let pokemonId = Number.parseInt(route.params.id)
+
+    if (pokemonId <= 0 || pokemonId > pokemonCount) {
+      if (pokemonId <= 0) {
+        pokemonId = 1
+      } else {
+        pokemonId = pokemonCount
+      }
+
+      router.replace({ name: 'pokedexInfo', params: { id: pokemonId } })
+      return
+    }
+
+    getPokemonById(pokemonId)
+  }
+
   return {
     calculatePokemonBaseStatPercentage,
     getPokemonById,
@@ -92,6 +115,7 @@ export const usePokemon = () => {
     pokemonName,
     pokemonSwiper,
     pokemonTypes,
-    pokemonWeight
+    pokemonWeight,
+    validatePokemonId
   }
 }
