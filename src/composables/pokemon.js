@@ -10,10 +10,8 @@ export const usePokemon = () => {
 
   // Computed
   const isShowModal = computed({
-    get () {
-      return store.getters['pokemon/isShowModal']
-    },
-    set (value) {
+    get: () => store.getters['pokemon/isShowModal'],
+    set: (value) => {
       store.commit('pokemon/SET_IS_SHOW_MODAL', value)
     }
   })
@@ -29,10 +27,8 @@ export const usePokemon = () => {
   const pokemonHeight = computed(() => store.getters['pokemon/height'])
   const pokemonId = computed(() => store.getters['pokemon/id'])
   const pokemonIsFavorite = computed({
-    get () {
-      return store.getters['pokemon/isFavorite']
-    },
-    set (value) {
+    get: () => store.getters['pokemon/isFavorite'],
+    set: (value) => {
       store.commit('pokemon/SET_IS_FAVORITE', value)
     }
   })
@@ -40,10 +36,8 @@ export const usePokemon = () => {
   const pokemonIsLoadingEvolution = computed(() => store.getters['pokemon/isLoadingEvolution'])
   const pokemonName = computed(() => store.getters['pokemon/name'])
   const pokemonSwiper = computed({
-    get () {
-      return store.getters['pokemon/swiper']
-    },
-    set (value) {
+    get: () => store.getters['pokemon/swiper'],
+    set: (value) => {
       store.commit('pokemon/SET_SWIPER', value)
     }
   })

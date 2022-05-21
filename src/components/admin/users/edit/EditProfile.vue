@@ -7,18 +7,14 @@ const route = useRoute()
 const store = useStore()
 
 const email = computed({
-  get () {
-    return store.getters['user/email']
-  },
-  set (value) {
+  get: () => store.getters['user/email'],
+  set: (value) => {
     store.commit('user/SET_EMAIL', value)
   }
 })
 const name = computed({
-  get () {
-    return store.getters['user/name']
-  },
-  set (value) {
+  get: () => store.getters['user/name'],
+  set: (value) => {
     store.commit('user/SET_NAME', value)
   }
 })

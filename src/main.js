@@ -8,10 +8,10 @@ import AppButton from '@/components/shared/AppButton.vue'
 import AppCard from '@/components/shared/AppCard.vue'
 import AppCheckbox from '@/components/shared/AppCheckbox.vue'
 import AppInput from '@/components/shared/AppInput.vue'
-import AppLinearProgress from '@/components/shared/AppLinearProgress.vue'
 import AppModal from '@/components/shared/AppModal.vue'
 import AppNotification from '@/components/shared/AppNotification.vue'
 import AppRadio from '@/components/shared/AppRadio.vue'
+import AppSelect from '@/components/shared/AppSelect.vue'
 import AppTable from '@/components/shared/AppTable.vue'
 import AppTabs from '@/components/shared/AppTabs.vue'
 
@@ -40,6 +40,7 @@ if (localStorage.getItem('refreshToken')) {
   store.commit('auth/SET_REFRESH_TOKEN', localStorage.getItem('refreshToken'))
 }
 
+// Create vue app
 const app = createApp(App)
 
 // Use vuex
@@ -53,10 +54,10 @@ app.component('AppButton', AppButton)
 app.component('AppCard', AppCard)
 app.component('AppCheckbox', AppCheckbox)
 app.component('AppInput', AppInput)
-app.component('AppLinearProgress', AppLinearProgress)
 app.component('AppModal', AppModal)
 app.component('AppNotification', AppNotification)
 app.component('AppRadio', AppRadio)
+app.component('AppSelect', AppSelect)
 app.component('AppTable', AppTable)
 app.component('AppTabs', AppTabs)
 

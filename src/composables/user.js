@@ -8,37 +8,29 @@ export const useUser = () => {
   const isLoading = computed(() => store.getters['user/isLoading'])
 
   const isShowModal = computed({
-    get () {
-      return store.getters['user/isShowModal']
-    },
-    set (value) {
+    get: () => store.getters['user/isShowModal'],
+    set: (value) => {
       store.commit('user/SET_IS_SHOW_MODAL', value)
     }
   })
 
   const userEmail = computed({
-    get () {
-      return store.getters['user/email']
-    },
-    set (value) {
+    get: () => store.getters['user/email'],
+    set: (value) => {
       store.commit('user/SET_EMAIL', value)
     }
   })
 
   const userId = computed({
-    get () {
-      return store.getters['user/id']
-    },
-    set (value) {
+    get: () => store.getters['user/id'],
+    set: (value) => {
       store.commit('user/SET_ID', value)
     }
   })
 
   const userName = computed({
-    get () {
-      return store.getters['user/name']
-    },
-    set (value) {
+    get: () => store.getters['user/name'],
+    set: (value) => {
       store.commit('user/SET_NAME', value)
     }
   })
