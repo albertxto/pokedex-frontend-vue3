@@ -16,6 +16,7 @@ export default {
   isLoadingEvolution: false,
   isShowModal: false,
   name: '',
+  swiper: null,
   types: [],
   weight: 0
 }

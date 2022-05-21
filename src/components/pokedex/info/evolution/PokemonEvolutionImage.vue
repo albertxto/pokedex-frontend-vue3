@@ -1,5 +1,7 @@
 <script setup>
 import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { usePokemon } from '@/composables/pokemon'
 
 const props = defineProps({
   image: {
@@ -16,8 +18,26 @@ const props = defineProps({
   }
 })
 
+const route = useRoute()
+const router = useRouter()
+const { pokemonSwiper } = usePokemon()
+
 const isShowImage = computed(() => !!(props.image && props.pokemonId))
 const isShowName = computed(() => !!(props.name && props.pokemonId))
+
+const onChangePokemon = () => {
+  // Validate current pokemon
+  if (props.pokemonId === route.params.id) return
+
+  // Scroll to top
+  window.scrollTo(0, 0)
+
+  // Slide image to the clicked pokemon
+  pokemonSwiper.value.slideTo(props.pokemonId - 1)
+
+  // Change url param to get clicked pokemon
+  router.replace({ name: 'pokedexInfo', params: { id: props.pokemonId } })
+}
 </script>
 
 <template>
@@ -31,8 +51,9 @@ const isShowName = computed(() => !!(props.name && props.pokemonId))
       <div class="relative">
         <img
           v-if="isShowImage"
-          class="object-cover"
+          class="object-cover cursor-pointer"
           :src="image"
+          @click="onChangePokemon"
         >
         <div
           v-else
@@ -43,7 +64,8 @@ const isShowName = computed(() => !!(props.name && props.pokemonId))
 
     <div
       v-if="isShowName"
-      class="capitalize"
+      class="capitalize cursor-pointer"
+      @click="onChangePokemon"
     >
       {{ name }}
     </div>

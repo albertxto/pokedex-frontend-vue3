@@ -151,6 +151,10 @@ export function name (state) {
   return state.name
 }
 
+export function swiper (state) {
+  return state.swiper
+}
+
 export function types (state) {
   return state.types
 }

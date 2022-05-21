@@ -1,6 +1,7 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
+import { usePokemon } from '@/composables/pokemon'
 import { count as pokemonCount } from '@/config/pokemon'
 import { getPokemonImageUrlById } from '@/utils/stringFormat'
 
@@ -16,6 +17,7 @@ import 'swiper/css/virtual'
 import { Keyboard, Virtual } from 'swiper'
 
 // Composition API
+const { pokemonSwiper } = usePokemon()
 const route = useRoute()
 const router = useRouter()
 
@@ -25,8 +27,13 @@ const windowWidth = ref(0)
 const swiperHeight = computed(() => windowWidth.value >= 640 ? 240 : 160)
 const initialSlide = computed(() => route.params.id - 1)
 
+// Set swiper ref
+const setSwiperRef = (swiper) => {
+  pokemonSwiper.value = swiper
+}
+
+// Change url params to get current Pokemon
 const onSlideChange = (swiper) => {
-  // Change url params to get current Pokemon
   router.replace({ name: 'pokedexInfo', params: { id: swiper.activeIndex + 1 } })
 }
 
@@ -50,7 +57,6 @@ onBeforeUnmount(() => {
 
 <template>
   <Swiper
-    ref="swiperRef"
     :centered-slides="true"
     :grab-cursor="true"
     :height="swiperHeight"
@@ -64,6 +70,7 @@ onBeforeUnmount(() => {
     :observe-parents="true"
     :slides-per-view="2"
     :virtual="true"
+    @swiper="setSwiperRef"
     @slide-change="onSlideChange"
   >
     <SwiperSlide

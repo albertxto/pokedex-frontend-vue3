@@ -35,6 +35,14 @@ export const usePokemon = () => {
   const pokemonIsLoading = computed(() => store.getters['pokemon/isLoading'])
   const pokemonIsLoadingEvolution = computed(() => store.getters['pokemon/isLoadingEvolution'])
   const pokemonName = computed(() => store.getters['pokemon/name'])
+  const pokemonSwiper = computed({
+    get () {
+      return store.getters['pokemon/swiper']
+    },
+    set (value) {
+      store.commit('pokemon/SET_SWIPER', value)
+    }
+  })
   const pokemonTypes = computed(() => store.getters['pokemon/types'])
   const pokemonWeight = computed(() => store.getters['pokemon/weight'])
 
@@ -82,6 +90,7 @@ export const usePokemon = () => {
     pokemonIsLoading,
     pokemonIsLoadingEvolution,
     pokemonName,
+    pokemonSwiper,
     pokemonTypes,
     pokemonWeight
   }

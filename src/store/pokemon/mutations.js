@@ -158,6 +158,10 @@ export function SET_NAME (state, payload) {
   }
 }
 
+export function SET_SWIPER (state, payload) {
+  state.swiper = payload
+}
+
 export function SET_TYPES (state, payload) {
   if (Array.isArray(payload) && payload.length) {
     state.types = payload
