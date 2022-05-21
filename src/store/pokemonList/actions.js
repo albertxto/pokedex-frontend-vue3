@@ -43,7 +43,6 @@ export function getPokemonList ({ commit, getters }, nextPage = false) {
       resolve(response.data)
     })
     .catch((error) => {
-      commit('SET_IS_LOAD_MORE', false)
       reject(error)
     })
     .finally(() => {

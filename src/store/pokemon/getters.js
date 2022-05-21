@@ -84,6 +84,17 @@ export function genders (state) {
           value: '75%'
         }
       ]
+    case 7:
+      return [
+        {
+          label: 'MALE',
+          value: '12.5%'
+        },
+        {
+          label: 'FEMALE',
+          value: '87.5%'
+        }
+      ]
     case 8:
       return [
         {

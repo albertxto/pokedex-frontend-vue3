@@ -110,7 +110,7 @@ export function getPokemonEvolutionChain ({ commit, dispatch, getters }) {
   )
 }
 
-export function setPokemonEvolution ({ commit, dispatch, getters }, payload) {
+export function setPokemonEvolution ({ commit, dispatch }, payload) {
   if (payload?.evolves_to?.length) {
     const pokemonIdEvolveFrom = getIdFromPokeApiUrl(payload?.species?.url)
 
@@ -132,6 +132,10 @@ export function setPokemonEvolution ({ commit, dispatch, getters }, payload) {
         if (evolutionDetail?.min_affection) {
           evolutionDetails.push('affection in pokemon amie')
         }
+        // Min beauty
+        if (evolutionDetail?.min_beauty) {
+          evolutionDetails.push(`level up with min beauty ${evolutionDetail.min_beauty}`)
+        }
         // Time of day
         if (evolutionDetail?.time_of_day === 'day') {
           evolutionDetails.push('day time')
@@ -151,6 +155,12 @@ export function setPokemonEvolution ({ commit, dispatch, getters }, payload) {
         // During rain
         if (evolutionDetail?.needs_overworld_rain) {
           evolutionDetails.push('during rain')
+        }
+        // Party species
+        if (evolutionDetail?.party_species?.name) {
+          evolutionDetails.push(
+            `with ${normalizePokeApiName(evolutionDetail.party_species.name)} in party`
+          )
         }
         // Party type
         if (evolutionDetail?.party_type?.name) {
@@ -183,6 +193,8 @@ export function setPokemonEvolution ({ commit, dispatch, getters }, payload) {
         // Trigger
         if (evolutionDetail?.trigger?.name === 'trade') {
           evolutionDetails.push('trade')
+        } else if (evolutionDetail?.trigger?.name === 'shed') {
+          evolutionDetails.push('has a spare slot in the party and extra pokeball')
         } else if (evolutionDetail?.trigger?.name === 'spin') {
           evolutionDetails.push('trainer spins and strikes a pose')
         } else if (evolutionDetail?.trigger?.name === 'take-damage') {
@@ -199,6 +211,10 @@ export function setPokemonEvolution ({ commit, dispatch, getters }, payload) {
           evolutionDetails.push(
             `while holding ${normalizePokeApiName(evolutionDetail.held_item.name)}`
           )
+        }
+        // Trade species
+        if (evolutionDetail?.trade_species?.name) {
+          evolutionDetails.push(`with ${normalizePokeApiName(evolutionDetail.trade_species.name)}`)
         }
       })
 
