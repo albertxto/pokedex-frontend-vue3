@@ -6,6 +6,7 @@ export default {
   eggGroups: [],
   evolutionChainId: 0,
   evolutions: [],
+  formSelected: '',
   genderRate: -1,
   genus: '',
   height: 0,
@@ -18,5 +19,6 @@ export default {
   name: '',
   swiper: null,
   types: [],
+  varieties: [],
   weight: 0
 }

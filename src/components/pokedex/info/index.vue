@@ -12,7 +12,7 @@ const { validatePokemonId } = usePokemon()
 validatePokemonId()
 
 watch(() => route.params.id, () => {
-  validatePokemonId()
+  validatePokemonId(true)
 })
 </script>
 

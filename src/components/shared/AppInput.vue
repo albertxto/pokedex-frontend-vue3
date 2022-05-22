@@ -8,6 +8,10 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
   modelValue: {
     type: String,
     default: ''
@@ -78,8 +82,9 @@ const componentClass = computed(() => {
 
     <input
       v-model="computedValue"
-      class="flex-1 block w-full border-gray-300 rounded dark:bg-slate-800 dark:border-gray-400 sm:text-sm"
+      class="flex-1 block w-full text-sm border-gray-300 rounded dark:bg-slate-800 dark:border-gray-400"
       :class="componentClass"
+      :disabled="disabled"
       :placeholder="placeholder"
       :type="computedType"
     >

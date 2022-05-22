@@ -7,6 +7,10 @@ const props = defineProps({
     type: Boolean,
     default: false
   },
+  disabled: {
+    type: Boolean,
+    default: false
+  },
   modelValue: {
     type: String,
     default: ''
@@ -49,13 +53,15 @@ const componentClass = computed(() => {
   <div class="flex rounded-md shadow-sm">
     <select
       v-model="computedValue"
-      class="flex-1 block w-full border-gray-300 rounded dark:bg-slate-800 dark:border-gray-400 sm:text-sm"
+      class="flex-1 block w-full text-sm capitalize border-gray-300 rounded dark:bg-slate-800 dark:border-gray-400"
       :class="componentClass"
+      :disabled="disabled"
       :placeholder="placeholder"
     >
       <option
         v-for="(option, index) in options"
         :key="index"
+        class="capitalize"
         :value="option.value"
       >
         {{ option.label }}

@@ -78,6 +78,14 @@ export function SET_EVOLUTIONS (state, payload) {
   }
 }
 
+export function SET_FORM_SELECTED (state, payload) {
+  if (typeof payload === 'string') {
+    state.formSelected = payload
+  } else {
+    state.formSelected = ''
+  }
+}
+
 export function SET_GENDER_RATE (state, payload) {
   if (typeof payload === 'number') {
     state.genderRate = payload
@@ -167,6 +175,14 @@ export function SET_TYPES (state, payload) {
     state.types = payload
   } else {
     state.types = []
+  }
+}
+
+export function SET_VARIETIES (state, payload) {
+  if (Array.isArray(payload) && payload.length) {
+    state.varieties = payload
+  } else {
+    state.varieties = []
   }
 }
 

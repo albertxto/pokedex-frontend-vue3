@@ -32,9 +32,17 @@ const setSwiperRef = (swiper) => {
   pokemonSwiper.value = swiper
 }
 
-// Change url params to get current Pokemon
 const onSlideChange = (swiper) => {
-  router.replace({ name: 'pokedexInfo', params: { id: swiper.activeIndex + 1 } })
+  const pokemonId = swiper.activeIndex + 1
+
+  // Change url params to get current Pokemon
+  router.replace({ name: 'pokedexInfo', params: { id: pokemonId } })
+
+  // Wait for the DOM updates to complete and change current pokemon image
+  nextTick(() => {
+    const currentPokemonImage = document.getElementById(`pokemon-${pokemonId}`)
+    currentPokemonImage.src = getPokemonImageUrlById(pokemonId)
+  })
 }
 
 // Set window inner width to ref
@@ -79,6 +87,7 @@ onBeforeUnmount(() => {
       :virtual-index="index"
     >
       <img
+        :id="`pokemon-${index}`"
         class="block object-fill w-40 h-40 sm:w-60 sm:h-60"
         loading="lazy"
         :src="getPokemonImageUrlById(index)"

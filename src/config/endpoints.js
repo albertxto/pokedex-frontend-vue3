@@ -5,5 +5,6 @@ export default {
   },
   EVOLUTION_CHAIN: '/pokedex/evolution-chain',
   POKEDEX: '/pokedex',
+  POKEMON_FORM: '/pokedex/form',
   USERS: '/users'
 }

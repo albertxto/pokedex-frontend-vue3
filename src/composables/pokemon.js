@@ -22,6 +22,12 @@ export const usePokemon = () => {
   const pokemonEggGroups = computed(() => store.getters['pokemon/eggGroups'])
   const pokemonEvolutionChainId = computed(() => store.getters['pokemon/evolutionChainId'])
   const pokemonEvolutions = computed(() => store.getters['pokemon/evolutions'])
+  const pokemonFormSelected = computed({
+    get: () => store.getters['pokemon/formSelected'],
+    set: (value) => {
+      store.commit('pokemon/SET_FORM_SELECTED', value)
+    }
+  })
   const pokemonGenders = computed(() => store.getters['pokemon/genders'])
   const pokemonGenus = computed(() => store.getters['pokemon/genus'])
   const pokemonHeight = computed(() => store.getters['pokemon/height'])
@@ -42,6 +48,8 @@ export const usePokemon = () => {
     }
   })
   const pokemonTypes = computed(() => store.getters['pokemon/types'])
+  const pokemonVarietiesCount = computed(() => store.getters['pokemon/varietiesCount'])
+  const pokemonVarietyOptions = computed(() => store.getters['pokemon/varietyOptions'])
   const pokemonWeight = computed(() => store.getters['pokemon/weight'])
 
   // Method
@@ -68,11 +76,25 @@ export const usePokemon = () => {
     }
   }
 
-  const validatePokemonId = () => {
+  const getPokemonFormById = async (id = 1) => {
+    try {
+      await store.dispatch('pokemon/getPokemonFormById', id)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const validatePokemonId = async (isMounted = false) => {
+    // Validate route param id exist
     if (!route.params.id) return
 
+    // Disable pokemon swiper
+    if (isMounted) pokemonSwiper.value.disable()
+
+    // Get pokemon id from route params
     let pokemonId = Number.parseInt(route.params.id)
 
+    // Validate pokemon id must between 1 and pokemonCount
     if (pokemonId <= 0 || pokemonId > pokemonCount) {
       if (pokemonId <= 0) {
         pokemonId = 1
@@ -84,13 +106,23 @@ export const usePokemon = () => {
       return
     }
 
-    getPokemonById(pokemonId)
+    // Call get pokemon by id API
+    await getPokemonById(pokemonId)
+
+    // Reset pokemon form selected to default
+    if (pokemonVarietiesCount.value) {
+      pokemonFormSelected.value = pokemonVarietyOptions.value[0].value
+    }
+
+    // Enable pokemon swiper
+    if (isMounted) pokemonSwiper.value.enable()
   }
 
   return {
     calculatePokemonBaseStatPercentage,
     getPokemonById,
     getPokemonEvolutionChain,
+    getPokemonFormById,
     isShowModal,
     pokemonAbout,
     pokemonBaseExperience,
@@ -99,6 +131,7 @@ export const usePokemon = () => {
     pokemonEggGroups,
     pokemonEvolutionChainId,
     pokemonEvolutions,
+    pokemonFormSelected,
     pokemonGenders,
     pokemonGenus,
     pokemonHeight,
@@ -109,6 +142,8 @@ export const usePokemon = () => {
     pokemonName,
     pokemonSwiper,
     pokemonTypes,
+    pokemonVarietiesCount,
+    pokemonVarietyOptions,
     pokemonWeight,
     validatePokemonId
   }

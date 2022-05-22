@@ -80,6 +80,20 @@ export function getPokemonById ({ commit }, id) {
             getIdFromPokeApiUrl(data[1].evolution_chain.url)
           ))
         }
+
+        // Varieties
+        if (data[1]?.varieties?.length) {
+          const varieties = data[1]?.varieties.map((variety) => {
+            const pokemonId = getIdFromPokeApiUrl(variety.pokemon.url)
+            return {
+              isDefault: variety.is_default,
+              id: pokemonId,
+              image: getPokemonImageUrlById(pokemonId),
+              name: normalizePokeApiName(variety.pokemon.name)
+            }
+          })
+          commit('SET_VARIETIES', varieties)
+        }
       }
 
       resolve(response.data)
@@ -103,6 +117,48 @@ export function getPokemonEvolutionChain ({ commit, dispatch, getters }) {
       const { chain } = response.data
       dispatch('setPokemonEvolution', chain)
       resolve(response.data)
+    })
+    .catch((error) => {
+      reject(error)
+    })
+  )
+}
+
+export function getPokemonFormById ({ commit }, id) {
+  return new Promise((resolve, reject) => axiosInstance
+    .get(`${endpoints.POKEMON_FORM}/${id}`)
+    .then((response) => {
+      const { data } = response
+
+      // Basic info
+      if (data?.name) commit('SET_NAME', normalizePokeApiName(data.name))
+      if (data?.sprites?.other['official-artwork']?.front_default) {
+        commit('SET_IMAGE', data.sprites.other['official-artwork'].front_default)
+      }
+      if (data?.types?.length) {
+        const types = data.types.map((pokemonType) => pokemonType.type.name)
+        commit('SET_TYPES', types)
+      }
+
+      // Measurement
+      if (data?.height) commit('SET_HEIGHT', data.height)
+      if (data?.weight) commit('SET_WEIGHT', data.weight)
+
+      // Training
+      if (data?.base_experience) {
+        commit('SET_BASE_EXPERIENCE', data.base_experience)
+      }
+
+      // Base stats
+      if (data?.stats?.length) {
+        const baseStats = data.stats.map((status) => ({
+          label: status.stat.name,
+          value: status.base_stat
+        }))
+        commit('SET_BASE_STATS', baseStats)
+      }
+
+      resolve(data)
     })
     .catch((error) => {
       reject(error)

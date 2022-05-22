@@ -26,6 +26,10 @@ export function evolutions (state) {
   return state.evolutions
 }
 
+export function formSelected (state) {
+  return state.formSelected
+}
+
 export function genders (state) {
   const genderRate = state.genderRate
   switch (genderRate) {
@@ -157,6 +161,17 @@ export function swiper (state) {
 
 export function types (state) {
   return state.types
+}
+
+export function varietiesCount (state) {
+  return state.varieties.filter((variety) => !variety.isDefault).length
+}
+
+export function varietyOptions (state) {
+  return state.varieties.map((variety) => ({
+    label: variety.name,
+    value: variety.id
+  }))
 }
 
 export function weight (state) {

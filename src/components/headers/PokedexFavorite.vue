@@ -15,7 +15,7 @@ const openModal = () => {
 
 <template>
   <a
-    class="flex items-center text-xs font-bold text-white hover:text-slate-200"
+    class="flex items-center py-2 text-xs font-bold text-white hover:text-slate-200"
     href="#"
     @click="openModal"
   >

@@ -19,7 +19,7 @@ const componentClass = computed(() => pokemonIsLoading.value
 <template>
   <section class="block h-550-px sm:h-600-px">
     <div
-      class="flex flex-col w-full h-full gap-6 pt-6 bg-center bg-cover sm:gap-8 sm:pt-8"
+      class="flex flex-col w-full h-full gap-6 pt-6 bg-center bg-cover -z-10 sm:gap-8 sm:pt-8"
       :class="componentClass"
     >
       <PokedexNavbar />
