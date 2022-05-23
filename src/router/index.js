@@ -1,22 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import store from '@/store'
 
-const ifAuthenticated = (_to, _from, next) => {
-  if (store.getters['auth/isAuthenticated']) {
-    next()
-    return
-  }
-  next({ name: 'login' })
-}
-
-const ifNotAuthenticated = (_to, _from, next) => {
-  if (!store.getters['auth/isAuthenticated']) {
-    next()
-    return
-  }
-  next({ name: 'users' })
-}
-
 const routes = [
   {
     path: '/',
@@ -27,7 +11,7 @@ const routes = [
     path: '/admin',
     redirect: '/admin/users',
     component: () => import('@/layouts/AdminLayout.vue'),
-    beforeEnter: ifAuthenticated,
+    meta: { auth: true },
     children: [
       {
         path: '/admin/profile',
@@ -53,8 +37,9 @@ const routes = [
   },
   {
     path: '/auth',
+    redirect: '/auth/login',
     component: () => import('@/layouts/AuthLayout.vue'),
-    beforeEnter: ifNotAuthenticated,
+    meta: { auth: false },
     children: [
       {
         path: '/auth/login',
@@ -87,6 +72,25 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(),
   routes
+})
+
+// Global before guards
+router.beforeEach(async (to, _from, next) => {
+  // Check if user is authenticated
+  const recordsAuthenticated = to.matched.find((record) => record.meta?.auth === true)
+  if (recordsAuthenticated && !store.getters['auth/isAuthenticated']) {
+    next({ name: 'login' })
+    return
+  }
+
+  // Check if user is not authenticated
+  const recordsNotAuthenticated = to.matched.find((record) => record.meta?.auth === false)
+  if (recordsNotAuthenticated && store.getters['auth/isAuthenticated']) {
+    next({ name: 'users' })
+    return
+  }
+
+  next()
 })
 
 export default router

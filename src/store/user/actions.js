@@ -1,10 +1,8 @@
 import endpoints from '@/config/endpoints'
 import { axiosInstance } from '@/plugins/axios'
-import authHeader from '@/plugins/auth-header'
 
-export function addUser ({ commit, rootGetters }, { email = '', name = '', password = '', role = '' }) {
+export function addUser ({ commit }, { email = '', name = '', password = '', role = '' }) {
   commit('SET_IS_LOADING', true)
-  const accessToken = rootGetters['auth/accessToken']
   const payload = {
     email,
     name,
@@ -12,9 +10,7 @@ export function addUser ({ commit, rootGetters }, { email = '', name = '', passw
     role
   }
   return new Promise((resolve, reject) => axiosInstance
-    .post('/users', payload, {
-      headers: authHeader(accessToken)
-    })
+    .post('/users', payload)
     .then((response) => {
       resolve(response.data)
     })
@@ -27,16 +23,13 @@ export function addUser ({ commit, rootGetters }, { email = '', name = '', passw
   )
 }
 
-export function changePasswordById ({ commit, rootGetters }, { id = '', password = '' }) {
+export function changePasswordById ({ commit }, { id = '', password = '' }) {
   commit('SET_IS_LOADING', true)
-  const accessToken = rootGetters['auth/accessToken']
   const payload = {
     password
   }
   return new Promise((resolve, reject) => axiosInstance
-    .patch(`${endpoints.USERS}/${id}`, payload, {
-      headers: authHeader(accessToken)
-    })
+    .patch(`${endpoints.USERS}/${id}`, payload)
     .then((response) => {
       resolve(response.data)
     })
@@ -49,13 +42,10 @@ export function changePasswordById ({ commit, rootGetters }, { id = '', password
   )
 }
 
-export function deleteUser ({ commit, rootGetters }, id = '') {
+export function deleteUser ({ commit }, id = '') {
   commit('SET_IS_LOADING', true)
-  const accessToken = rootGetters['auth/accessToken']
   return new Promise((resolve, reject) => axiosInstance
-    .delete(`${endpoints.USERS}/${id}`, {
-      headers: authHeader(accessToken)
-    })
+    .delete(`${endpoints.USERS}/${id}`)
     .then((response) => {
       resolve(response.data)
     })
@@ -68,17 +58,14 @@ export function deleteUser ({ commit, rootGetters }, id = '') {
   )
 }
 
-export function editUser ({ commit, rootGetters }, { email = '', id = '', name = '' }) {
+export function editUser ({ commit }, { email = '', id = '', name = '' }) {
   commit('SET_IS_LOADING', true)
-  const accessToken = rootGetters['auth/accessToken']
   const payload = {
     email,
     name
   }
   return new Promise((resolve, reject) => axiosInstance
-    .patch(`${endpoints.USERS}/${id}`, payload, {
-      headers: authHeader(accessToken)
-    })
+    .patch(`${endpoints.USERS}/${id}`, payload)
     .then((response) => {
       resolve(response.data)
     })
@@ -91,13 +78,10 @@ export function editUser ({ commit, rootGetters }, { email = '', id = '', name =
   )
 }
 
-export function getUserById ({ commit, rootGetters }, id) {
+export function getUserById ({ commit }, id = '') {
   commit('SET_IS_LOADING', true)
-  const accessToken = rootGetters['auth/accessToken']
   return new Promise((resolve, reject) => axiosInstance
-    .get(`${endpoints.USERS}/${id}`, {
-      headers: authHeader(accessToken)
-    })
+    .get(`${endpoints.USERS}/${id}`)
     .then((response) => {
       const { data } = response
       if (data?.id) commit('SET_ID', data.id)
@@ -116,13 +100,10 @@ export function getUserById ({ commit, rootGetters }, id) {
   )
 }
 
-export function getUserList ({ commit, rootGetters }) {
+export function getUserList ({ commit }) {
   commit('SET_IS_LOADING', true)
-  const accessToken = rootGetters['auth/accessToken']
   return new Promise((resolve, reject) => axiosInstance
-    .get(endpoints.USERS, {
-      headers: authHeader(accessToken)
-    })
+    .get(endpoints.USERS)
     .then((response) => {
       if (response.data?.results?.length) commit('SET_LIST', response.data.results)
       resolve(response.data)

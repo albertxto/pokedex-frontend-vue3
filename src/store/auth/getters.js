@@ -14,6 +14,10 @@ export function isLoading (state) {
   return state.isLoading
 }
 
+export function isRetryToken (state) {
+  return state.isRetryToken
+}
+
 export function refreshToken (state) {
   return state.refreshToken
 }

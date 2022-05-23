@@ -1,3 +1,23 @@
+import router from '@/router'
+
+export function RESET (state) {
+  // Remove tokens from store
+  state.accessToken = ''
+  state.currentUser.email = ''
+  state.currentUser.id = ''
+  state.currentUser.name = ''
+  state.currentUser.role = ''
+  state.isLoading = false
+  state.refreshToken = ''
+
+  // Remove tokens from local storage
+  localStorage.removeItem('accessToken')
+  localStorage.removeItem('refreshToken')
+
+  // Redirect to login
+  router.push({ name: 'login' })
+}
+
 export function SET_ACCESS_TOKEN (state, payload) {
   if (typeof payload === 'string' && payload) {
     state.accessToken = payload
@@ -43,6 +63,14 @@ export function SET_IS_LOADING (state, payload) {
     state.isLoading = payload
   } else {
     state.isLoading = false
+  }
+}
+
+export function SET_IS_RETRY_TOKEN (state, payload) {
+  if (typeof payload === 'boolean') {
+    state.isRetryToken = payload
+  } else {
+    state.isRetryToken = true
   }
 }
 

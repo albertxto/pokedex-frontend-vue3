@@ -7,5 +7,6 @@ export default {
     role: ''
   },
   isLoading: false,
+  isRetryToken: true,
   refreshToken: ''
 }

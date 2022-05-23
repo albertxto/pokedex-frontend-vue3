@@ -1,11 +1,12 @@
 <script setup>
 import { computed, defineAsyncComponent, reactive } from 'vue'
+import { useStore } from 'vuex'
 import { PencilAltIcon, PlusIcon, TrashIcon } from '@heroicons/vue/solid'
 import { useUser } from '@/composables/user.js'
-import store from '@/store'
 
 const DeleteUserModal = defineAsyncComponent(() => import('@/components/admin/users/delete/DeleteUserModal.vue'))
 
+const store = useStore()
 const { getUserList, openModal, users } = useUser()
 
 const columns = reactive([
