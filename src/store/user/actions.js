@@ -99,20 +99,3 @@ export function getUserById ({ commit }, id = '') {
     })
   )
 }
-
-export function getUserList ({ commit }) {
-  commit('SET_IS_LOADING', true)
-  return new Promise((resolve, reject) => axiosInstance
-    .get(endpoints.USERS)
-    .then((response) => {
-      if (response.data?.results?.length) commit('SET_LIST', response.data.results)
-      resolve(response.data)
-    })
-    .catch((error) => {
-      reject(error)
-    })
-    .finally(() => {
-      commit('SET_IS_LOADING', false)
-    })
-  )
-}

@@ -3,11 +3,13 @@ import { computed, defineAsyncComponent, reactive } from 'vue'
 import { useStore } from 'vuex'
 import { PencilAltIcon, PlusIcon, TrashIcon } from '@heroicons/vue/solid'
 import { useUser } from '@/composables/user.js'
+import { useUserList } from '@/composables/userList.js'
 
 const DeleteUserModal = defineAsyncComponent(() => import('@/components/admin/users/delete/DeleteUserModal.vue'))
 
 const store = useStore()
-const { getUserList, openModal, users } = useUser()
+const { openModal } = useUser()
+const { getUserList, isLoading, isLoadMore, users } = useUserList()
 
 const columns = reactive([
   {
@@ -115,6 +117,20 @@ getUserList()
           </tr>
         </template>
       </AppTable>
+    </div>
+
+    <div
+      v-if="isLoadMore"
+      class="mx-auto mt-6"
+    >
+      <AppButton
+        color="primary"
+        size="sm"
+        :loading="isLoading"
+        @click="getUserList(true)"
+      >
+        Load More
+      </AppButton>
     </div>
   </div>
 

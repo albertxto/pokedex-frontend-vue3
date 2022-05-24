@@ -4,7 +4,6 @@ export default {
   isEmailVerified: false,
   isLoading: false,
   isShowModal: false,
-  list: [],
   name: '',
   role: ''
 }

@@ -47,14 +47,6 @@ export function SET_IS_SHOW_MODAL (state, payload) {
   }
 }
 
-export function SET_LIST (state, payload) {
-  if (Array.isArray(payload) && payload.length) {
-    state.list = payload
-  } else {
-    state.list = []
-  }
-}
-
 export function SET_NAME (state, payload) {
   if (typeof payload === 'string' && payload) {
     state.name = payload
