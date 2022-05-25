@@ -1,55 +1,35 @@
 <script setup>
-import { ref } from 'vue'
-import { useStore } from 'vuex'
+import { useNotification } from '@/composables/notification'
 import { useUser } from '@/composables/user'
 
-const store = useStore()
-const { userId } = useUser()
-
-const password = ref('')
-const confirmPassword = ref('')
-
-const successMessage = ref('')
-const errorMessage = ref('')
-
-const dismissNotification = () => {
-  successMessage.value = ''
-  errorMessage.value = ''
-}
-const dismissSuccessNotification = () => {
-  successMessage.value = ''
-}
-const dismissErrorNotification = () => {
-  errorMessage.value = ''
-}
+const {
+  dismissAllNotifications,
+  dismissErrorNotification,
+  dismissSuccessNotification,
+  errorMessage,
+  successMessage
+} = useNotification()
+const { changePasswordById, userConfirmPassword, userId, userPassword } = useUser()
 
 const onSubmit = async () => {
   // Dismiss all notifications
-  dismissNotification()
+  dismissAllNotifications()
 
   // Validate confirm password
-  if (password.value !== confirmPassword.value) {
+  if (userPassword.value !== userConfirmPassword.value) {
     errorMessage.value = 'Password must be the same as confirm password'
     return
   }
 
   const payload = {
     id: userId.value,
-    password: password.value
+    password: userPassword.value
   }
   try {
-    const response = await store.dispatch('user/changePasswordById', payload)
-    if (response?.id) {
-      successMessage.value = 'Password changed successfully'
-
-      // Reset form
-      password.value = ''
-      confirmPassword.value = ''
-    }
+    const response = await changePasswordById(payload)
+    successMessage.value = response
   } catch (error) {
-    if (error.response?.data?.message) {
-      errorMessage.value = error.response.data.message
-    }
+    errorMessage.value = error
   }
 }
 </script>
@@ -70,7 +50,7 @@ const onSubmit = async () => {
           Password
         </label>
         <AppInput
-          v-model="password"
+          v-model="userPassword"
           placeholder="Password"
           type="password"
         />
@@ -85,7 +65,7 @@ const onSubmit = async () => {
           Confirm Password
         </label>
         <AppInput
-          v-model="confirmPassword"
+          v-model="userConfirmPassword"
           placeholder="Confirm Password"
           type="password"
         />

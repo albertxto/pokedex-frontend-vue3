@@ -1,4 +1,5 @@
 export default {
+  confirmPassword: '',
   email: '',
   id: '',
   isEmailVerified: false,
@@ -8,5 +9,6 @@ export default {
   list: [],
   name: '',
   page: 1,
+  password: '',
   role: ''
 }

@@ -5,12 +5,22 @@ export function PUSH_LIST (state, payload) {
 }
 
 export function RESET (state) {
+  state.confirmPassword = ''
   state.email = ''
   state.id = ''
   state.isLoading = true
   state.isShowModal = false
   state.name = ''
+  state.password = ''
   state.role = ''
+}
+
+export function SET_CONFIRM_PASSWORD (state, payload) {
+  if (typeof payload === 'string' && payload) {
+    state.confirmPassword = payload
+  } else {
+    state.confirmPassword = ''
+  }
 }
 
 export function SET_EMAIL (state, payload) {
@@ -82,6 +92,14 @@ export function SET_PAGE (state, payload) {
     state.page = payload
   } else {
     state.page = 1
+  }
+}
+
+export function SET_PASSWORD (state, payload) {
+  if (typeof payload === 'string' && payload) {
+    state.password = payload
+  } else {
+    state.password = ''
   }
 }
 

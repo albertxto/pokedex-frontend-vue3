@@ -1,28 +1,19 @@
 <script setup>
-import { ref } from 'vue'
-import { useStore } from 'vuex'
+import { useNotification } from '@/composables/notification'
 import { useUser } from '@/composables/user'
 
-const store = useStore()
-const { userEmail, userId, userName } = useUser()
-
-const successMessage = ref('')
-const errorMessage = ref('')
-
-const dismissNotification = () => {
-  successMessage.value = ''
-  errorMessage.value = ''
-}
-const dismissSuccessNotification = () => {
-  successMessage.value = ''
-}
-const dismissErrorNotification = () => {
-  errorMessage.value = ''
-}
+const {
+  dismissAllNotifications,
+  dismissErrorNotification,
+  dismissSuccessNotification,
+  errorMessage,
+  successMessage
+} = useNotification()
+const { editUser, userEmail, userId, userName } = useUser()
 
 const onSubmit = async () => {
   // Dismiss all notifications
-  dismissNotification()
+  dismissAllNotifications()
 
   const payload = {
     id: userId.value,
@@ -30,14 +21,10 @@ const onSubmit = async () => {
     name: userName.value
   }
   try {
-    const response = await store.dispatch('user/editUser', payload)
-    if (response?.id) {
-      successMessage.value = 'Successfully updated user'
-    }
+    const response = await editUser(payload)
+    successMessage.value = response
   } catch (error) {
-    if (error.response?.data?.message) {
-      errorMessage.value = error.response.data.message
-    }
+    errorMessage.value = error
   }
 }
 </script>

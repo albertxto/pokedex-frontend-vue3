@@ -1,3 +1,7 @@
+export function confirmPassword (state) {
+  return state.confirmPassword
+}
+
 export function email (state) {
   return state.email
 }
@@ -32,6 +36,10 @@ export function name (state) {
 
 export function page (state) {
   return state.page
+}
+
+export function password (state) {
+  return state.password
 }
 
 export function role (state) {

@@ -13,6 +13,7 @@ export function addUser ({ commit }, { email = '', name = '', password = '', rol
   return new Promise((resolve, reject) => axiosInstance
     .post('/users', payload)
     .then((response) => {
+      commit('RESET')
       resolve(response.data)
     })
     .catch((error) => {

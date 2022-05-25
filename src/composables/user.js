@@ -16,6 +16,13 @@ export const useUser = () => {
     }
   })
 
+  const userConfirmPassword = computed({
+    get: () => store.getters['user/confirmPassword'],
+    set: (value) => {
+      store.commit('user/SET_CONFIRM_PASSWORD', value)
+    }
+  })
+
   const userEmail = computed({
     get: () => store.getters['user/email'],
     set: (value) => {
@@ -39,11 +46,64 @@ export const useUser = () => {
     }
   })
 
+  const userPassword = computed({
+    get: () => store.getters['user/password'],
+    set: (value) => {
+      store.commit('user/SET_PASSWORD', value)
+    }
+  })
+
+  const userRole = computed({
+    get: () => store.getters['user/role'],
+    set: (value) => {
+      store.commit('user/SET_ROLE', value)
+    }
+  })
+
   // Method
+  const addUser = async (payload) => {
+    try {
+      const response = await store.dispatch('user/addUser', payload)
+      if (response?.id) {
+        return 'Successfully added user'
+      }
+    } catch (error) {
+      if (error.response?.data?.message) {
+        throw error.response.data.message
+      }
+    }
+  }
+
+  const changePasswordById = async (payload) => {
+    try {
+      const response = await store.dispatch('user/changePasswordById', payload)
+      if (response?.id) {
+        return 'Password changed successfully'
+      }
+    } catch (error) {
+      if (error.response?.data?.message) {
+        throw error.response.data.message
+      }
+    }
+  }
+
   const closeModal = () => {
     isShowModal.value = false
     userId.value = ''
     userEmail.value = ''
+  }
+
+  const editUser = async (payload) => {
+    try {
+      const response = await store.dispatch('user/editUser', payload)
+      if (response?.id) {
+        return 'Successfully updated user'
+      }
+    } catch (error) {
+      if (error.response?.data?.message) {
+        throw error.response.data.message
+      }
+    }
   }
 
   const deleteUser = async () => {
@@ -81,17 +141,23 @@ export const useUser = () => {
   }
 
   return {
+    addUser,
+    changePasswordById,
     closeModal,
     deleteUser,
+    editUser,
     getUserById,
     getUserList,
     isLoading,
     isLoadMore,
     isShowModal,
     openModal,
+    userConfirmPassword,
     userEmail,
     userId,
     userList,
-    userName
+    userName,
+    userPassword,
+    userRole
   }
 }

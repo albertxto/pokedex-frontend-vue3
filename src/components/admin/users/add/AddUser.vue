@@ -1,61 +1,37 @@
 <script setup>
-import { ref } from 'vue'
-import { useStore } from 'vuex'
+import { useNotification } from '@/composables/notification'
+import { useUser } from '@/composables/user'
 
-const store = useStore()
-
-const email = ref('')
-const name = ref('')
-const role = ref('')
-const password = ref('')
-const confirmPassword = ref('')
-
-const successMessage = ref('')
-const errorMessage = ref('')
-
-const dismissNotification = () => {
-  successMessage.value = ''
-  errorMessage.value = ''
-}
-const dismissSuccessNotification = () => {
-  successMessage.value = ''
-}
-const dismissErrorNotification = () => {
-  errorMessage.value = ''
-}
+const {
+  dismissAllNotifications,
+  dismissErrorNotification,
+  dismissSuccessNotification,
+  errorMessage,
+  successMessage
+} = useNotification()
+const { addUser, userConfirmPassword, userEmail, userName, userPassword, userRole } = useUser()
 
 const onSubmit = async () => {
   // Dismiss all notifications
-  dismissNotification()
+  dismissAllNotifications()
 
   // Validate confirm password
-  if (password.value !== confirmPassword.value) {
+  if (userPassword.value !== userConfirmPassword.value) {
     errorMessage.value = 'Password must be the same as confirm password'
     return
   }
 
   const payload = {
-    email: email.value,
-    name: name.value,
-    password: password.value,
-    role: role.value
+    email: userEmail.value,
+    name: userName.value,
+    password: userPassword.value,
+    role: userRole.value
   }
   try {
-    const response = await store.dispatch('user/addUser', payload)
-    if (response?.id) {
-      successMessage.value = 'Successfully added user'
-
-      // Reset form
-      email.value = ''
-      name.value = ''
-      role.value = ''
-      password.value = ''
-      confirmPassword.value = ''
-    }
+    const response = await addUser(payload)
+    successMessage.value = response
   } catch (error) {
-    if (error.response?.data?.message) {
-      errorMessage.value = error.response.data.message
-    }
+    errorMessage.value = error
   }
 }
 </script>
@@ -76,7 +52,7 @@ const onSubmit = async () => {
           Name
         </label>
         <AppInput
-          v-model="name"
+          v-model="userName"
           placeholder="Name"
           type="text"
         />
@@ -91,7 +67,7 @@ const onSubmit = async () => {
           Email
         </label>
         <AppInput
-          v-model="email"
+          v-model="userEmail"
           placeholder="Email"
           type="text"
         />
@@ -106,13 +82,13 @@ const onSubmit = async () => {
           Role
         </label>
         <AppRadio
-          v-model="role"
+          v-model="userRole"
           name="role"
           label="Admin"
           val="admin"
         />
         <AppRadio
-          v-model="role"
+          v-model="userRole"
           name="role"
           label="User"
           val="user"
@@ -128,7 +104,7 @@ const onSubmit = async () => {
           Password
         </label>
         <AppInput
-          v-model="password"
+          v-model="userPassword"
           placeholder="Password"
           type="password"
         />
@@ -143,7 +119,7 @@ const onSubmit = async () => {
           Confirm Password
         </label>
         <AppInput
-          v-model="confirmPassword"
+          v-model="userConfirmPassword"
           placeholder="Confirm Password"
           type="password"
         />
