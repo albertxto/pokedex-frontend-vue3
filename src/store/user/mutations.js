@@ -1,7 +1,13 @@
+export function PUSH_LIST (state, payload) {
+  if (Array.isArray(payload) && payload.length) {
+    state.list.push(...payload)
+  }
+}
+
 export function RESET (state) {
   state.email = ''
   state.id = ''
-  state.isLoading = false
+  state.isLoading = true
   state.isShowModal = false
   state.name = ''
   state.role = ''
@@ -39,6 +45,14 @@ export function SET_IS_LOADING (state, payload) {
   }
 }
 
+export function SET_IS_LOAD_MORE (state, payload) {
+  if (typeof payload === 'boolean') {
+    state.isLoadMore = payload
+  } else {
+    state.isLoadMore = false
+  }
+}
+
 export function SET_IS_SHOW_MODAL (state, payload) {
   if (typeof payload === 'boolean') {
     state.isShowModal = payload
@@ -47,11 +61,27 @@ export function SET_IS_SHOW_MODAL (state, payload) {
   }
 }
 
+export function SET_LIST (state, payload) {
+  if (Array.isArray(payload) && payload.length) {
+    state.list = payload
+  } else {
+    state.list = []
+  }
+}
+
 export function SET_NAME (state, payload) {
   if (typeof payload === 'string' && payload) {
     state.name = payload
   } else {
     state.name = ''
+  }
+}
+
+export function SET_PAGE (state, payload) {
+  if (typeof payload === 'number' && payload > 0) {
+    state.page = payload
+  } else {
+    state.page = 1
   }
 }
 

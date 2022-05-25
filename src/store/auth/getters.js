@@ -2,8 +2,8 @@ export function accessToken (state) {
   return state.accessToken
 }
 
-export function currentUser (state) {
-  return state.currentUser
+export function currentUserId (state) {
+  return state.currentUser.id
 }
 
 export function isAuthenticated (state) {

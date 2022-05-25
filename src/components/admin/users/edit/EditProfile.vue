@@ -1,23 +1,10 @@
 <script setup>
-import { computed, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref } from 'vue'
 import { useStore } from 'vuex'
+import { useUser } from '@/composables/user'
 
-const route = useRoute()
 const store = useStore()
-
-const email = computed({
-  get: () => store.getters['user/email'],
-  set: (value) => {
-    store.commit('user/SET_EMAIL', value)
-  }
-})
-const name = computed({
-  get: () => store.getters['user/name'],
-  set: (value) => {
-    store.commit('user/SET_NAME', value)
-  }
-})
+const { userEmail, userId, userName } = useUser()
 
 const successMessage = ref('')
 const errorMessage = ref('')
@@ -38,9 +25,9 @@ const onSubmit = async () => {
   dismissNotification()
 
   const payload = {
-    id: route.params.id,
-    email: email.value,
-    name: name.value
+    id: userId.value,
+    email: userEmail.value,
+    name: userName.value
   }
   try {
     const response = await store.dispatch('user/editUser', payload)
@@ -71,7 +58,7 @@ const onSubmit = async () => {
           Name
         </label>
         <AppInput
-          v-model="name"
+          v-model="userName"
           placeholder="Name"
           type="text"
         />
@@ -86,7 +73,7 @@ const onSubmit = async () => {
           Email
         </label>
         <AppInput
-          v-model="email"
+          v-model="userEmail"
           placeholder="Email"
           type="text"
         />

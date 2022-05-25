@@ -1,15 +1,15 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
-import { useRoute } from 'vue-router'
+import { useAuth } from '@/composables/auth'
 import { useUser } from '@/composables/user'
-
-const route = useRoute()
-const { getUserById } = useUser()
 
 const ChangePassword = defineAsyncComponent(() => import('@/components/admin/users/edit/ChangePassword.vue'))
 const EditProfile = defineAsyncComponent(() => import('@/components/admin/users/edit/EditProfile.vue'))
 
-getUserById(route.params.id)
+const { currentUserId } = useAuth()
+const { getUserById } = useUser()
+
+getUserById(currentUserId.value)
 </script>
 
 <template>

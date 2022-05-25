@@ -7,6 +7,8 @@ export const useUser = () => {
   // Computed
   const isLoading = computed(() => store.getters['user/isLoading'])
 
+  const isLoadMore = computed(() => store.getters['user/isLoadMore'])
+
   const isShowModal = computed({
     get: () => store.getters['user/isShowModal'],
     set: (value) => {
@@ -28,14 +30,14 @@ export const useUser = () => {
     }
   })
 
+  const userList = computed(() => store.getters['user/list'])
+
   const userName = computed({
     get: () => store.getters['user/name'],
     set: (value) => {
       store.commit('user/SET_NAME', value)
     }
   })
-
-  const users = computed(() => store.getters['user/list'])
 
   // Method
   const closeModal = () => {
@@ -56,9 +58,17 @@ export const useUser = () => {
     }
   }
 
-  const getUserList = async () => {
+  const getUserById = async (id = '') => {
     try {
-      await store.dispatch('user/getUserList')
+      await store.dispatch('user/getUserById', id)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const getUserList = async (nextPage = false) => {
+    try {
+      await store.dispatch('user/getUserList', nextPage)
     } catch (error) {
       console.error(error)
     }
@@ -73,13 +83,15 @@ export const useUser = () => {
   return {
     closeModal,
     deleteUser,
+    getUserById,
     getUserList,
     isLoading,
+    isLoadMore,
     isShowModal,
     openModal,
     userEmail,
     userId,
-    userName,
-    users
+    userList,
+    userName
   }
 }

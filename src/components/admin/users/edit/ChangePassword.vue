@@ -1,10 +1,10 @@
 <script setup>
 import { ref } from 'vue'
-import { useRoute } from 'vue-router'
 import { useStore } from 'vuex'
+import { useUser } from '@/composables/user'
 
-const route = useRoute()
 const store = useStore()
+const { userId } = useUser()
 
 const password = ref('')
 const confirmPassword = ref('')
@@ -34,7 +34,7 @@ const onSubmit = async () => {
   }
 
   const payload = {
-    id: route.params.id,
+    id: userId.value,
     password: password.value
   }
   try {

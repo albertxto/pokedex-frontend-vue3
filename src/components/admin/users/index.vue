@@ -1,17 +1,16 @@
 <script setup>
-import { computed, defineAsyncComponent, reactive } from 'vue'
-import { useStore } from 'vuex'
+import { defineAsyncComponent } from 'vue'
 import { PencilAltIcon, PlusIcon, TrashIcon } from '@heroicons/vue/solid'
-import { useUser } from '@/composables/user.js'
-import { useUserList } from '@/composables/userList.js'
+import { useAuth } from '@/composables/auth'
+import { useUser } from '@/composables/user'
 
 const DeleteUserModal = defineAsyncComponent(() => import('@/components/admin/users/delete/DeleteUserModal.vue'))
 
-const store = useStore()
+const { currentUserId } = useAuth()
 const { openModal } = useUser()
-const { getUserList, isLoading, isLoadMore, users } = useUserList()
+const { getUserList, isLoading, isLoadMore, userList } = useUser()
 
-const columns = reactive([
+const columns = [
   {
     name: 'name', label: 'Name', align: 'left'
   },
@@ -27,12 +26,10 @@ const columns = reactive([
   {
     name: 'actions', label: 'Actions', align: 'center'
   }
-])
-
-const currentUser = computed(() => store.getters['auth/currentUser'])
+]
 
 const isShowDeleteButton = (userId = '') => {
-  return currentUser.value.id !== userId
+  return currentUserId.value !== userId
 }
 
 getUserList()
@@ -67,7 +64,7 @@ getUserList()
         </template>
 
         <template #default>
-          <tr v-if="!users.length">
+          <tr v-if="!userList.length">
             <td
               class="p-4 px-6 text-xs"
               colspan="5"
@@ -76,7 +73,8 @@ getUserList()
             </td>
           </tr>
           <tr
-            v-for="(user, index) in users"
+            v-for="(user, index) in userList"
+            v-else
             :key="index"
           >
             <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
