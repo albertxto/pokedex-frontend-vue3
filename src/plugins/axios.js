@@ -39,6 +39,7 @@ axiosInstance.interceptors.response.use((response) => {
       axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`
     } catch (err) {
       store.commit('auth/RESET')
+      return Promise.reject(error)
     }
 
     return axiosInstance(originalRequest)

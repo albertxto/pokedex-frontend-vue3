@@ -3,6 +3,7 @@ import { defineAsyncComponent, ref } from 'vue'
 import { MenuIcon, XIcon } from '@heroicons/vue/outline'
 import { DesktopComputerIcon, DeviceMobileIcon, UsersIcon } from '@heroicons/vue/solid'
 
+const DarkModeButton = defineAsyncComponent(() => import('@/components/headers/DarkModeButton.vue'))
 const UserDropdown = defineAsyncComponent(() => import('@/components/headers/UserDropdown.vue'))
 
 const collapseShow = ref('hidden')
@@ -16,7 +17,7 @@ const toggleCollapseShow = (classes) => {
     <div class="flex flex-wrap items-center justify-between w-full px-0 mx-auto md:flex-col md:items-stretch md:min-h-full md:flex-nowrap">
       <!-- Toggler -->
       <button
-        class="px-3 py-1 text-xl leading-none bg-transparent border border-transparent border-solid rounded cursor-pointer md:hidden"
+        class="px-3 py-1 text-xl leading-none bg-transparent border border-transparent border-solid rounded cursor-pointer hover:text-slate-400 md:hidden"
         type="button"
         @click="toggleCollapseShow('bg-white dark:bg-slate-900 m-2 py-3 px-6')"
       >
@@ -28,11 +29,14 @@ const toggleCollapseShow = (classes) => {
         class="inline-block p-4 px-0 mr-0 text-sm font-bold text-left uppercase md:block md:pb-2 text-slate-600 dark:text-slate-300 whitespace-nowrap"
         to="/"
       >
-        Pokedex
+        Pokedex Frontend Vue 3
       </router-link>
 
       <!-- User -->
-      <ul class="flex flex-wrap items-center list-none md:hidden">
+      <ul class="flex flex-wrap items-center gap-6 list-none md:hidden">
+        <li class="relative inline-block">
+          <DarkModeButton />
+        </li>
         <li class="relative inline-block">
           <UserDropdown />
         </li>
@@ -60,16 +64,14 @@ const toggleCollapseShow = (classes) => {
                 class="px-3 py-1 text-xl leading-none text-black bg-transparent border border-transparent border-solid rounded cursor-pointer dark:text-white md:hidden"
                 @click="toggleCollapseShow('hidden')"
               >
-                <XIcon class="w-5 h-5" />
+                <XIcon class="w-5 h-5 hover:text-slate-400" />
               </button>
             </div>
           </div>
         </div>
 
         <!-- Heading -->
-        <h6
-          class="block pt-1 pb-4 text-xs font-bold no-underline uppercase md:min-w-full text-blueGray-500"
-        >
+        <h6 class="block pt-1 pb-4 text-xs font-bold no-underline uppercase md:min-w-full text-slate-500">
           Admin Layout Pages
         </h6>
 
@@ -122,7 +124,7 @@ const toggleCollapseShow = (classes) => {
         <hr class="my-4 md:min-w-full">
 
         <!-- Heading -->
-        <h6 class="block pt-1 pb-4 text-xs font-bold no-underline uppercase md:min-w-full text-blueGray-500">
+        <h6 class="block pt-1 pb-4 text-xs font-bold no-underline uppercase md:min-w-full text-slate-500">
           Pokedex Layout Pages
         </h6>
 

@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { usePokemon } from '@/composables/pokemon'
 
 const BackArrow = defineAsyncComponent(() => import('@/components/headers/BackArrow.vue'))
+const DarkModeButton = defineAsyncComponent(() => import('@/components/headers/DarkModeButton.vue'))
 const GithubStar = defineAsyncComponent(() => import('@/components/headers/GithubStar.vue'))
 const PokedexFavorite = defineAsyncComponent(() => import('@/components/headers/PokedexFavorite.vue'))
 const PokemonFormSelect = defineAsyncComponent(() => import('@/components/pokedex/info/PokemonFormSelect.vue'))
@@ -42,6 +43,11 @@ const goBack = () => {
           <!-- Favorite -->
           <li class="flex items-center">
             <PokedexFavorite />
+          </li>
+
+          <!-- Dark mode -->
+          <li class="flex items-center">
+            <DarkModeButton force-white />
           </li>
 
           <!-- Github -->

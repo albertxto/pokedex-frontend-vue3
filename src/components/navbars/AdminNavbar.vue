@@ -1,5 +1,7 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
+
+const DarkModeButton = defineAsyncComponent(() => import('@/components/headers/DarkModeButton.vue'))
 const UserDropdown = defineAsyncComponent(() => import('@/components/headers/UserDropdown.vue'))
 </script>
 
@@ -16,7 +18,8 @@ const UserDropdown = defineAsyncComponent(() => import('@/components/headers/Use
       </a>
 
       <!-- Right navbar -->
-      <ul class="flex-row items-center hidden gap-3 list-none md:flex">
+      <ul class="flex-row items-center hidden gap-6 list-none md:flex">
+        <DarkModeButton force-white />
         <UserDropdown />
       </ul>
     </div>
