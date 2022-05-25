@@ -1,10 +1,9 @@
 <script setup>
-// import NotificationDropdown from '@/components/Dropdowns/NotificationDropdown.vue'
-// import UserDropdown from '@/components/Dropdowns/UserDropdown.vue'
-
-import { ref } from 'vue'
+import { defineAsyncComponent, ref } from 'vue'
 import { MenuIcon, XIcon } from '@heroicons/vue/outline'
-import { DesktopComputerIcon, DeviceMobileIcon, UserCircleIcon, UsersIcon } from '@heroicons/vue/solid'
+import { DesktopComputerIcon, DeviceMobileIcon, UsersIcon } from '@heroicons/vue/solid'
+
+const UserDropdown = defineAsyncComponent(() => import('@/components/headers/UserDropdown.vue'))
 
 const collapseShow = ref('hidden')
 const toggleCollapseShow = (classes) => {
@@ -23,6 +22,7 @@ const toggleCollapseShow = (classes) => {
       >
         <MenuIcon class="w-5 h-5" />
       </button>
+
       <!-- Brand -->
       <router-link
         class="inline-block p-4 px-0 mr-0 text-sm font-bold text-left uppercase md:block md:pb-2 text-slate-600 dark:text-slate-300 whitespace-nowrap"
@@ -30,15 +30,14 @@ const toggleCollapseShow = (classes) => {
       >
         Pokedex
       </router-link>
+
       <!-- User -->
       <ul class="flex flex-wrap items-center list-none md:hidden">
         <li class="relative inline-block">
-          <!-- <notification-dropdown /> -->
-        </li>
-        <li class="relative inline-block">
-          <!-- <user-dropdown /> -->
+          <UserDropdown />
         </li>
       </ul>
+
       <!-- Collapse -->
       <div
         class="absolute top-0 left-0 right-0 z-40 items-center flex-1 h-auto overflow-x-hidden overflow-y-auto rounded shadow md:flex md:flex-col md:items-stretch md:relative md:mt-4 md:shadow-none"
@@ -66,24 +65,15 @@ const toggleCollapseShow = (classes) => {
             </div>
           </div>
         </div>
-        <!-- Form -->
-        <form class="my-6 md:hidden">
-          <AppInput
-            type="text"
-            placeholder="Search"
-          />
-        </form>
 
-        <!-- Divider -->
-        <hr class="my-4 md:min-w-full">
         <!-- Heading -->
         <h6
           class="block pt-1 pb-4 text-xs font-bold no-underline uppercase md:min-w-full text-blueGray-500"
         >
           Admin Layout Pages
         </h6>
-        <!-- Navigation -->
 
+        <!-- Navigation -->
         <ul class="flex flex-col list-none md:flex-col md:min-w-full">
           <li class="items-center">
             <router-link
@@ -102,27 +92,6 @@ const toggleCollapseShow = (classes) => {
               >
                 <DesktopComputerIcon class="w-4 h-4 mr-2" />
                 Dashboard
-              </a>
-            </router-link>
-          </li>
-
-          <li class="items-center">
-            <router-link
-              v-slot="{ href, navigate, isActive }"
-              :to="{ name: 'profile' }"
-            >
-              <a
-                :href="href"
-                class="flex py-3 text-xs font-bold uppercase"
-                :class="[
-                  isActive
-                    ? 'text-emerald-500 hover:text-emerald-600'
-                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-500 dark:hover:text-slate-400'
-                ]"
-                @click="navigate"
-              >
-                <UserCircleIcon class="w-4 h-4 mr-2" />
-                Profile
               </a>
             </router-link>
           </li>
@@ -151,12 +120,13 @@ const toggleCollapseShow = (classes) => {
 
         <!-- Divider -->
         <hr class="my-4 md:min-w-full">
+
         <!-- Heading -->
         <h6 class="block pt-1 pb-4 text-xs font-bold no-underline uppercase md:min-w-full text-blueGray-500">
           Pokedex Layout Pages
         </h6>
-        <!-- Navigation -->
 
+        <!-- Navigation -->
         <ul class="flex flex-col list-none md:flex-col md:min-w-full md:mb-4">
           <li class="items-center">
             <router-link

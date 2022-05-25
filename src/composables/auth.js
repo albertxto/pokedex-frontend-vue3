@@ -7,5 +7,17 @@ export const useAuth = () => {
   // Computed
   const currentUserId = computed(() => store.getters['auth/currentUserId'])
 
-  return { currentUserId }
+  // Method
+  const logout = async () => {
+    try {
+      await store.dispatch('auth/logout')
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  return {
+    currentUserId,
+    logout
+  }
 }
