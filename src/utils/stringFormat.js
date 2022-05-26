@@ -1,6 +1,6 @@
 export const getIdFromPokeApiUrl = (url = '') => url.split('/')[6] || null
 
-export const getPokemonImageUrlById = (id = '') => {
+export const getPokemonImageUrlById = (id = '1') => {
   return `${import.meta.env.VITE_POKEMON_IMAGE_URL}/${id}.png` || null
 }
 
@@ -14,4 +14,8 @@ export const parseJwt = (token = '') => {
   }).join(''))
 
   return JSON.parse(jsonPayload)
+}
+
+export const pokedexNumberFormat = (id = '1') => {
+  return `#${id.toString().padStart(3, '0')}`
 }

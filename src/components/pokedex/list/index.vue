@@ -25,6 +25,7 @@ if (!pokemonList.value.length) {
         <PokedexCard
           :image="pokemon.image"
           :name="pokemon.name"
+          :number="pokemon.number"
           :pokemon-id="pokemon.id"
         />
       </template>

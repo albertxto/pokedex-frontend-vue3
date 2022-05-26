@@ -12,6 +12,10 @@ const props = defineProps({
     type: String,
     default: null
   },
+  number: {
+    type: String,
+    default: null
+  },
   pokemonId: {
     type: String,
     default: null
@@ -19,8 +23,6 @@ const props = defineProps({
 })
 
 const isShowCard = computed(() => !!props.pokemonId)
-const pokemonIdLabel = computed(() => `#${props.pokemonId.padStart(3, '0')}`)
-const pokemonNameLabel = computed(() => props.name.replaceAll('-', ' '))
 </script>
 
 <template>
@@ -32,9 +34,9 @@ const pokemonNameLabel = computed(() => props.name.replaceAll('-', ' '))
     <div class="p-4 overflow-hidden h-44 rounded-2xl hover:opacity-75 bg-gradient-to-b from-slate-200 to-slate-400 dark:from-slate-700 dark:to-slate-900">
       <div class="flex flex-wrap justify-between">
         <div class="font-bold">
-          {{ pokemonNameLabel }}
+          {{ name }}
         </div>
-        <div>{{ pokemonIdLabel }}</div>
+        <div>{{ number }}</div>
       </div>
 
       <div class="relative">

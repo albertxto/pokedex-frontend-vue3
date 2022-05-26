@@ -1,7 +1,9 @@
 import endpoints from '@/config/endpoints'
 import { limit } from '@/config/pokemon'
 import { axiosInstance } from '@/plugins/axios'
-import { getIdFromPokeApiUrl, getPokemonImageUrlById } from '@/utils/stringFormat'
+import {
+  getIdFromPokeApiUrl, getPokemonImageUrlById, normalizePokeApiName, pokedexNumberFormat
+} from '@/utils/stringFormat'
 
 export function getPokemonList ({ commit, getters }, nextPage = false) {
   commit('SET_IS_LOADING', true)
@@ -24,7 +26,8 @@ export function getPokemonList ({ commit, getters }, nextPage = false) {
           return {
             id: pokemonId,
             image: getPokemonImageUrlById(pokemonId),
-            name: result.name
+            name: normalizePokeApiName(result.name),
+            number: pokedexNumberFormat(pokemonId)
           }
         })
 

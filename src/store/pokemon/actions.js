@@ -6,7 +6,7 @@ import {
 
 export function getPokemonById ({ commit }, id) {
   return new Promise((resolve, reject) => axiosInstance
-    .get(`${endpoints.POKEDEX}/${id}`)
+    .get(`${endpoints.POKEDEX_INFO}/${id}`)
     .then((response) => {
       if (response.data?.length) {
         const { data } = response
@@ -126,7 +126,7 @@ export function getPokemonEvolutionChain ({ commit, dispatch, getters }) {
 
 export function getPokemonFormById ({ commit }, id) {
   return new Promise((resolve, reject) => axiosInstance
-    .get(`${endpoints.POKEMON_FORM}/${id}`)
+    .get(`${endpoints.POKEDEX_FORM}/${id}`)
     .then((response) => {
       const { data } = response
 

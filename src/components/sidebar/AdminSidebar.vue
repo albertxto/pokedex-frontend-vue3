@@ -1,7 +1,9 @@
 <script setup>
 import { defineAsyncComponent, ref } from 'vue'
 import { MenuIcon, XIcon } from '@heroicons/vue/outline'
-import { DesktopComputerIcon, DeviceMobileIcon, UsersIcon } from '@heroicons/vue/solid'
+import {
+  DesktopComputerIcon, DeviceMobileIcon, SearchCircleIcon, UsersIcon
+} from '@heroicons/vue/solid'
 
 const DarkModeButton = defineAsyncComponent(() => import('@/components/headers/DarkModeButton.vue'))
 const UserDropdown = defineAsyncComponent(() => import('@/components/headers/UserDropdown.vue'))
@@ -94,6 +96,27 @@ const toggleCollapseShow = (classes) => {
               >
                 <DesktopComputerIcon class="w-4 h-4 mr-2" />
                 Dashboard
+              </a>
+            </router-link>
+          </li>
+
+          <li class="items-center">
+            <router-link
+              v-slot="{ href, navigate, isActive }"
+              :to="{ name: 'favoritePokemon' }"
+            >
+              <a
+                :href="href"
+                class="flex py-3 text-xs font-bold uppercase"
+                :class="[
+                  isActive
+                    ? 'text-emerald-500 hover:text-emerald-600'
+                    : 'text-slate-700 dark:text-slate-300 hover:text-slate-500 dark:hover:text-slate-400'
+                ]"
+                @click="navigate"
+              >
+                <SearchCircleIcon class="w-4 h-4 mr-2" />
+                Favorite Pokemon
               </a>
             </router-link>
           </li>

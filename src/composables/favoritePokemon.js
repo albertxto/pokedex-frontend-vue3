@@ -8,6 +8,7 @@ export const useFavoritePokemon = () => {
   const route = useRoute()
 
   // Computed
+  const favoritePokemonList = computed(() => store.getters['favoritePokemon/list'])
   const isFavorite = computed({
     get: () => store.getters['favoritePokemon/isFavorite'],
     set: (value) => {
@@ -15,6 +16,7 @@ export const useFavoritePokemon = () => {
     }
   })
   const isLoading = computed(() => store.getters['favoritePokemon/isLoading'])
+  const isLoadMore = computed(() => store.getters['favoritePokemon/isLoadMore'])
   const isShowModal = computed({
     get: () => store.getters['favoritePokemon/isShowModal'],
     set: (value) => {
@@ -36,6 +38,14 @@ export const useFavoritePokemon = () => {
     }
   }
 
+  const getFavoritePokemonList = async (nextPage = false) => {
+    try {
+      await store.dispatch('favoritePokemon/getFavoritePokemonList', nextPage)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   const setFavoritePokemon = async () => {
     if (!validatePokemonRoute) return
     try {
@@ -52,9 +62,12 @@ export const useFavoritePokemon = () => {
 
   return {
     closeModal,
+    favoritePokemonList,
     getFavoritePokemon,
+    getFavoritePokemonList,
     isFavorite,
     isLoading,
+    isLoadMore,
     isShowModal,
     openModal,
     setFavoritePokemon

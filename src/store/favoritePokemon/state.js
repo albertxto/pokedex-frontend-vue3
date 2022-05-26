@@ -1,5 +1,8 @@
 export default {
   isFavorite: false,
   isLoading: false,
-  isShowModal: false
+  isLoadMore: false,
+  isShowModal: false,
+  list: [],
+  page: 1
 }

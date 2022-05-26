@@ -59,7 +59,7 @@ export const usePokemon = () => {
     // Disable pokemon swiper
     setTimeout(() => {
       pokemonSwiper.value.disable()
-    }, 1000)
+    }, 500)
 
     // Get pokemon id from route params
     const pokemonId = Number.parseInt(route.params.id)
@@ -85,7 +85,7 @@ export const usePokemon = () => {
     // Enable pokemon swiper
     setTimeout(() => {
       pokemonSwiper.value.enable()
-    }, 1000)
+    }, 500)
   }
 
   const getPokemonEvolutionChain = async () => {

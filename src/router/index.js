@@ -14,6 +14,11 @@ const routes = [
     meta: { auth: true },
     children: [
       {
+        path: '/admin/favorite-pokemon',
+        name: 'favoritePokemon',
+        component: () => import('@/views/admin/favoritePokemon/index.vue')
+      },
+      {
         path: '/admin/profile',
         name: 'profile',
         component: () => import('@/views/admin/profile/index.vue')

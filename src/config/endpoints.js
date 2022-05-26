@@ -7,7 +7,9 @@ export default {
   },
   EVOLUTION_CHAIN: '/pokedex/evolution-chain',
   FAVORITE_POKEMON: '/pokedex/favorite',
+  FAVORITE_POKEMON_LIST: '/pokedex/list',
   POKEDEX: '/pokedex',
-  POKEMON_FORM: '/pokedex/form',
+  POKEDEX_FORM: '/pokedex/form',
+  POKEDEX_INFO: '/pokedex/info',
   USERS: '/users'
 }
