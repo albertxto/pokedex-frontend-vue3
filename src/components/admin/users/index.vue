@@ -1,5 +1,5 @@
 <script setup>
-import { defineAsyncComponent } from 'vue'
+import { computed, defineAsyncComponent } from 'vue'
 import { PencilAltIcon, PlusIcon, TrashIcon } from '@heroicons/vue/solid'
 import { useAuth } from '@/composables/auth'
 import { useUser } from '@/composables/user'
@@ -7,35 +7,26 @@ import { roles as userRolesConfig } from '@/config/user'
 
 const DeleteUserModal = defineAsyncComponent(() => import('@/components/admin/users/delete/DeleteUserModal.vue'))
 
-const { currentUserId } = useAuth()
+const { currentUserId, currentUserRole, isUserRoleAdmin } = useAuth()
 const { openModal } = useUser()
 const { getUserList, isLoading, isLoadMore, userList } = useUser()
 
-const columns = [
-  {
-    name: 'name', label: 'Name', align: 'left'
-  },
-  {
-    name: 'email', label: 'Email', align: 'left'
-  },
-  {
-    name: 'role', label: 'Role', align: 'left'
-  },
-  {
-    name: 'isEmailVerified', label: 'Email Verified', align: 'left'
-  },
-  {
-    name: 'actions', label: 'Actions', align: 'center'
+const columns = computed(() => {
+  const array = [
+    { name: 'name', label: 'Name', align: 'left' },
+    { name: 'email', label: 'Email', align: 'left' },
+    { name: 'role', label: 'Role', align: 'left' },
+    { name: 'isEmailVerified', label: 'Email Verified', align: 'left' }
+  ]
+  if (isUserRoleAdmin(currentUserRole.value)) {
+    array.push({ name: 'actions', label: 'Actions', align: 'center' })
   }
-]
+  return array
+})
 
-const isShowDeleteButton = (userId = '') => {
-  return currentUserId.value !== userId
-}
+const isShowDeleteButton = (userId = '') => currentUserId.value !== userId
 
-const userRoleLabel = (role = '') => {
-  return userRolesConfig[role]?.label || ''
-}
+const userRoleLabel = (role = '') => userRolesConfig[role]?.label || ''
 
 getUserList()
 </script>
@@ -51,7 +42,10 @@ getUserList()
             </h3>
           </div>
 
-          <div class="w-1/2 text-right">
+          <div
+            v-if="isUserRoleAdmin(currentUserRole)"
+            class="w-1/2 text-right"
+          >
             <router-link
               v-slot="{ navigate }"
               :to="{ name: 'usersAdd' }"
@@ -94,7 +88,10 @@ getUserList()
             <td class="p-4 px-6 text-sm align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
               {{ user.isEmailVerified }}
             </td>
-            <td class="flex gap-3 p-4 px-6 text-sm align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+            <td
+              v-if="isUserRoleAdmin(currentUserRole)"
+              class="flex gap-3 p-4 px-6 text-sm align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+            >
               <router-link
                 v-slot="{ navigate }"
                 :to="{ name: 'usersEdit', params: { id: user.id } }"
@@ -137,5 +134,5 @@ getUserList()
     </div>
   </div>
 
-  <DeleteUserModal />
+  <DeleteUserModal v-if="isUserRoleAdmin(currentUserRole)" />
 </template>
