@@ -1,8 +1,7 @@
 <script setup>
 import { ref } from 'vue'
+import { UserCircleIcon } from '@heroicons/vue/solid'
 import { useAuth } from '@/composables/auth'
-
-import image from '@/assets/images/team-1-800x800.jpg'
 
 const { logout } = useAuth()
 
@@ -23,11 +22,7 @@ const toggleDropdown = (event) => {
     >
       <div class="flex items-center">
         <span class="inline-flex items-center justify-center w-12 h-12 text-sm rounded-full">
-          <img
-            alt="..."
-            class="w-full align-middle border-none rounded-full shadow-lg"
-            :src="image"
-          >
+          <UserCircleIcon class="w-6 h-6 align-middle border-none rounded-full shadow-lg" />
         </span>
       </div>
     </a>

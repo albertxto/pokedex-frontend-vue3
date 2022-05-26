@@ -11,7 +11,7 @@ const UserDropdown = defineAsyncComponent(() => import('@/components/headers/Use
     <div class="flex flex-wrap items-center justify-between w-full px-4 mx-auto md:flex-nowrap md:px-10">
       <!-- Brand -->
       <a
-        class="hidden text-sm font-semibold text-white uppercase md:inline-block"
+        class="hidden text-sm font-bold uppercase md:inline-block"
         href="javascript:void(0)"
       >
         Dashboard
@@ -19,7 +19,7 @@ const UserDropdown = defineAsyncComponent(() => import('@/components/headers/Use
 
       <!-- Right navbar -->
       <ul class="flex-row items-center hidden gap-6 list-none md:flex">
-        <DarkModeButton force-white />
+        <DarkModeButton />
         <UserDropdown />
       </ul>
     </div>
