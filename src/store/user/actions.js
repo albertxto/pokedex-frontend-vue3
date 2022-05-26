@@ -140,3 +140,17 @@ export function getUserList ({ commit, getters }, nextPage = false) {
     })
   )
 }
+
+export function getUserListCount ({ commit }) {
+  return new Promise((resolve, reject) => axiosInstance
+    .get(`${endpoints.USERS}${endpoints.COUNT}`)
+    .then((response) => {
+      const { totalResults } = response.data
+      commit('SET_LIST_COUNT', totalResults)
+      resolve(response.data)
+    })
+    .catch((error) => {
+      reject(error)
+    })
+  )
+}

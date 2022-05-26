@@ -13,7 +13,7 @@ const props = defineProps({
     default: null
   },
   pokemonId: {
-    type: String,
+    type: Number,
     default: null
   }
 })

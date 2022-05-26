@@ -22,7 +22,7 @@ const onSubmit = async () => {
 
   try {
     await store.dispatch('auth/login', payload)
-    router.push({ name: 'users' })
+    router.push({ name: 'dashboard' })
   } catch (error) {
     if (error.response?.data?.message) {
       errorMessage.value = error.response.data.message

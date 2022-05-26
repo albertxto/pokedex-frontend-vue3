@@ -1,4 +1,4 @@
-export const getIdFromPokeApiUrl = (url = '') => url.split('/')[6] || null
+export const getIdFromPokeApiUrl = (url = '') => Number.parseInt(url.split('/')[6]) || null
 
 export const getPokemonImageUrlById = (id = '1') => {
   return `${import.meta.env.VITE_POKEMON_IMAGE_URL}/${id}.png` || null
@@ -18,4 +18,8 @@ export const parseJwt = (token = '') => {
 
 export const pokedexNumberFormat = (id = '1') => {
   return `#${id.toString().padStart(3, '0')}`
+}
+
+export const thousandSeparator = (number = 0) => {
+  return number.toLocaleString()
 }

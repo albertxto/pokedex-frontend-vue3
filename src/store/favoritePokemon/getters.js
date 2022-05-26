@@ -18,6 +18,10 @@ export function list (state) {
   return state.list
 }
 
+export function listCount (state) {
+  return state.listCount
+}
+
 export function page (state) {
   return state.page
 }

@@ -9,6 +9,7 @@ export const useFavoritePokemon = () => {
 
   // Computed
   const favoritePokemonList = computed(() => store.getters['favoritePokemon/list'])
+  const favoritePokemonListCount = computed(() => store.getters['favoritePokemon/listCount'])
   const isFavorite = computed({
     get: () => store.getters['favoritePokemon/isFavorite'],
     set: (value) => {
@@ -46,6 +47,14 @@ export const useFavoritePokemon = () => {
     }
   }
 
+  const getFavoritePokemonListCount = async () => {
+    try {
+      await store.dispatch('favoritePokemon/getFavoritePokemonListCount')
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   const setFavoritePokemon = async () => {
     if (!validatePokemonRoute) return
     try {
@@ -63,8 +72,10 @@ export const useFavoritePokemon = () => {
   return {
     closeModal,
     favoritePokemonList,
+    favoritePokemonListCount,
     getFavoritePokemon,
     getFavoritePokemonList,
+    getFavoritePokemonListCount,
     isFavorite,
     isLoading,
     isLoadMore,

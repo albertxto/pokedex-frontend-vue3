@@ -39,6 +39,8 @@ export const useUser = () => {
 
   const userList = computed(() => store.getters['user/list'])
 
+  const userListCount = computed(() => store.getters['user/listCount'])
+
   const userName = computed({
     get: () => store.getters['user/name'],
     set: (value) => {
@@ -134,6 +136,14 @@ export const useUser = () => {
     }
   }
 
+  const getUserListCount = async () => {
+    try {
+      await store.dispatch('user/getUserListCount')
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   const openModal = (id = '', email = '') => {
     isShowModal.value = true
     userId.value = id
@@ -148,6 +158,7 @@ export const useUser = () => {
     editUser,
     getUserById,
     getUserList,
+    getUserListCount,
     isLoading,
     isLoadMore,
     isShowModal,
@@ -156,6 +167,7 @@ export const useUser = () => {
     userEmail,
     userId,
     userList,
+    userListCount,
     userName,
     userPassword,
     userRole

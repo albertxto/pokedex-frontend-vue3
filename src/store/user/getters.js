@@ -30,6 +30,10 @@ export function list (state) {
   return state.list
 }
 
+export function listCount (state) {
+  return state.listCount
+}
+
 export function name (state) {
   return state.name
 }

@@ -5,6 +5,7 @@ export default {
     REFRESH_TOKEN: '/auth/refresh-tokens',
     REGISTER: '/auth/register'
   },
+  COUNT: '/count',
   EVOLUTION_CHAIN: '/pokedex/evolution-chain',
   FAVORITE_POKEMON: '/pokedex/favorite',
   FAVORITE_POKEMON_LIST: '/pokedex/list',

@@ -44,6 +44,14 @@ export function SET_LIST (state, payload) {
   }
 }
 
+export function SET_LIST_COUNT (state, payload) {
+  if (typeof payload === 'number' && payload > 0) {
+    state.listCount = payload
+  } else {
+    state.listCount = 0
+  }
+}
+
 export function SET_PAGE (state, payload) {
   if (typeof payload === 'number' && payload > 0) {
     state.page = payload

@@ -9,10 +9,15 @@ const routes = [
   },
   {
     path: '/admin',
-    redirect: '/admin/users',
+    redirect: '/admin/dashboard',
     component: () => import('@/layouts/AdminLayout.vue'),
     meta: { auth: true },
     children: [
+      {
+        path: '/admin/dashboard',
+        name: 'dashboard',
+        component: () => import('@/views/admin/dashboard/index.vue')
+      },
       {
         path: '/admin/favorite-pokemon',
         name: 'favoritePokemon',
@@ -91,7 +96,7 @@ router.beforeEach(async (to, _from, next) => {
   // Check if user is not authenticated
   const recordsNotAuthenticated = to.matched.find((record) => record.meta?.auth === false)
   if (recordsNotAuthenticated && store.getters['auth/isAuthenticated']) {
-    next({ name: 'users' })
+    next({ name: 'dashboard' })
     return
   }
 

@@ -69,6 +69,20 @@ export function getFavoritePokemonList ({ commit, getters }, nextPage = false) {
   )
 }
 
+export function getFavoritePokemonListCount ({ commit }) {
+  return new Promise((resolve, reject) => axiosInstance
+    .get(`${endpoints.FAVORITE_POKEMON_LIST}${endpoints.COUNT}`)
+    .then((response) => {
+      const { totalResults } = response.data
+      commit('SET_LIST_COUNT', totalResults)
+      resolve(response.data)
+    })
+    .catch((error) => {
+      reject(error)
+    })
+  )
+}
+
 export function setFavoritePokemon ({ commit, getters }, pokemonId = '') {
   commit('SET_IS_LOADING', true)
   const { isFavorite } = getters
