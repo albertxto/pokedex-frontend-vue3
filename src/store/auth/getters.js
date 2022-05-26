@@ -6,6 +6,10 @@ export function currentUserId (state) {
   return state.currentUser.id
 }
 
+export function currentUserRole (state) {
+  return state.currentUser.role
+}
+
 export function isAuthenticated (state) {
   return !!state.accessToken
 }

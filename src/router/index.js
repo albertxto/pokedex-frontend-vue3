@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import store from '@/store'
+import { roles as userRolesConfig } from '@/config/user'
 
 const routes = [
   {
@@ -32,7 +33,15 @@ const routes = [
         path: '/admin/users',
         name: 'users',
         component: () => import('@/views/admin/users/index.vue')
-      },
+      }
+    ]
+  },
+  {
+    path: '/admin',
+    redirect: '/admin/dashboard',
+    component: () => import('@/layouts/AdminLayout.vue'),
+    meta: { auth: [userRolesConfig.admin.value] },
+    children: [
       {
         path: '/admin/users/add',
         name: 'usersAdd',
@@ -87,9 +96,21 @@ const router = createRouter({
 // Global before guards
 router.beforeEach(async (to, _from, next) => {
   // Check if user is authenticated
-  const recordsAuthenticated = to.matched.find((record) => record.meta?.auth === true)
+  const recordsAuthenticated = to.matched.find((record) => {
+    return record.meta?.auth === true || Array.isArray(record.meta?.auth)
+  })
   if (recordsAuthenticated && !store.getters['auth/isAuthenticated']) {
     next({ name: 'login' })
+    return
+  }
+
+  // Check if user is authorized
+  const recordsAuthorized = to.matched.find((record) => {
+    return Array.isArray(record.meta?.auth) &&
+      !record.meta.auth.includes(store.getters['auth/currentUserRole'])
+  })
+  if (recordsAuthorized) {
+    next({ name: 'dashboard' })
     return
   }
 

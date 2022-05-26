@@ -3,6 +3,7 @@ import { defineAsyncComponent } from 'vue'
 import { PencilAltIcon, PlusIcon, TrashIcon } from '@heroicons/vue/solid'
 import { useAuth } from '@/composables/auth'
 import { useUser } from '@/composables/user'
+import { roles as userRolesConfig } from '@/config/user'
 
 const DeleteUserModal = defineAsyncComponent(() => import('@/components/admin/users/delete/DeleteUserModal.vue'))
 
@@ -30,6 +31,10 @@ const columns = [
 
 const isShowDeleteButton = (userId = '') => {
   return currentUserId.value !== userId
+}
+
+const userRoleLabel = (role = '') => {
+  return userRolesConfig[role]?.label || ''
 }
 
 getUserList()
@@ -84,7 +89,7 @@ getUserList()
               {{ user.email }}
             </td>
             <td class="p-4 px-6 text-sm align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
-              {{ user.role }}
+              {{ userRoleLabel(user.role) }}
             </td>
             <td class="p-4 px-6 text-sm align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
               {{ user.isEmailVerified }}
