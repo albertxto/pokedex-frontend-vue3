@@ -1,6 +1,7 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
 import { useRouter } from 'vue-router'
+import { useAuth } from '@/composables/auth'
 import { usePokemon } from '@/composables/pokemon'
 
 const BackArrow = defineAsyncComponent(() => import('@/components/headers/BackArrow.vue'))
@@ -10,6 +11,7 @@ const PokedexFavorite = defineAsyncComponent(() => import('@/components/headers/
 const PokemonFormSelect = defineAsyncComponent(() => import('@/components/pokedex/info/PokemonFormSelect.vue'))
 
 const router = useRouter()
+const { isAuthenticated } = useAuth()
 const { pokemonVarietiesCount } = usePokemon()
 
 const goBack = () => {
@@ -39,9 +41,12 @@ const goBack = () => {
 
       <!-- Right navbar -->
       <div class="flex items-center bg-white bg-opacity-0">
-        <ul class="flex flex-row gap-6 ml-auto list-none">
+        <ul class="flex flex-row gap-3 ml-auto list-none sm:gap-6">
           <!-- Favorite -->
-          <li class="flex items-center">
+          <li
+            v-if="isAuthenticated"
+            class="flex items-center"
+          >
             <PokedexFavorite />
           </li>
 

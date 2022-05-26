@@ -6,6 +6,7 @@ export default {
     REGISTER: '/auth/register'
   },
   EVOLUTION_CHAIN: '/pokedex/evolution-chain',
+  FAVORITE_POKEMON: '/pokedex/favorite',
   POKEDEX: '/pokedex',
   POKEMON_FORM: '/pokedex/form',
   USERS: '/users'

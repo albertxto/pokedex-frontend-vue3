@@ -6,6 +6,7 @@ export const useAuth = () => {
 
   // Computed
   const currentUserId = computed(() => store.getters['auth/currentUserId'])
+  const isAuthenticated = computed(() => store.getters['auth/isAuthenticated'])
 
   // Method
   const logout = async () => {
@@ -18,6 +19,7 @@ export const useAuth = () => {
 
   return {
     currentUserId,
+    isAuthenticated,
     logout
   }
 }

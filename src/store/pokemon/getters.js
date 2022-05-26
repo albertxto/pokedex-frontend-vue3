@@ -135,20 +135,12 @@ export function image (state) {
   return state.image
 }
 
-export function isFavorite (state) {
-  return state.isFavorite
-}
-
 export function isLoading (state) {
   return state.isLoading
 }
 
 export function isLoadingEvolution (state) {
   return state.isLoadingEvolution
-}
-
-export function isShowModal (state) {
-  return state.isShowModal
 }
 
 export function name (state) {

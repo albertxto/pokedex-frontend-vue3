@@ -1,20 +1,16 @@
 <script setup>
 import { computed } from 'vue'
 import { HeartIcon } from '@heroicons/vue/outline'
-import { usePokemon } from '@/composables/pokemon'
+import { useFavoritePokemon } from '@/composables/favoritePokemon'
 
-const { isShowModal, pokemonIsFavorite, pokemonIsLoading } = usePokemon()
+const { closeModal, isFavorite, isLoading, isShowModal, setFavoritePokemon } = useFavoritePokemon()
 
-const label = computed(() => pokemonIsFavorite.value
-  ? 'Are you sure you want cancel this Pokemon from your favorite?'
-  : 'Are you sure you want set this Pokemon as your favorite?')
+const label = computed(() => isFavorite.value
+  ? 'Are you sure you want to cancel this Pokemon from your favorite?'
+  : 'Are you sure you want to set this Pokemon as your favorite?')
 
-const closeModal = () => {
-  isShowModal.value = false
-}
-
-const onSubmit = () => {
-  pokemonIsFavorite.value = !pokemonIsFavorite.value
+const onSubmit = async () => {
+  await setFavoritePokemon()
   closeModal()
 }
 </script>
@@ -54,7 +50,7 @@ const onSubmit = () => {
           class="w-full sm:w-auto"
           color="info"
           size="sm"
-          :loading="pokemonIsLoading"
+          :loading="isLoading"
           @click="onSubmit"
         >
           Confirm

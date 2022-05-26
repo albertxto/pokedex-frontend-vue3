@@ -2,6 +2,7 @@ import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute, useRouter } from 'vue-router'
 import { count as pokemonCount } from '@/config/pokemon'
+import { validatePokemonRoute } from '@/utils/validation'
 
 export const usePokemon = () => {
   const store = useStore()
@@ -9,12 +10,6 @@ export const usePokemon = () => {
   const router = useRouter()
 
   // Computed
-  const isShowModal = computed({
-    get: () => store.getters['pokemon/isShowModal'],
-    set: (value) => {
-      store.commit('pokemon/SET_IS_SHOW_MODAL', value)
-    }
-  })
   const pokemonAbout = computed(() => store.getters['pokemon/about'])
   const pokemonBaseExperience = computed(() => store.getters['pokemon/baseExperience'])
   const pokemonBaseHappiness = computed(() => store.getters['pokemon/baseHappiness'])
@@ -57,12 +52,40 @@ export const usePokemon = () => {
     return Number.parseFloat((stat * 100 / 255).toFixed(2))
   }
 
-  const getPokemonById = async (id = 1) => {
+  const getPokemonById = async () => {
+    // Validate route param id exist
+    if (!route.params.id) return
+
+    // Disable pokemon swiper
+    setTimeout(() => {
+      pokemonSwiper.value.disable()
+    }, 1000)
+
+    // Get pokemon id from route params
+    const pokemonId = Number.parseInt(route.params.id)
+
+    // Validate pokemon id must between 1 and pokemonCount
+    if (!validatePokemonRoute(pokemonId)) {
+      router.replace({ name: 'pokedexInfo', params: { id: 1 } })
+      return
+    }
+
+    // Call get pokemon by id API
     try {
-      await store.dispatch('pokemon/getPokemonById', id)
+      await store.dispatch('pokemon/getPokemonById', pokemonId)
     } catch (error) {
       console.error(error)
     }
+
+    // Reset pokemon form selected to default
+    if (pokemonVarietiesCount.value) {
+      pokemonFormSelected.value = pokemonVarietyOptions.value[0].value
+    }
+
+    // Enable pokemon swiper
+    setTimeout(() => {
+      pokemonSwiper.value.enable()
+    }, 1000)
   }
 
   const getPokemonEvolutionChain = async () => {
@@ -123,7 +146,6 @@ export const usePokemon = () => {
     getPokemonById,
     getPokemonEvolutionChain,
     getPokemonFormById,
-    isShowModal,
     pokemonAbout,
     pokemonBaseExperience,
     pokemonBaseHappiness,

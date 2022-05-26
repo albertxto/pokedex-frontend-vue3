@@ -7,12 +7,12 @@ const PokedexBackground = defineAsyncComponent(() => import('@/components/pokede
 const PokedexSlider = defineAsyncComponent(() => import('@/components/pokedex/info/PokedexSlider.vue'))
 
 const route = useRoute()
-const { validatePokemonId } = usePokemon()
+const { getPokemonById } = usePokemon()
 
-validatePokemonId()
+getPokemonById()
 
 watch(() => route.params.id, () => {
-  validatePokemonId(true)
+  getPokemonById()
 })
 </script>
 
