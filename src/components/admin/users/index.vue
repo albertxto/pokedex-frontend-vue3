@@ -66,7 +66,7 @@ getUserList()
         <template #default>
           <tr v-if="!userList.length">
             <td
-              class="p-4 px-6 text-xs"
+              class="p-4 px-6 text-sm"
               colspan="5"
             >
               No users found
@@ -77,19 +77,19 @@ getUserList()
             v-else
             :key="index"
           >
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+            <td class="p-4 px-6 text-sm align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
               {{ user.name }}
             </td>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+            <td class="p-4 px-6 text-sm align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
               {{ user.email }}
             </td>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+            <td class="p-4 px-6 text-sm align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
               {{ user.role }}
             </td>
-            <td class="p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+            <td class="p-4 px-6 text-sm align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
               {{ user.isEmailVerified }}
             </td>
-            <td class="flex gap-3 p-4 px-6 text-xs align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+            <td class="flex gap-3 p-4 px-6 text-sm align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
               <router-link
                 v-slot="{ navigate }"
                 :to="{ name: 'usersEdit', params: { id: user.id } }"

@@ -10,8 +10,22 @@ getFavoritePokemonList()
 </script>
 
 <template>
-  <div class="container">
-    <div class="grid items-center justify-between grid-cols-2 gap-6 xl:grid-cols-5">
+  <div class="container flex flex-col gap-6 md:gap-10">
+    <div class="text-3xl font-bold">
+      Favorite Pokemon
+    </div>
+
+    <div
+      v-if="!favoritePokemonList.length"
+      class="text-center"
+    >
+      No favorite pokemon found
+    </div>
+
+    <div
+      v-else
+      class="grid items-center justify-between grid-cols-2 gap-6 xl:grid-cols-5"
+    >
       <template
         v-for="(pokemon, index) in favoritePokemonList"
         :key="index"

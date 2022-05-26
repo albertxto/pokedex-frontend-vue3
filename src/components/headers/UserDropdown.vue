@@ -21,7 +21,7 @@ const toggleDropdown = (event) => {
       @click="toggleDropdown($event)"
     >
       <div class="flex items-center">
-        <span class="inline-flex items-center justify-center w-12 h-12 text-sm rounded-full">
+        <span class="inline-flex items-center justify-center py-2 rounded-full hover:text-slate-400">
           <UserCircleIcon class="w-6 h-6 align-middle border-none rounded-full shadow-lg" />
         </span>
       </div>
