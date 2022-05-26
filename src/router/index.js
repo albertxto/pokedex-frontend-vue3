@@ -5,7 +5,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: () => import('@/views/pokedex/index.vue')
+    component: () => import('@/views/index.vue')
   },
   {
     path: '/admin',

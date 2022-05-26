@@ -2,7 +2,7 @@
 import { defineAsyncComponent, ref } from 'vue'
 import { MenuIcon, XIcon } from '@heroicons/vue/outline'
 import {
-  DesktopComputerIcon, DeviceMobileIcon, SearchCircleIcon, UsersIcon
+  DesktopComputerIcon, DeviceMobileIcon, HomeIcon, SearchCircleIcon, UsersIcon
 } from '@heroicons/vue/solid'
 
 const DarkModeButton = defineAsyncComponent(() => import('@/components/headers/DarkModeButton.vue'))
@@ -153,6 +153,16 @@ const toggleCollapseShow = (classes) => {
 
         <!-- Navigation -->
         <ul class="flex flex-col list-none md:flex-col md:min-w-full md:mb-4">
+          <li class="items-center">
+            <router-link
+              class="flex py-3 text-xs font-bold uppercase text-slate-700 dark:text-slate-300 hover:text-slate-500 dark:hover:text-slate-400"
+              :to="{ 'name': 'home' }"
+            >
+              <HomeIcon class="w-4 h-4 mr-2" />
+              Home
+            </router-link>
+          </li>
+
           <li class="items-center">
             <router-link
               class="flex py-3 text-xs font-bold uppercase text-slate-700 dark:text-slate-300 hover:text-slate-500 dark:hover:text-slate-400"
