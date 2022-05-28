@@ -106,6 +106,7 @@ module.exports = {
         '580-px': '580px'
       },
       minHeight: {
+        'screen-60': '60vh',
         'screen-75': '75vh'
       },
       minWidth: {

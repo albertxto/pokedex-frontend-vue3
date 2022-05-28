@@ -38,7 +38,7 @@ const isShowTabEvolution = () => tab.value === 'EVOLUTION'
 <template>
   <section class="relative">
     <div class="container pokedex-slider">
-      <div class="z-50 flex flex-col w-full min-w-0 -mt-48 break-words shadow-xl sm:-mt-32 bg-slate-100 rounded-t-3xl dark:bg-slate-900">
+      <div class="z-50 flex flex-col w-full min-w-0 -mt-48 break-words shadow-xl min-h-screen-60 sm:-mt-32 bg-slate-100 rounded-t-3xl dark:bg-slate-900">
         <div class="p-6">
           <AppTabs
             :tabs="tabs"
