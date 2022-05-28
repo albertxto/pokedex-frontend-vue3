@@ -1,24 +1,25 @@
 <script setup>
 import { ref } from 'vue'
-import { useStore } from 'vuex'
+import { useAuth } from '@/composables/auth'
+import { useNotification } from '@/composables/notification'
 
-const store = useStore()
+const { register } = useAuth()
+const {
+  dismissAllNotifications,
+  dismissErrorNotification,
+  dismissSuccessNotification,
+  errorMessage,
+  successMessage
+} = useNotification()
 
 const name = ref('')
 const email = ref('')
 const password = ref('')
-const successMessage = ref('')
-const errorMessage = ref('')
-
-const dismissSuccessNotification = () => {
-  successMessage.value = ''
-}
-
-const dismissErrorNotification = () => {
-  errorMessage.value = ''
-}
 
 const onSubmit = async () => {
+  // Dismiss all notifications
+  dismissAllNotifications()
+
   const payload = {
     name: name.value,
     email: email.value,
@@ -26,16 +27,13 @@ const onSubmit = async () => {
   }
 
   try {
-    await store.dispatch('auth/register', payload)
+    const response = await register(payload)
     name.value = ''
     email.value = ''
     password.value = ''
-    errorMessage.value = ''
-    successMessage.value = 'Successfully registered'
+    successMessage.value = response
   } catch (error) {
-    if (error.response?.data?.message) {
-      errorMessage.value = error.response.data.message
-    }
+    errorMessage.value = error
   }
 }
 </script>
@@ -90,26 +88,23 @@ const onSubmit = async () => {
         />
       </div>
 
-      <div
+      <AppNotification
+        v-if="successMessage"
+        class="mt-6"
+        color="success"
+        @dismiss="dismissSuccessNotification"
+      >
+        {{ successMessage }}
+      </AppNotification>
+
+      <AppNotification
         v-if="errorMessage"
         class="mt-6"
+        color="danger"
+        @dismiss="dismissErrorNotification"
       >
-        <AppNotification
-          v-if="successMessage"
-          color="success"
-          @dismiss="dismissSuccessNotification"
-        >
-          {{ successMessage }}
-        </AppNotification>
-
-        <AppNotification
-          v-if="errorMessage"
-          color="danger"
-          @dismiss="dismissErrorNotification"
-        >
-          {{ errorMessage }}
-        </AppNotification>
-      </div>
+        {{ errorMessage }}
+      </AppNotification>
 
       <div class="mt-6 text-center">
         <AppButton

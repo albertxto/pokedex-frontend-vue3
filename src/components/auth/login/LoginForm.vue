@@ -1,32 +1,27 @@
 <script setup>
 import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useStore } from 'vuex'
+import { useAuth } from '@/composables/auth'
+import { useNotification } from '@/composables/notification'
 
-const router = useRouter()
-const store = useStore()
+const { login } = useAuth()
+const { dismissErrorNotification, errorMessage } = useNotification()
 
 const email = ref('')
 const password = ref('')
-const errorMessage = ref('')
-
-const dismissNotification = () => {
-  errorMessage.value = ''
-}
 
 const onSubmit = async () => {
+  // Dismiss notification
+  dismissErrorNotification()
+
   const payload = {
     email: email.value,
     password: password.value
   }
 
   try {
-    await store.dispatch('auth/login', payload)
-    router.push({ name: 'dashboard' })
+    await login(payload)
   } catch (error) {
-    if (error.response?.data?.message) {
-      errorMessage.value = error.response.data.message
-    }
+    errorMessage.value = error
   }
 }
 </script>
@@ -73,7 +68,7 @@ const onSubmit = async () => {
       >
         <AppNotification
           color="danger"
-          @dismiss="dismissNotification"
+          @dismiss="dismissErrorNotification"
         >
           {{ errorMessage }}
         </AppNotification>
