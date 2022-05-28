@@ -57,7 +57,7 @@ const componentClass = computed(() => {
         :style="{ backgroundImage: `url(${pokeballImage})` }"
       />
 
-      <div class="flex flex-wrap items-center justify-between text-xl font-bold">
+      <div class="flex flex-wrap items-center justify-between text-xl font-bold text-white">
         {{ label }}
       </div>
 
