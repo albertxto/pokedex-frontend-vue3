@@ -1,5 +1,5 @@
 import endpoints from '@/config/endpoints'
-import { limit } from '@/config/pokemon'
+import { count as pokemonCount, limit as pokemonLimit } from '@/config/pokemon'
 import { axiosInstance } from '@/plugins/axios'
 import {
   getIdFromPokeApiUrl, getPokemonImageUrlById, normalizePokeApiName, pokedexNumberFormat
@@ -16,11 +16,18 @@ export function getPokemonList ({ commit, getters }, nextPage = false) {
   const { offset } = getters
 
   return new Promise((resolve, reject) => axiosInstance
-    .get(`${endpoints.POKEDEX}/?limit=${limit}&offset=${offset}`)
+    .get(`${endpoints.POKEDEX}/?limit=${pokemonLimit}&offset=${offset}`)
     .then((response) => {
       const { results } = response.data
 
       if (results.length) {
+        // Validate results cannot be greater than pokemon count in config file
+        if (offset + results.length > pokemonCount) {
+          const startIndex = getIdFromPokeApiUrl(results[0].url) - 1
+          const spliceIndex = pokemonCount - startIndex
+          results.splice(spliceIndex, results.length - spliceIndex)
+        }
+
         const list = results.map((result) => {
           const pokemonId = getIdFromPokeApiUrl(result.url)
           return {
@@ -33,8 +40,8 @@ export function getPokemonList ({ commit, getters }, nextPage = false) {
 
         commit('PUSH_LIST', list)
 
-        if (results.length === limit) {
-          commit('SET_OFFSET', offset + limit)
+        if (results.length === pokemonLimit) {
+          commit('SET_OFFSET', offset + pokemonLimit)
           commit('SET_IS_LOAD_MORE', true)
         } else {
           commit('SET_IS_LOAD_MORE', false)
