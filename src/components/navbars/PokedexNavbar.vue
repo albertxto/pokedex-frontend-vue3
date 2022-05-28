@@ -3,6 +3,7 @@ import { defineAsyncComponent } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuth } from '@/composables/auth'
 import { usePokemon } from '@/composables/pokemon'
+import dottedImage from '@/assets/images/dotted.png'
 
 const BackArrow = defineAsyncComponent(() => import('@/components/headers/BackArrow.vue'))
 const DarkModeButton = defineAsyncComponent(() => import('@/components/headers/DarkModeButton.vue'))
@@ -36,7 +37,7 @@ const goBack = () => {
       <!-- Dotted decoration -->
       <div
         class="absolute top-0 w-20 h-12 bg-no-repeat bg-contain -z-2 opacity-20 left-2/3"
-        style="background-image: url('/src/assets/images/dotted.png')"
+        :style="{ backgroundImage: `url(${dottedImage})` }"
       />
 
       <!-- Right navbar -->

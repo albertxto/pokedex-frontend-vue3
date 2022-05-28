@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from 'vue'
+import pokeballImage from '@/assets/images/pokeball.png'
 
 const props = defineProps({
   color: {
@@ -53,7 +54,7 @@ const componentClass = computed(() => {
     >
       <div
         class="absolute w-32 h-32 overflow-hidden bg-no-repeat bg-contain -left-20 -top-20 opacity-20"
-        style="background-image: url('/src/assets/images/pokeball.png')"
+        :style="{ backgroundImage: `url(${pokeballImage})` }"
       />
 
       <div class="flex flex-wrap items-center justify-between text-xl font-bold">
@@ -62,7 +63,7 @@ const componentClass = computed(() => {
 
       <div
         class="absolute w-32 h-32 overflow-hidden bg-no-repeat bg-contain left-3/4 -top-4 opacity-20"
-        style="background-image: url('/src/assets/images/pokeball.png')"
+        :style="{ backgroundImage: `url(${pokeballImage})` }"
       />
     </div>
   </router-link>

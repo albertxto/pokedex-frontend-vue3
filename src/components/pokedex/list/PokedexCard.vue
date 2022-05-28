@@ -1,5 +1,6 @@
 <script setup>
 import { computed, defineAsyncComponent } from 'vue'
+import pokeballImage from '@/assets/images/pokeball.png'
 
 const LazyImage = defineAsyncComponent(() => import('@/components/shared/LazyImage.vue'))
 
@@ -42,7 +43,7 @@ const isShowCard = computed(() => !!props.pokemonId)
       <div class="relative">
         <div
           class="absolute bg-no-repeat bg-contain w-36 h-36 left-2/3 top-1/3 opacity-20"
-          style="background-image: url('/src/assets/images/pokeball.png')"
+          :style="{ backgroundImage: `url(${pokeballImage})` }"
         />
 
         <div class="relative flex flex-row-reverse">

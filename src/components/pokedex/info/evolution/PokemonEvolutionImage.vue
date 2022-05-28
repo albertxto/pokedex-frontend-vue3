@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { usePokemon } from '@/composables/pokemon'
+import pokeballImage from '@/assets/images/pokeball.png'
 
 const props = defineProps({
   image: {
@@ -45,7 +46,7 @@ const onChangePokemon = () => {
     <div class="relative w-16 sm:w-24">
       <div
         class="absolute w-full h-16 bg-no-repeat bg-contain sm:h-24 opacity-20"
-        style="background-image: url('/src/assets/images/pokeball.png')"
+        :style="{ backgroundImage: `url(${pokeballImage})` }"
       />
 
       <div class="relative">
