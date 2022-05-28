@@ -79,10 +79,10 @@ export function SET_EVOLUTIONS (state, payload) {
 }
 
 export function SET_FORM_SELECTED (state, payload) {
-  if (typeof payload === 'string') {
+  if (typeof payload === 'number') {
     state.formSelected = payload
   } else {
-    state.formSelected = ''
+    state.formSelected = null
   }
 }
 

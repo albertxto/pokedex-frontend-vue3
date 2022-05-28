@@ -4,8 +4,8 @@ import { colorsRingFocus } from '@/config/colors'
 
 const props = defineProps({
   modelValue: {
-    type: String,
-    default: ''
+    type: [Number, String],
+    default: null
   },
   name: {
     type: String,
