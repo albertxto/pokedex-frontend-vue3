@@ -19,9 +19,8 @@ watch(() => route.params.id, () => {
 
 <template>
   <a
-    class="flex items-center py-2 text-xs font-bold text-white"
+    class="flex items-center py-2 text-xs font-bold text-white cursor-pointer"
     :class="{ 'hover:text-slate-400': !isLoading, 'cursor-default': isLoading }"
-    href="#"
     @click="openModal"
   >
     <RefreshIcon

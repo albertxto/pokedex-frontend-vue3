@@ -56,11 +56,6 @@ export const usePokemon = () => {
     // Validate route param id exist
     if (!route.params.id) return
 
-    // Disable pokemon swiper
-    setTimeout(() => {
-      pokemonSwiper.value.disable()
-    }, 500)
-
     // Get pokemon id from route params
     const pokemonId = Number.parseInt(route.params.id)
 
@@ -81,11 +76,6 @@ export const usePokemon = () => {
     if (pokemonVarietiesCount.value) {
       pokemonFormSelected.value = pokemonVarietyOptions.value[0].value
     }
-
-    // Enable pokemon swiper
-    setTimeout(() => {
-      pokemonSwiper.value.enable()
-    }, 500)
   }
 
   const getPokemonEvolutionChain = async () => {

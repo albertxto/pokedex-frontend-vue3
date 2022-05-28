@@ -21,9 +21,8 @@ const toggleDarkMode = () => {
 
 <template>
   <a
-    class="flex items-center py-2 text-xs font-bold hover:text-slate-400"
+    class="flex items-center py-2 text-xs font-bold cursor-pointer hover:text-slate-400"
     :class="{ 'text-white': forceWhite }"
-    href="#"
     @click="toggleDarkMode"
   >
     <MoonIcon

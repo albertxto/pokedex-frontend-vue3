@@ -41,7 +41,7 @@ const componentClass = (index, isDisable) => {
     <li
       v-for="(tab, index) in tabs"
       :key="index"
-      @click="(event) => changeSelected(event, index, tab)"
+      @click="changeSelected($event, index, tab)"
     >
       <a
         href="#"

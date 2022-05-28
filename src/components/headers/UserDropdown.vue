@@ -16,8 +16,7 @@ const toggleDropdown = (event) => {
 <template>
   <div class="relative">
     <a
-      class="block"
-      href="#"
+      class="block cursor-pointer"
       @click="toggleDropdown($event)"
     >
       <div class="flex items-center">

@@ -1,23 +1,17 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
-import { useRouter } from 'vue-router'
+import { ArrowLeftIcon, DesktopComputerIcon } from '@heroicons/vue/outline'
 import { useAuth } from '@/composables/auth'
 import { usePokemon } from '@/composables/pokemon'
 import dottedImage from '@/assets/images/dotted.png'
 
-const BackArrow = defineAsyncComponent(() => import('@/components/headers/BackArrow.vue'))
 const DarkModeButton = defineAsyncComponent(() => import('@/components/headers/DarkModeButton.vue'))
-const GithubStar = defineAsyncComponent(() => import('@/components/headers/GithubStar.vue'))
+const NavigationButton = defineAsyncComponent(() => import('@/components/headers/NavigationButton.vue'))
 const PokedexFavorite = defineAsyncComponent(() => import('@/components/headers/PokedexFavorite.vue'))
 const PokemonFormSelect = defineAsyncComponent(() => import('@/components/pokedex/info/PokemonFormSelect.vue'))
 
-const router = useRouter()
 const { isAuthenticated } = useAuth()
 const { pokemonVarietiesCount } = usePokemon()
-
-const goBack = () => {
-  router.push({ name: 'pokedex' })
-}
 </script>
 
 <template>
@@ -28,7 +22,9 @@ const goBack = () => {
 
       <!-- Left navbar -->
       <div class="flex items-center w-auto">
-        <BackArrow @click="goBack" />
+        <NavigationButton :to="{ name: 'pokedex' }">
+          <ArrowLeftIcon class="w-6 h-6" />
+        </NavigationButton>
       </div>
 
       <!-- Pokemon forms -->
@@ -56,9 +52,11 @@ const goBack = () => {
             <DarkModeButton force-white />
           </li>
 
-          <!-- Github -->
+          <!-- Dashboard -->
           <li class="flex items-center">
-            <GithubStar />
+            <NavigationButton :to="{ name: 'dashboard' }">
+              <DesktopComputerIcon class="w-6 h-6" />
+            </NavigationButton>
           </li>
         </ul>
       </div>
