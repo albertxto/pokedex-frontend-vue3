@@ -3,6 +3,7 @@ import { defineAsyncComponent } from 'vue'
 import { usePokemonList } from '@/composables/pokemonList'
 
 const PokedexCard = defineAsyncComponent(() => import('@/components/pokedex/list/PokedexCard.vue'))
+const PokedexListNavbar = defineAsyncComponent(() => import('@/components/navbars/PokedexListNavbar.vue'))
 
 const { getPokemonList, pokemonListIsLoading, pokemonListIsLoadMore, pokemonList } = usePokemonList()
 
@@ -13,7 +14,9 @@ if (!pokemonList.value.length) {
 
 <template>
   <div class="container p-6 pokedex-slider">
-    <h1 class="text-3xl font-bold">
+    <PokedexListNavbar />
+
+    <h1 class="mt-6 text-3xl font-bold">
       Pokedex
     </h1>
 

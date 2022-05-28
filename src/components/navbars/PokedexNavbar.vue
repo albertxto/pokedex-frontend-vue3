@@ -22,7 +22,10 @@ const { pokemonVarietiesCount } = usePokemon()
 
       <!-- Left navbar -->
       <div class="flex items-center w-auto">
-        <NavigationButton :to="{ name: 'pokedex' }">
+        <NavigationButton
+          force-white
+          :to="{ name: 'pokedex' }"
+        >
           <ArrowLeftIcon class="w-6 h-6" />
         </NavigationButton>
       </div>
@@ -54,7 +57,10 @@ const { pokemonVarietiesCount } = usePokemon()
 
           <!-- Dashboard -->
           <li class="flex items-center">
-            <NavigationButton :to="{ name: 'dashboard' }">
+            <NavigationButton
+              force-white
+              :to="{ name: 'dashboard' }"
+            >
               <DesktopComputerIcon class="w-6 h-6" />
             </NavigationButton>
           </li>

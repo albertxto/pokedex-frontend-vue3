@@ -1,5 +1,6 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
+
 const RegisterForm = defineAsyncComponent(() => import('@/components/auth/register/RegisterForm.vue'))
 const RegisterNavigation = defineAsyncComponent(() => import('@/components/auth/register/RegisterNavigation.vue'))
 </script>

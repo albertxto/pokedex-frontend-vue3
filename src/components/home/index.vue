@@ -1,12 +1,15 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
 
+const HomeNavbar = defineAsyncComponent(() => import('@/components/navbars/HomeNavbar.vue'))
 const NavigationCard = defineAsyncComponent(() => import('@/components/home/NavigationCard.vue'))
 </script>
 
 <template>
-  <div class="container px-6 py-20 sm:px-20 pokedex-slider">
-    <h1 class="text-3xl font-bold">
+  <div class="container p-6 pokedex-slider">
+    <HomeNavbar />
+
+    <h1 class="mt-6 text-3xl font-bold">
       What Pokemon are you looking for?
     </h1>
 

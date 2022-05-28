@@ -37,7 +37,6 @@ This project is developed using Vue 3 in Vite and uses Vue 3 `<script setup>` SF
 - [ ] List of items
 - [ ] List of type effects
 - [ ] Forgot password
-- [ ] Navbar on homepage, register & login, Pokemon list page
 
 ## Thanks
 

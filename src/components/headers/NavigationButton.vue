@@ -1,8 +1,8 @@
 <script setup>
 defineProps({
-  color: {
-    type: String,
-    default: 'text-white'
+  forceWhite: {
+    type: Boolean,
+    default: false
   },
   to: {
     type: [Object, String],
@@ -14,7 +14,7 @@ defineProps({
 <template>
   <router-link
     class="flex items-center py-2 text-xs font-bold uppercase hover:text-slate-400"
-    :class="[color]"
+    :class="{ 'text-white': forceWhite }"
     :to="to"
   >
     <slot />
