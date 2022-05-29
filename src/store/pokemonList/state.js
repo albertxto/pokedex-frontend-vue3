@@ -1,5 +1,6 @@
 export default {
-  isLoading: true,
+  isLoadingButton: true,
+  isLoadingField: true,
   isLoadMore: false,
   list: [],
   offset: 0

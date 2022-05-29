@@ -4,11 +4,19 @@ export function PUSH_LIST (state, payload) {
   }
 }
 
-export function SET_IS_LOADING (state, payload) {
+export function SET_IS_LOADING_BUTTON (state, payload) {
   if (typeof payload === 'boolean') {
-    state.isLoading = payload
+    state.isLoadingButton = payload
   } else {
-    state.isLoading = false
+    state.isLoadingButton = false
+  }
+}
+
+export function SET_IS_LOADING_FIELD (state, payload) {
+  if (typeof payload === 'boolean') {
+    state.isLoadingField = payload
+  } else {
+    state.isLoadingField = false
   }
 }
 

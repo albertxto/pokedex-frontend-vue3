@@ -5,9 +5,10 @@ export const usePokemonList = () => {
   const store = useStore()
 
   // Computed
+  const isLoadingButton = computed(() => store.getters['pokemonList/isLoadingButton'])
+  const isLoadingField = computed(() => store.getters['pokemonList/isLoadingField'])
+  const isLoadMore = computed(() => store.getters['pokemonList/isLoadMore'])
   const pokemonList = computed(() => store.getters['pokemonList/list'])
-  const pokemonListIsLoading = computed(() => store.getters['pokemonList/isLoading'])
-  const pokemonListIsLoadMore = computed(() => store.getters['pokemonList/isLoadMore'])
   const pokemonListOffset = computed(() => store.getters['pokemonList/offset'])
 
   // Method
@@ -21,9 +22,10 @@ export const usePokemonList = () => {
 
   return {
     getPokemonList,
+    isLoadingButton,
+    isLoadingField,
+    isLoadMore,
     pokemonList,
-    pokemonListIsLoading,
-    pokemonListIsLoadMore,
     pokemonListOffset
   }
 }
