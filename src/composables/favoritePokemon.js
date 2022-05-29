@@ -16,7 +16,8 @@ export const useFavoritePokemon = () => {
       store.commit('favoritePokemon/SET_IS_FAVORITE', value)
     }
   })
-  const isLoading = computed(() => store.getters['favoritePokemon/isLoading'])
+  const isLoadingButton = computed(() => store.getters['favoritePokemon/isLoadingButton'])
+  const isLoadingField = computed(() => store.getters['favoritePokemon/isLoadingField'])
   const isLoadMore = computed(() => store.getters['favoritePokemon/isLoadMore'])
   const isShowModal = computed({
     get: () => store.getters['favoritePokemon/isShowModal'],
@@ -65,7 +66,7 @@ export const useFavoritePokemon = () => {
   }
 
   const openModal = () => {
-    if (isLoading.value) return
+    if (isLoadingButton.value) return
     isShowModal.value = true
   }
 
@@ -77,7 +78,8 @@ export const useFavoritePokemon = () => {
     getFavoritePokemonList,
     getFavoritePokemonListCount,
     isFavorite,
-    isLoading,
+    isLoadingButton,
+    isLoadingField,
     isLoadMore,
     isShowModal,
     openModal,

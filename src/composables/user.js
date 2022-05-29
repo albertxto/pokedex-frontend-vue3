@@ -5,7 +5,9 @@ export const useUser = () => {
   const store = useStore()
 
   // Computed
-  const isLoading = computed(() => store.getters['user/isLoading'])
+  const isLoadingButton = computed(() => store.getters['user/isLoadingButton'])
+
+  const isLoadingField = computed(() => store.getters['user/isLoadingField'])
 
   const isLoadMore = computed(() => store.getters['user/isLoadMore'])
 
@@ -159,7 +161,8 @@ export const useUser = () => {
     getUserById,
     getUserList,
     getUserListCount,
-    isLoading,
+    isLoadingButton,
+    isLoadingField,
     isLoadMore,
     isShowModal,
     openModal,

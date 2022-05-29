@@ -8,7 +8,8 @@ export function RESET (state) {
   state.confirmPassword = ''
   state.email = ''
   state.id = ''
-  state.isLoading = true
+  state.isLoadingButton = true
+  state.isLoadingField = true
   state.isShowModal = false
   state.name = ''
   state.password = ''
@@ -47,11 +48,19 @@ export function SET_IS_EMAIL_VERIFIED (state, payload) {
   }
 }
 
-export function SET_IS_LOADING (state, payload) {
+export function SET_IS_LOADING_BUTTON (state, payload) {
   if (typeof payload === 'boolean') {
-    state.isLoading = payload
+    state.isLoadingButton = payload
   } else {
-    state.isLoading = false
+    state.isLoadingButton = false
+  }
+}
+
+export function SET_IS_LOADING_FIELD (state, payload) {
+  if (typeof payload === 'boolean') {
+    state.isLoadingField = payload
+  } else {
+    state.isLoadingField = false
   }
 }
 

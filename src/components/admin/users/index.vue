@@ -9,7 +9,7 @@ const DeleteUserModal = defineAsyncComponent(() => import('@/components/admin/us
 
 const { currentUserId, currentUserRole, isUserRoleAdmin } = useAuth()
 const { openModal } = useUser()
-const { getUserList, isLoading, isLoadMore, userList } = useUser()
+const { getUserList, isLoadingButton, isLoadingField, isLoadMore, userList } = useUser()
 
 const columnCount = computed(() => isUserRoleAdmin(currentUserRole.value) ? 5 : 4)
 const columns = computed(() => {
@@ -64,7 +64,7 @@ getUserList()
         </template>
 
         <template #default>
-          <template v-if="isLoading">
+          <template v-if="isLoadingField">
             <!-- Loading -->
             <tr
               v-for="rowIndex in 5"
@@ -141,7 +141,7 @@ getUserList()
       <AppButton
         color="primary"
         size="sm"
-        :loading="isLoading"
+        :loading="isLoadingButton"
         @click="getUserList(true)"
       >
         Load More

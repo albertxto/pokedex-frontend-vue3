@@ -26,9 +26,10 @@ export function getFavoritePokemon ({ commit }, pokemonId = '') {
 }
 
 export function getFavoritePokemonList ({ commit, getters }, nextPage = false) {
-  commit('SET_IS_LOADING', true)
+  commit('SET_IS_LOADING_BUTTON', true)
 
   if (!nextPage) {
+    commit('SET_IS_LOADING_FIELD', true)
     commit('SET_LIST', [])
     commit('SET_PAGE', 1)
   }
@@ -64,7 +65,10 @@ export function getFavoritePokemonList ({ commit, getters }, nextPage = false) {
       reject(error)
     })
     .finally(() => {
-      commit('SET_IS_LOADING', false)
+      commit('SET_IS_LOADING_BUTTON', false)
+      if (!nextPage) {
+        commit('SET_IS_LOADING_FIELD', false)
+      }
     })
   )
 }

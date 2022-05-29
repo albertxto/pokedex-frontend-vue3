@@ -1,6 +1,7 @@
 export default {
   isFavorite: false,
-  isLoading: false,
+  isLoadingButton: false,
+  isLoadingField: false,
   isLoadMore: false,
   isShowModal: false,
   list: [],

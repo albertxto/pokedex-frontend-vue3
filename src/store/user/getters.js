@@ -14,8 +14,12 @@ export function isEmailVerified (state) {
   return state.isEmailVerified
 }
 
-export function isLoading (state) {
-  return state.isLoading
+export function isLoadingButton (state) {
+  return state.isLoadingButton
+}
+
+export function isLoadingField (state) {
+  return state.isLoadingField
 }
 
 export function isLoadMore (state) {
