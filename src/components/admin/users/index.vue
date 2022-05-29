@@ -11,6 +11,7 @@ const { currentUserId, currentUserRole, isUserRoleAdmin } = useAuth()
 const { openModal } = useUser()
 const { getUserList, isLoading, isLoadMore, userList } = useUser()
 
+const columnCount = computed(() => isUserRoleAdmin(currentUserRole.value) ? 5 : 4)
 const columns = computed(() => {
   const array = [
     { name: 'name', label: 'Name', align: 'left' },
@@ -63,34 +64,48 @@ getUserList()
         </template>
 
         <template #default>
-          <tr v-if="!userList.length">
-            <td
-              class="p-4 px-6 text-sm"
-              colspan="5"
+          <template v-if="isLoading">
+            <!-- Loading -->
+            <tr
+              v-for="rowIndex in 5"
+              :key="rowIndex"
             >
+              <AppTd
+                v-for="colIndex in columnCount"
+                :key="colIndex"
+              >
+                <AppSkeleton class="h-4" />
+              </AppTd>
+            </tr>
+          </template>
+
+          <tr v-else-if="!userList.length">
+            <!-- No data -->
+            <AppTd :colspan="5">
               No users found
-            </td>
+            </AppTd>
           </tr>
+
           <tr
             v-for="(user, index) in userList"
             v-else
             :key="index"
           >
-            <td class="p-4 px-6 text-sm align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+            <AppTd>
               {{ user.name }}
-            </td>
-            <td class="p-4 px-6 text-sm align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+            </AppTd>
+            <AppTd>
               {{ user.email }}
-            </td>
-            <td class="p-4 px-6 text-sm align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+            </AppTd>
+            <AppTd>
               {{ userRoleLabel(user.role) }}
-            </td>
-            <td class="p-4 px-6 text-sm align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap">
+            </AppTd>
+            <AppTd>
               {{ user.isEmailVerified }}
-            </td>
-            <td
+            </AppTd>
+            <AppTd
               v-if="isUserRoleAdmin(currentUserRole)"
-              class="flex gap-3 p-4 px-6 text-sm align-middle border-t-0 border-l-0 border-r-0 whitespace-nowrap"
+              class="flex gap-3"
             >
               <router-link
                 v-slot="{ navigate }"
@@ -113,7 +128,7 @@ getUserList()
               >
                 <TrashIcon class="w-4 h-4" />
               </AppButton>
-            </td>
+            </AppTd>
           </tr>
         </template>
       </AppTable>

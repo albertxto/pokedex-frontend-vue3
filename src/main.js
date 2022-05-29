@@ -14,8 +14,10 @@ const AppModal = defineAsyncComponent(() => import('@/components/shared/AppModal
 const AppNotification = defineAsyncComponent(() => import('@/components/shared/AppNotification.vue'))
 const AppRadio = defineAsyncComponent(() => import('@/components/shared/AppRadio.vue'))
 const AppSelect = defineAsyncComponent(() => import('@/components/shared/AppSelect.vue'))
+const AppSkeleton = defineAsyncComponent(() => import('@/components/shared/AppSkeleton.vue'))
 const AppTable = defineAsyncComponent(() => import('@/components/shared/AppTable.vue'))
 const AppTabs = defineAsyncComponent(() => import('@/components/shared/AppTabs.vue'))
+const AppTd = defineAsyncComponent(() => import('@/components/shared/AppTd.vue'))
 
 // Init dark mode
 if ((!localStorage.getItem('darkMode') &&
@@ -60,8 +62,10 @@ app.component('AppModal', AppModal)
 app.component('AppNotification', AppNotification)
 app.component('AppRadio', AppRadio)
 app.component('AppSelect', AppSelect)
+app.component('AppSkeleton', AppSkeleton)
 app.component('AppTable', AppTable)
 app.component('AppTabs', AppTabs)
+app.component('AppTd', AppTd)
 
 // Mount
 app.mount('#app')

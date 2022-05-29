@@ -6,7 +6,7 @@ const pokeApiInstance = new Pokedex({
   versionPath: import.meta.env.VITE_POKEAPI_VERSION_PATH,
   cache: true,
   cacheImages: true,
-  timeout: 5000
+  timeout: 10000
 })
 
 export { pokeApiInstance }
