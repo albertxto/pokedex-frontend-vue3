@@ -18,7 +18,7 @@ getFavoritePokemonListCount()
   <div class="container">
     <div class="grid items-center justify-between grid-cols-1 gap-6 sm:grid-cols-2 md:gap-10">
       <CardStats
-        subtitle="POKEMON"
+        subtitle="POKÉMON"
         :title="pokemonCount"
         icon-color="bg-red-500"
       >

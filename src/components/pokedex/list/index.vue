@@ -20,7 +20,7 @@ if (!pokemonList.value.length) {
     <PokedexListNavbar />
 
     <h1 class="mt-6 text-3xl font-bold">
-      Pokedex
+      Pokédex
     </h1>
 
     <div class="grid items-center justify-between grid-cols-2 gap-6 mt-6">

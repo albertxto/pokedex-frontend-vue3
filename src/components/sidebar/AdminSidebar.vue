@@ -31,7 +31,7 @@ const toggleCollapseShow = (classes) => {
         class="inline-block p-4 px-0 mr-0 text-sm font-bold text-left uppercase md:block md:pb-2 text-slate-600 dark:text-slate-300 whitespace-nowrap"
         to="/"
       >
-        Pokedex Frontend Vue 3
+        Pokédex Frontend Vue 3
       </router-link>
 
       <!-- User -->
@@ -57,7 +57,7 @@ const toggleCollapseShow = (classes) => {
                 class="inline-block p-4 px-0 mr-0 text-sm font-bold text-left uppercase md:block md:pb-2 text-slate-600 dark:text-slate-300 whitespace-nowrap"
                 to="/"
               >
-                Pokedex
+                Pokédex
               </router-link>
             </div>
             <div class="flex justify-end w-6/12">
@@ -116,7 +116,7 @@ const toggleCollapseShow = (classes) => {
                 @click="navigate"
               >
                 <SearchCircleIcon class="w-4 h-4 mr-2" />
-                Favorite Pokemon
+                Favorite Pokémon
               </a>
             </router-link>
           </li>
@@ -148,7 +148,7 @@ const toggleCollapseShow = (classes) => {
 
         <!-- Heading -->
         <h6 class="block pt-1 pb-4 text-xs font-bold no-underline uppercase md:min-w-full text-slate-500">
-          Pokedex Layout Pages
+          Pokédex Layout Pages
         </h6>
 
         <!-- Navigation -->
@@ -169,7 +169,7 @@ const toggleCollapseShow = (classes) => {
               :to="{ 'name': 'pokedex' }"
             >
               <DeviceMobileIcon class="w-4 h-4 mr-2" />
-              Pokedex
+              Pokédex
             </router-link>
           </li>
         </ul>

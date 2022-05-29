@@ -7,7 +7,7 @@ const NavigationButton = defineAsyncComponent(() => import('@/components/headers
 </script>
 
 <template>
-  <nav class="z-50 flex flex-wrap items-center justify-between p-6">
+  <nav class="absolute top-0 z-50 w-full p-6">
     <div class="flex flex-wrap items-center justify-between w-full mx-auto">
       <!-- Left navbar -->
       <div class="flex items-center w-auto">

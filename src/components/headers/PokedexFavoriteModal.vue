@@ -8,8 +8,8 @@ const {
 } = useFavoritePokemon()
 
 const label = computed(() => isFavorite.value
-  ? 'Are you sure you want to cancel this Pokemon from your favorite?'
-  : 'Are you sure you want to set this Pokemon as your favorite?')
+  ? 'Are you sure you want to cancel this Pokémon from your favorite?'
+  : 'Are you sure you want to set this Pokémon as your favorite?')
 
 const onSubmit = async () => {
   await setIsFavoritePokemon()
@@ -35,7 +35,7 @@ const onSubmit = async () => {
             id="modal-title"
             class="text-lg font-medium leading-6"
           >
-            Favorite Pokemon
+            Favorite Pokémon
           </h3>
           <div class="mt-2">
             <p class="text-sm">

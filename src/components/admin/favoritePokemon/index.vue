@@ -15,7 +15,7 @@ getFavoritePokemonList()
 <template>
   <div class="container flex flex-col gap-6 md:gap-10">
     <div class="text-3xl font-bold">
-      Favorite Pokemon
+      Favorite Pokémon
     </div>
 
     <template v-if="isLoadingField">

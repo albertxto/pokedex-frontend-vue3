@@ -10,13 +10,13 @@ const NavigationCard = defineAsyncComponent(() => import('@/components/home/Navi
     <HomeNavbar />
 
     <h1 class="mt-6 text-3xl font-bold">
-      What Pokemon are you looking for?
+      What Pokémon are you looking for?
     </h1>
 
     <div class="grid items-center justify-between grid-cols-2 gap-6 mt-20 sm:gap-10">
       <NavigationCard
         color="success"
-        label="Pokedex"
+        label="Pokédex"
         :to="{ name: 'pokedex' }"
       />
 
