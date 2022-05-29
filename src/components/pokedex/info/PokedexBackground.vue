@@ -12,7 +12,7 @@ const { pokemonIsLoading, pokemonTypes } = usePokemon()
 
 const componentClass = computed(() => pokemonIsLoading.value
   ? 'bg-slate-400 animate-pulse'
-  : pokemonTypesConfig[pokemonTypes.value[0]].color
+  : pokemonTypesConfig[pokemonTypes.value[0]]?.color || 'bg-slate-400'
 )
 </script>
 

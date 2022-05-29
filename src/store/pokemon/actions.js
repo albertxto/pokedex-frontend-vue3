@@ -1,34 +1,32 @@
-import endpoints from '@/config/endpoints'
-import { axiosInstance } from '@/plugins/axios'
+import { pokeApiInstance } from '@/plugins/pokeapi'
 import {
   getIdFromPokeApiUrl, getPokemonImageUrlById, normalizePokeApiName
 } from '@/utils/stringFormat'
 
 export function getPokemonById ({ commit }, id) {
-  return new Promise((resolve, reject) => axiosInstance
-    .get(`${endpoints.POKEDEX_INFO}/${id}`)
+  const pokemon = pokeApiInstance.getPokemonByName(id)
+  const species = pokeApiInstance.getPokemonSpeciesByName(id)
+  return Promise.all([pokemon, species])
     .then((response) => {
-      if (response.data?.length) {
-        const { data } = response
-
+      if (response?.length === 2) {
         // Basic info
-        if (data[0]?.id) commit('SET_ID', data[0].id)
-        if (data[0]?.name) commit('SET_NAME', normalizePokeApiName(data[0].name))
-        if (data[0]?.sprites?.other['official-artwork']?.front_default) {
-          commit('SET_IMAGE', data[0].sprites.other['official-artwork'].front_default)
+        if (response[0]?.id) commit('SET_ID', response[0].id)
+        if (response[0]?.name) commit('SET_NAME', normalizePokeApiName(response[0].name))
+        if (response[0]?.sprites?.other['official-artwork']?.front_default) {
+          commit('SET_IMAGE', response[0].sprites.other['official-artwork'].front_default)
         }
-        if (data[0]?.types?.length) {
-          const types = data[0].types.map((pokemonType) => pokemonType.type.name)
+        if (response[0]?.types?.length) {
+          const types = response[0].types.map((pokemonType) => pokemonType.type.name)
           commit('SET_TYPES', types)
         }
-        if (data[1]?.genera.length) {
-          const genus = data[1].genera.find((genera) => genera.language.name === 'en').genus
+        if (response[1]?.genera.length) {
+          const genus = response[1].genera.find((genera) => genera.language.name === 'en').genus
           commit('SET_GENUS', genus)
         }
 
         // About
-        if (data[1]?.flavor_text_entries.length) {
-          const about = data[1].flavor_text_entries.find((flavorText) => (
+        if (response[1]?.flavor_text_entries.length) {
+          const about = response[1].flavor_text_entries.find((flavorText) => (
             flavorText.language.name === 'en' &&
               (flavorText.version.name === 'sword' ||
               flavorText.version.name === 'shield' ||
@@ -43,31 +41,31 @@ export function getPokemonById ({ commit }, id) {
         }
 
         // Measurement
-        if (data[0]?.height) commit('SET_HEIGHT', data[0].height)
-        if (data[0]?.weight) commit('SET_WEIGHT', data[0].weight)
+        if (response[0]?.height) commit('SET_HEIGHT', response[0].height)
+        if (response[0]?.weight) commit('SET_WEIGHT', response[0].weight)
 
         // Gender
-        if (typeof data[1]?.gender_rate === 'number') {
-          commit('SET_GENDER_RATE', data[1]?.gender_rate)
+        if (typeof response[1]?.gender_rate === 'number') {
+          commit('SET_GENDER_RATE', response[1]?.gender_rate)
         }
 
         // Egg groups
-        if (data[1]?.egg_groups.length) {
-          const eggGroups = data[1].egg_groups.map((eggGroup) => eggGroup.name)
+        if (response[1]?.egg_groups.length) {
+          const eggGroups = response[1].egg_groups.map((eggGroup) => eggGroup.name)
           commit('SET_EGG_GROUPS', eggGroups)
         }
 
         // Training
-        if (data[0]?.base_experience) {
-          commit('SET_BASE_EXPERIENCE', data[0].base_experience)
+        if (response[0]?.base_experience) {
+          commit('SET_BASE_EXPERIENCE', response[0].base_experience)
         }
-        if (data[1]?.base_happiness) {
-          commit('SET_BASE_HAPPINESS', data[1].base_happiness)
+        if (response[1]?.base_happiness) {
+          commit('SET_BASE_HAPPINESS', response[1].base_happiness)
         }
 
         // Base stats
-        if (data[0]?.stats?.length) {
-          const baseStats = data[0].stats.map((status) => ({
+        if (response[0]?.stats?.length) {
+          const baseStats = response[0].stats.map((status) => ({
             label: status.stat.name,
             value: status.base_stat
           }))
@@ -75,15 +73,15 @@ export function getPokemonById ({ commit }, id) {
         }
 
         // Evolution chain
-        if (data[1]?.evolution_chain?.url) {
+        if (response[1]?.evolution_chain?.url) {
           commit('SET_EVOLUTION_CHAIN_ID', Number.parseInt(
-            getIdFromPokeApiUrl(data[1].evolution_chain.url)
+            getIdFromPokeApiUrl(response[1].evolution_chain.url)
           ))
         }
 
         // Varieties
-        if (data[1]?.varieties?.length) {
-          const varieties = data[1]?.varieties.map((variety) => {
+        if (response[1]?.varieties?.length) {
+          const varieties = response[1]?.varieties.map((variety) => {
             const pokemonId = getIdFromPokeApiUrl(variety.pokemon.url)
             return {
               isDefault: variety.is_default,
@@ -95,26 +93,23 @@ export function getPokemonById ({ commit }, id) {
           commit('SET_VARIETIES', varieties)
         }
       }
-
-      resolve(response.data)
     })
     .catch((error) => {
-      reject(error)
+      console.error(error)
     })
     .finally(() => {
       commit('SET_IS_LOADING', false)
     })
-  )
 }
 
 export function getPokemonEvolutionChain ({ commit, dispatch, getters }) {
   commit('SET_EVOLUTIONS', [])
   const { evolutionChainId } = getters
 
-  return new Promise((resolve, reject) => axiosInstance
-    .get(`${endpoints.EVOLUTION_CHAIN}/${evolutionChainId}`)
+  return new Promise((resolve, reject) => pokeApiInstance
+    .getEvolutionChainById(evolutionChainId)
     .then((response) => {
-      const { chain } = response.data
+      const { chain } = response
       dispatch('setPokemonEvolution', chain)
       resolve(response.data)
     })
@@ -125,40 +120,38 @@ export function getPokemonEvolutionChain ({ commit, dispatch, getters }) {
 }
 
 export function getPokemonFormById ({ commit }, id) {
-  return new Promise((resolve, reject) => axiosInstance
-    .get(`${endpoints.POKEDEX_FORM}/${id}`)
+  return new Promise((resolve, reject) => pokeApiInstance
+    .getPokemonByName(id)
     .then((response) => {
-      const { data } = response
-
       // Basic info
-      if (data?.name) commit('SET_NAME', normalizePokeApiName(data.name))
-      if (data?.sprites?.other['official-artwork']?.front_default) {
-        commit('SET_IMAGE', data.sprites.other['official-artwork'].front_default)
+      if (response?.name) commit('SET_NAME', normalizePokeApiName(response.name))
+      if (response?.sprites?.other['official-artwork']?.front_default) {
+        commit('SET_IMAGE', response.sprites.other['official-artwork'].front_default)
       }
-      if (data?.types?.length) {
-        const types = data.types.map((pokemonType) => pokemonType.type.name)
+      if (response?.types?.length) {
+        const types = response.types.map((pokemonType) => pokemonType.type.name)
         commit('SET_TYPES', types)
       }
 
       // Measurement
-      if (data?.height) commit('SET_HEIGHT', data.height)
-      if (data?.weight) commit('SET_WEIGHT', data.weight)
+      if (response?.height) commit('SET_HEIGHT', response.height)
+      if (response?.weight) commit('SET_WEIGHT', response.weight)
 
       // Training
-      if (data?.base_experience) {
-        commit('SET_BASE_EXPERIENCE', data.base_experience)
+      if (response?.base_experience) {
+        commit('SET_BASE_EXPERIENCE', response.base_experience)
       }
 
       // Base stats
-      if (data?.stats?.length) {
-        const baseStats = data.stats.map((status) => ({
+      if (response?.stats?.length) {
+        const baseStats = response.stats.map((status) => ({
           label: status.stat.name,
           value: status.base_stat
         }))
         commit('SET_BASE_STATS', baseStats)
       }
 
-      resolve(data)
+      resolve(response)
     })
     .catch((error) => {
       reject(error)

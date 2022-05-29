@@ -1,6 +1,5 @@
-import endpoints from '@/config/endpoints'
 import { count as pokemonCount, limit as pokemonLimit } from '@/config/pokemon'
-import { axiosInstance } from '@/plugins/axios'
+import { pokeApiInstance } from '@/plugins/pokeapi'
 import {
   getIdFromPokeApiUrl, getPokemonImageUrlById, normalizePokeApiName, pokedexNumberFormat
 } from '@/utils/stringFormat'
@@ -15,10 +14,10 @@ export function getPokemonList ({ commit, getters }, nextPage = false) {
 
   const { offset } = getters
 
-  return new Promise((resolve, reject) => axiosInstance
-    .get(`${endpoints.POKEDEX}/?limit=${pokemonLimit}&offset=${offset}`)
+  return new Promise((resolve, reject) => pokeApiInstance
+    .getPokemonsList({ limit: pokemonLimit, offset })
     .then((response) => {
-      const { results } = response.data
+      const { results } = response
 
       if (results.length) {
         // Validate results cannot be greater than pokemon count in config file

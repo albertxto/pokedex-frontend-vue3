@@ -1,21 +1,21 @@
-import { createApp } from 'vue'
+import { createApp, defineAsyncComponent } from 'vue'
 import '@/assets/styles/index.scss'
 import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
 
-import AppButton from '@/components/shared/AppButton.vue'
-import AppCard from '@/components/shared/AppCard.vue'
-import AppCheckbox from '@/components/shared/AppCheckbox.vue'
-import AppInput from '@/components/shared/AppInput.vue'
-import AppModal from '@/components/shared/AppModal.vue'
-import AppNotification from '@/components/shared/AppNotification.vue'
-import AppRadio from '@/components/shared/AppRadio.vue'
-import AppSelect from '@/components/shared/AppSelect.vue'
-import AppTable from '@/components/shared/AppTable.vue'
-import AppTabs from '@/components/shared/AppTabs.vue'
-
 import { parseJwt } from '@/utils/stringFormat.js'
+
+const AppButton = defineAsyncComponent(() => import('@/components/shared/AppButton.vue'))
+const AppCard = defineAsyncComponent(() => import('@/components/shared/AppCard.vue'))
+const AppCheckbox = defineAsyncComponent(() => import('@/components/shared/AppCheckbox.vue'))
+const AppInput = defineAsyncComponent(() => import('@/components/shared/AppInput.vue'))
+const AppModal = defineAsyncComponent(() => import('@/components/shared/AppModal.vue'))
+const AppNotification = defineAsyncComponent(() => import('@/components/shared/AppNotification.vue'))
+const AppRadio = defineAsyncComponent(() => import('@/components/shared/AppRadio.vue'))
+const AppSelect = defineAsyncComponent(() => import('@/components/shared/AppSelect.vue'))
+const AppTable = defineAsyncComponent(() => import('@/components/shared/AppTable.vue'))
+const AppTabs = defineAsyncComponent(() => import('@/components/shared/AppTabs.vue'))
 
 // Init dark mode
 if ((!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches) || localStorage.getItem('darkMode') === 'true') {
