@@ -18,7 +18,9 @@ const AppTable = defineAsyncComponent(() => import('@/components/shared/AppTable
 const AppTabs = defineAsyncComponent(() => import('@/components/shared/AppTabs.vue'))
 
 // Init dark mode
-if ((!localStorage.getItem('darkMode') && window.matchMedia('(prefers-color-scheme: dark)').matches) || localStorage.getItem('darkMode') === 'true') {
+if ((!localStorage.getItem('darkMode') &&
+  window.matchMedia('(prefers-color-scheme: dark)').matches) ||
+  localStorage.getItem('darkMode') === 'true') {
   store.dispatch('setting/toggleDarkMode', true)
 }
 

@@ -8,10 +8,13 @@ const { dismissErrorNotification, errorMessage } = useNotification()
 
 const email = ref('')
 const password = ref('')
+const isLoading = ref(false)
 
 const onSubmit = async () => {
   // Dismiss notification
   dismissErrorNotification()
+
+  isLoading.value = true
 
   const payload = {
     email: email.value,
@@ -22,6 +25,8 @@ const onSubmit = async () => {
     await login(payload)
   } catch (error) {
     errorMessage.value = error
+  } finally {
+    isLoading.value = false
   }
 }
 </script>
@@ -79,6 +84,7 @@ const onSubmit = async () => {
           class="w-full"
           color="dark"
           type="submit"
+          :loading="isLoading"
         >
           Sign In
         </AppButton>

@@ -15,10 +15,20 @@ const {
 const name = ref('')
 const email = ref('')
 const password = ref('')
+const confirmPassword = ref('')
+const isLoading = ref(false)
 
 const onSubmit = async () => {
   // Dismiss all notifications
   dismissAllNotifications()
+
+  // Validate confirm password
+  if (password.value !== confirmPassword.value) {
+    errorMessage.value = 'Password must be the same as confirm password'
+    return
+  }
+
+  isLoading.value = true
 
   const payload = {
     name: name.value,
@@ -34,6 +44,8 @@ const onSubmit = async () => {
     successMessage.value = response
   } catch (error) {
     errorMessage.value = error
+  } finally {
+    isLoading.value = false
   }
 }
 </script>
@@ -88,6 +100,20 @@ const onSubmit = async () => {
         />
       </div>
 
+      <div class="relative w-full mb-3">
+        <label
+          class="block mb-2 text-xs font-bold uppercase"
+          htmlFor="grid-confirm-password"
+        >
+          Confirm Password
+        </label>
+        <AppInput
+          v-model="confirmPassword"
+          placeholder="Confirm Password"
+          type="password"
+        />
+      </div>
+
       <AppNotification
         v-if="successMessage"
         class="mt-6"
@@ -111,6 +137,7 @@ const onSubmit = async () => {
           class="w-full"
           color="dark"
           type="submit"
+          :loading="isLoading"
         >
           Create Account
         </AppButton>
