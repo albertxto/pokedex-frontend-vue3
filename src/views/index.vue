@@ -7,5 +7,5 @@ const HomePage = defineAsyncComponent(() => import('@/components/home/index.vue'
 
 <template>
   <HomePage />
-  <AppFooter absolute />
+  <AppFooter />
 </template>
