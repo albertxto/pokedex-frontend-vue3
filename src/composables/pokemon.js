@@ -60,7 +60,7 @@ export const usePokemon = () => {
     const pokemonId = Number.parseInt(route.params.id)
 
     // Validate pokemon id must between 1 and pokemonCount
-    if (!validatePokemonRoute(pokemonId)) {
+    if (validatePokemonRoute(pokemonId)) {
       router.replace({ name: 'pokedexInfo', params: { id: 1 } })
       return
     }

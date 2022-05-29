@@ -8,23 +8,23 @@ import { useFavoritePokemon } from '@/composables/favoritePokemon'
 const PokedexFavoriteModal = defineAsyncComponent(() => import('@/components/headers/PokedexFavoriteModal.vue'))
 
 const route = useRoute()
-const { getFavoritePokemon, isFavorite, isLoading, openModal } = useFavoritePokemon()
+const { getIsFavoritePokemon, isFavorite, isLoadingButton, openModal } = useFavoritePokemon()
 
-getFavoritePokemon()
+getIsFavoritePokemon()
 
 watch(() => route.params.id, () => {
-  getFavoritePokemon()
+  getIsFavoritePokemon()
 })
 </script>
 
 <template>
   <a
     class="flex items-center py-2 text-xs font-bold text-white cursor-pointer"
-    :class="{ 'hover:text-slate-400': !isLoading, 'cursor-default': isLoading }"
+    :class="{ 'hover:text-slate-400': !isLoadingButton, 'cursor-default': isLoadingButton }"
     @click="openModal"
   >
     <RefreshIcon
-      v-if="isLoading"
+      v-if="isLoadingButton"
       class="w-6 h-6 animate-spin"
     />
     <template v-else>

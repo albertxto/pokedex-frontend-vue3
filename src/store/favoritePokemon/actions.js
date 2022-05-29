@@ -3,28 +3,6 @@ import { axiosInstance } from '@/plugins/axios'
 import { limit } from '@/config/favoritePokemon'
 import { getPokemonImageUrlById, pokedexNumberFormat } from '@/utils/stringFormat'
 
-export function getFavoritePokemon ({ commit }, pokemonId = '') {
-  commit('SET_IS_LOADING', true)
-  return new Promise((resolve, reject) => axiosInstance
-    .get(`${endpoints.FAVORITE_POKEMON}/${pokemonId}`)
-    .then((response) => {
-      if (response?.data?.isFavorite) {
-        commit('SET_IS_FAVORITE', true)
-      } else {
-        commit('SET_IS_FAVORITE', false)
-      }
-      resolve(response.data)
-    })
-    .catch((error) => {
-      commit('SET_IS_FAVORITE', false)
-      reject(error)
-    })
-    .finally(() => {
-      commit('SET_IS_LOADING', false)
-    })
-  )
-}
-
 export function getFavoritePokemonList ({ commit, getters }, nextPage = false) {
   commit('SET_IS_LOADING_BUTTON', true)
 
@@ -87,8 +65,30 @@ export function getFavoritePokemonListCount ({ commit }) {
   )
 }
 
-export function setFavoritePokemon ({ commit, getters }, pokemonId = '') {
-  commit('SET_IS_LOADING', true)
+export function getIsFavoritePokemon ({ commit }, pokemonId = '') {
+  commit('SET_IS_LOADING_BUTTON', true)
+  return new Promise((resolve, reject) => axiosInstance
+    .get(`${endpoints.FAVORITE_POKEMON}/${pokemonId}`)
+    .then((response) => {
+      if (response?.data?.isFavorite) {
+        commit('SET_IS_FAVORITE', true)
+      } else {
+        commit('SET_IS_FAVORITE', false)
+      }
+      resolve(response.data)
+    })
+    .catch((error) => {
+      commit('SET_IS_FAVORITE', false)
+      reject(error)
+    })
+    .finally(() => {
+      commit('SET_IS_LOADING_BUTTON', false)
+    })
+  )
+}
+
+export function setIsFavoritePokemon ({ commit, getters }, pokemonId = '') {
+  commit('SET_IS_LOADING_BUTTON', true)
   const { isFavorite } = getters
   return new Promise((resolve, reject) => axiosInstance
     .post(`${endpoints.FAVORITE_POKEMON}/${pokemonId}`)
@@ -100,7 +100,7 @@ export function setFavoritePokemon ({ commit, getters }, pokemonId = '') {
       reject(error)
     })
     .finally(() => {
-      commit('SET_IS_LOADING', false)
+      commit('SET_IS_LOADING_BUTTON', false)
     })
   )
 }

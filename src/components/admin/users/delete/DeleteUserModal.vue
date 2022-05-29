@@ -2,7 +2,7 @@
 import { ExclamationIcon } from '@heroicons/vue/outline'
 import { useUser } from '@/composables/user.js'
 
-const { closeModal, deleteUser, isLoading, isShowModal, userEmail } = useUser()
+const { closeModal, deleteUser, isLoadingButton, isShowModal, userEmail } = useUser()
 </script>
 
 <template>
@@ -41,7 +41,7 @@ const { closeModal, deleteUser, isLoading, isShowModal, userEmail } = useUser()
           class="w-full sm:w-auto"
           color="danger"
           size="sm"
-          :loading="isLoading"
+          :loading="isLoadingButton"
           @click="deleteUser"
         >
           Delete

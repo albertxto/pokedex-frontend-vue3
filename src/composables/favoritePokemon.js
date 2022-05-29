@@ -31,15 +31,6 @@ export const useFavoritePokemon = () => {
     isShowModal.value = false
   }
 
-  const getFavoritePokemon = async () => {
-    if (!validatePokemonRoute) return
-    try {
-      await store.dispatch('favoritePokemon/getFavoritePokemon', route.params.id)
-    } catch (error) {
-      console.error(error)
-    }
-  }
-
   const getFavoritePokemonList = async (nextPage = false) => {
     try {
       await store.dispatch('favoritePokemon/getFavoritePokemonList', nextPage)
@@ -56,10 +47,19 @@ export const useFavoritePokemon = () => {
     }
   }
 
-  const setFavoritePokemon = async () => {
-    if (!validatePokemonRoute) return
+  const getIsFavoritePokemon = async () => {
+    if (validatePokemonRoute(route.params.id)) return
     try {
-      await store.dispatch('favoritePokemon/setFavoritePokemon', route.params.id)
+      await store.dispatch('favoritePokemon/getIsFavoritePokemon', route.params.id)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const setIsFavoritePokemon = async () => {
+    if (validatePokemonRoute(route.params.id)) return
+    try {
+      await store.dispatch('favoritePokemon/setIsFavoritePokemon', route.params.id)
     } catch (error) {
       console.error(error)
     }
@@ -74,15 +74,15 @@ export const useFavoritePokemon = () => {
     closeModal,
     favoritePokemonList,
     favoritePokemonListCount,
-    getFavoritePokemon,
     getFavoritePokemonList,
     getFavoritePokemonListCount,
+    getIsFavoritePokemon,
     isFavorite,
     isLoadingButton,
     isLoadingField,
     isLoadMore,
     isShowModal,
     openModal,
-    setFavoritePokemon
+    setIsFavoritePokemon
   }
 }

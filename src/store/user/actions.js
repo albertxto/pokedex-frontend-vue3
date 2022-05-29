@@ -3,7 +3,7 @@ import { limit } from '@/config/user'
 import { axiosInstance } from '@/plugins/axios'
 
 export function addUser ({ commit }, { email = '', name = '', password = '', role = '' }) {
-  commit('SET_IS_LOADING', true)
+  commit('SET_IS_LOADING_BUTTON', true)
   const payload = {
     email,
     name,
@@ -11,7 +11,7 @@ export function addUser ({ commit }, { email = '', name = '', password = '', rol
     role
   }
   return new Promise((resolve, reject) => axiosInstance
-    .post('/users', payload)
+    .post(endpoints.USERS, payload)
     .then((response) => {
       commit('RESET')
       resolve(response.data)
@@ -20,13 +20,13 @@ export function addUser ({ commit }, { email = '', name = '', password = '', rol
       reject(error)
     })
     .finally(() => {
-      commit('SET_IS_LOADING', false)
+      commit('SET_IS_LOADING_BUTTON', false)
     })
   )
 }
 
 export function changePasswordById ({ commit }, { id = '', password = '' }) {
-  commit('SET_IS_LOADING', true)
+  commit('SET_IS_LOADING_BUTTON', true)
   const payload = {
     password
   }
@@ -39,13 +39,13 @@ export function changePasswordById ({ commit }, { id = '', password = '' }) {
       reject(error)
     })
     .finally(() => {
-      commit('SET_IS_LOADING', false)
+      commit('SET_IS_LOADING_BUTTON', false)
     })
   )
 }
 
 export function deleteUser ({ commit }, id = '') {
-  commit('SET_IS_LOADING', true)
+  commit('SET_IS_LOADING_BUTTON', true)
   return new Promise((resolve, reject) => axiosInstance
     .delete(`${endpoints.USERS}/${id}`)
     .then((response) => {
@@ -55,13 +55,13 @@ export function deleteUser ({ commit }, id = '') {
       reject(error)
     })
     .finally(() => {
-      commit('SET_IS_LOADING', false)
+      commit('SET_IS_LOADING_BUTTON', false)
     })
   )
 }
 
 export function editUser ({ commit }, { email = '', id = '', name = '' }) {
-  commit('SET_IS_LOADING', true)
+  commit('SET_IS_LOADING_BUTTON', true)
   const payload = {
     email,
     name
@@ -75,7 +75,7 @@ export function editUser ({ commit }, { email = '', id = '', name = '' }) {
       reject(error)
     })
     .finally(() => {
-      commit('SET_IS_LOADING', false)
+      commit('SET_IS_LOADING_BUTTON', false)
     })
   )
 }
@@ -97,7 +97,8 @@ export function getUserById ({ commit }, id = '') {
       reject(error)
     })
     .finally(() => {
-      commit('SET_IS_LOADING', false)
+      commit('SET_IS_LOADING_BUTTON', false)
+      commit('SET_IS_LOADING_FIELD', false)
     })
   )
 }
