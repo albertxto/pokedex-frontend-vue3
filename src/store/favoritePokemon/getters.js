@@ -1,3 +1,7 @@
+export function favoriteSelected (state) {
+  return state.favoriteSelected
+}
+
 export function isFavorite (state) {
   return state.isFavorite
 }

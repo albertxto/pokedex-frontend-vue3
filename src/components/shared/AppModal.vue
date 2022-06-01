@@ -1,5 +1,5 @@
 <script setup>
-defineEmits(['close'])
+const emits = defineEmits(['close'])
 
 defineProps({
   show: {
@@ -16,7 +16,10 @@ defineProps({
         v-if="show"
         class="modal-mask"
       >
-        <div class="modal-wrapper">
+        <div
+          class="modal-wrapper"
+          @click.self="emits('close')"
+        >
           <AppCard class="container max-w-lg transition-all shadow-xl">
             <slot />
             <slot name="footer" />

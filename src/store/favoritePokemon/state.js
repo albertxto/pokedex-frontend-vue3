@@ -1,4 +1,5 @@
 export default {
+  favoriteSelected: null,
   isFavorite: false,
   isLoadingButton: false,
   isLoadingField: false,

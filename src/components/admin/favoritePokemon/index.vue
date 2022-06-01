@@ -2,8 +2,9 @@
 import { defineAsyncComponent } from 'vue'
 import { useFavoritePokemon } from '@/composables/favoritePokemon'
 
-const PokedexCard = defineAsyncComponent(() => import('@/components/pokedex/list/PokedexCard.vue'))
 const PokedexCardSkeleton = defineAsyncComponent(() => import('@/components/shared/PokedexCardSkeleton.vue'))
+const PokedexFavoriteCard = defineAsyncComponent(() => import('@/components/admin/favoritePokemon/PokedexFavoriteCard.vue'))
+const PokedexUnfavoriteModal = defineAsyncComponent(() => import('@/components/admin/favoritePokemon/PokedexUnfavoriteModal.vue'))
 
 const {
   favoritePokemonList, getFavoritePokemonList, isLoadingButton, isLoadingField, isLoadMore
@@ -45,7 +46,7 @@ getFavoritePokemonList()
         v-for="(pokemon, index) in favoritePokemonList"
         :key="index"
       >
-        <PokedexCard
+        <PokedexFavoriteCard
           :image="pokemon.image"
           :number="pokemon.number"
           :pokemon-id="pokemon.id"
@@ -67,4 +68,6 @@ getFavoritePokemonList()
       </AppButton>
     </div>
   </div>
+
+  <PokedexUnfavoriteModal />
 </template>

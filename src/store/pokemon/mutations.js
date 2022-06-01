@@ -79,7 +79,7 @@ export function SET_EVOLUTIONS (state, payload) {
 }
 
 export function SET_FORM_SELECTED (state, payload) {
-  if (typeof payload === 'number') {
+  if (typeof payload === 'number' && payload > 0) {
     state.formSelected = payload
   } else {
     state.formSelected = null

@@ -4,6 +4,14 @@ export function PUSH_LIST (state, payload) {
   }
 }
 
+export function SET_FAVORITE_SELECTED (state, payload) {
+  if (typeof payload === 'number' && payload > 0) {
+    state.favoriteSelected = payload
+  } else {
+    state.favoriteSelected = null
+  }
+}
+
 export function SET_IS_FAVORITE (state, payload) {
   if (typeof payload === 'boolean') {
     state.isFavorite = payload
