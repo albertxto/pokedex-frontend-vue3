@@ -10,13 +10,14 @@
     "@heroicons/vue": "^1.0.6",
     "axios": "^0.27.2",
     "pokeapi-js-wrapper": "^1.2.2",
-    "swiper": "^8.1.6",
+    "swiper": "^8.2.1",
     "vue": "^3.2.36",
     "vue-router": "^4.0.15",
     "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.2",
+    "@vitejs/plugin-legacy": "^1.8.2",
     "@vitejs/plugin-vue": "^2.3.3",
     "autoprefixer": "^10.4.7",
     "eslint": "^7.32.0",
