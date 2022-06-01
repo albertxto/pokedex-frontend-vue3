@@ -56,7 +56,7 @@ getFavoritePokemonList()
 
     <div
       v-if="isLoadMore"
-      class="mt-6 text-center"
+      class="text-center"
     >
       <AppButton
         color="primary"
