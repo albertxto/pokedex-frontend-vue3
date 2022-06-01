@@ -47,7 +47,7 @@ const onSubmit = async () => {
           Email
         </label>
         <AppInput
-          v-model.trim="email"
+          v-model="email"
           placeholder="Email"
           type="text"
         />

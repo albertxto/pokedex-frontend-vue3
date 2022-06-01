@@ -14,8 +14,7 @@ const indexActive = ref(0)
 
 const emit = defineEmits(['change'])
 
-const changeSelected = (event, index, tab) => {
-  event.preventDefault() // Prevent scroll to top when clicking tab
+const changeSelected = (index, tab) => {
   if (tab.disable) return
   indexActive.value = index
   emit('change', tab.value)
@@ -41,10 +40,10 @@ const componentClass = (index, isDisable) => {
     <li
       v-for="(tab, index) in tabs"
       :key="index"
-      @click="changeSelected($event, index, tab)"
+      @click.prevent="changeSelected(index, tab)"
     >
       <a
-        href="#"
+        href="javascript:void(0)"
         class="inline-block p-2 font-medium text-center border-b-2 rounded-t-lg sm:p-4"
         :class="componentClass(index, tab.disable)"
       >

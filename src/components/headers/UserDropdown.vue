@@ -7,8 +7,7 @@ const { logout } = useAuth()
 
 const isShowDropdown = ref(false)
 
-const toggleDropdown = (event) => {
-  event.preventDefault()
+const toggleDropdown = () => {
   isShowDropdown.value = !isShowDropdown.value
 }
 </script>
@@ -16,8 +15,9 @@ const toggleDropdown = (event) => {
 <template>
   <div class="relative">
     <a
-      class="block cursor-pointer"
-      @click="toggleDropdown($event)"
+      href="javascript:void(0)"
+      class="block"
+      @click.prevent="toggleDropdown"
     >
       <div class="flex items-center">
         <span class="inline-flex items-center justify-center py-2 rounded-full hover:text-slate-400">
@@ -29,7 +29,7 @@ const toggleDropdown = (event) => {
     <div
       class="absolute right-0 z-50 py-2 text-base list-none bg-white rounded shadow-lg dark:bg-slate-900 min-w-48"
       :class="{ block: isShowDropdown, hidden: !isShowDropdown }"
-      @click="toggleDropdown($event)"
+      @click="toggleDropdown"
     >
       <router-link
         class="block w-full px-4 py-2 text-sm font-normal whitespace-nowrap"
@@ -41,7 +41,7 @@ const toggleDropdown = (event) => {
       <hr class="my-2 md:min-w-full">
 
       <a
-        href="javascript:void(0);"
+        href="javascript:void(0)"
         class="block w-full px-4 py-2 text-sm font-normal whitespace-nowrap"
         @click="logout"
       >

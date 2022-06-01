@@ -81,7 +81,7 @@ const componentClass = computed(() => {
     </span>
 
     <input
-      v-model="computedValue"
+      v-model.trim="computedValue"
       class="flex-1 block w-full text-sm border-gray-300 rounded dark:bg-slate-800 dark:border-gray-400"
       :class="componentClass"
       :disabled="disabled"

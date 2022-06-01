@@ -16,7 +16,7 @@ const githubUrl = import.meta.env.VITE_GITHUB_URL
       absolute ? 'absolute bottom-0' : 'relative pt-10'
     ]"
   >
-    <div class="container px-4 mx-auto">
+    <div class="container px-6 mx-auto">
       <hr class="mb-6 border-black dark:border-white">
       <div class="flex flex-wrap items-center justify-center">
         <div class="py-1 text-sm text-center">

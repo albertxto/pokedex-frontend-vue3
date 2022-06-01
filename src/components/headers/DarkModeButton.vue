@@ -21,9 +21,10 @@ const toggleDarkMode = () => {
 
 <template>
   <a
-    class="flex items-center py-2 text-xs font-bold cursor-pointer hover:text-slate-400"
+    href="javascript:void(0)"
+    class="flex items-center py-2 text-xs font-bold hover:text-slate-400"
     :class="{ 'text-white': forceWhite }"
-    @click="toggleDarkMode"
+    @click.prevent="toggleDarkMode"
   >
     <MoonIcon
       v-if="darkMode"

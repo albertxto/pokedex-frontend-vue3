@@ -1,19 +1,19 @@
 <template>
   <div class="relative flex flex-wrap mt-6">
-    <div class="w-1/2">
+    <div class="w-1/2 text-sm">
       <a
         href="javascript:void(0)"
         class="underline"
       >
-        <small>Forgot password?</small>
+        Forgot password?
       </a>
     </div>
-    <div class="w-1/2 text-right">
+    <div class="w-1/2 text-sm text-right">
       <router-link
         :to="{ name: 'register' }"
         class="underline"
       >
-        <small>Create new account</small>
+        Create new account
       </router-link>
     </div>
   </div>

@@ -20,7 +20,8 @@ const onClick = () => {
 
 <template>
   <a
-    class="absolute right-0 p-1 rounded-full cursor-pointer -top-1 hover:bg-slate-500"
+    href="javascript:void(0)"
+    class="absolute right-0 p-1 rounded-full -top-1 hover:bg-slate-500"
     @click.prevent="onClick"
   >
     <RefreshIcon
