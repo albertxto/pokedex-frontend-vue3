@@ -21,11 +21,11 @@ This project is developed using Vue 3 in Vite and uses Vue 3 `<script setup>` SF
 - Dark mode
 - Authentication (register & login)
 - Authorization (role-based)
-- Add Pokemon to favorite
-- Remove Pokemon from favorite
-- Update profile
-- Change password
-- Admin can create, edit, delete users
+- Add Pokemon to favorite (must login first)
+- Remove Pokemon from favorite (must login first)
+- Update profile (must login first)
+- Change password (must login first)
+- Admin can create, edit, delete users (must login first)
 
 ## To Do
 
