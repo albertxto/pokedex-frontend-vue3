@@ -30,8 +30,6 @@ export function getPokemonById ({ commit }, id) {
             flavorText.language.name === 'en' &&
               (flavorText.version.name === 'sword' ||
               flavorText.version.name === 'shield' ||
-              flavorText.version.name === 'sun' ||
-              flavorText.version.name === 'moon' ||
               flavorText.version.name === 'ultra-sun' ||
               flavorText.version.name === 'ultra-moon' ||
               flavorText.version.name === 'x' ||
