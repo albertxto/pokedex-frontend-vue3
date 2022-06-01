@@ -1,5 +1,5 @@
 <script setup>
-import { RefreshIcon, TrashIcon } from '@heroicons/vue/solid'
+import { TrashIcon } from '@heroicons/vue/solid'
 import { useFavoritePokemon } from '@/composables/favoritePokemon'
 
 const props = defineProps({
@@ -9,7 +9,7 @@ const props = defineProps({
   }
 })
 
-const { favoritePokemonSelected, isLoadingButton, openModal } = useFavoritePokemon()
+const { favoritePokemonSelected, openModal } = useFavoritePokemon()
 
 const onClick = () => {
   favoritePokemonSelected.value = props.pokemonId
@@ -24,10 +24,6 @@ const onClick = () => {
     class="absolute right-0 p-1 rounded-full -top-1 hover:bg-slate-500"
     @click.prevent="onClick"
   >
-    <RefreshIcon
-      v-if="isLoadingButton"
-      class="w-6 h-6 animate-spin"
-    />
     <TrashIcon class="w-6 h-6" />
   </a>
 </template>
