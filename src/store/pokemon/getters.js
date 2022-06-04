@@ -127,10 +127,6 @@ export function height (state) {
   return `${state.height * 10} cm`
 }
 
-export function id (state) {
-  return `#${state.id.toString().padStart(3, '0')}`
-}
-
 export function image (state) {
   return state.image
 }

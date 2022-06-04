@@ -1,7 +1,7 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute, useRouter } from 'vue-router'
-import { count as pokemonCount } from '@/config/pokemon'
+import { pokedexNumberFormat } from '@/utils/stringFormat'
 import { validatePokemonRoute } from '@/utils/validation'
 
 export const usePokemon = () => {
@@ -26,15 +26,14 @@ export const usePokemon = () => {
   const pokemonGenders = computed(() => store.getters['pokemon/genders'])
   const pokemonGenus = computed(() => store.getters['pokemon/genus'])
   const pokemonHeight = computed(() => store.getters['pokemon/height'])
-  const pokemonId = computed(() => store.getters['pokemon/id'])
-  const pokemonIsFavorite = computed({
-    get: () => store.getters['pokemon/isFavorite'],
+  const pokemonId = computed(() => pokedexNumberFormat(route.params.id))
+  const pokemonIsLoading = computed(() => store.getters['pokemon/isLoading'])
+  const pokemonIsLoadingEvolution = computed({
+    get: () => store.getters['pokemon/isLoadingEvolution'],
     set: (value) => {
-      store.commit('pokemon/SET_IS_FAVORITE', value)
+      store.commit('pokemon/SET_IS_LOADING_EVOLUTION', value)
     }
   })
-  const pokemonIsLoading = computed(() => store.getters['pokemon/isLoading'])
-  const pokemonIsLoadingEvolution = computed(() => store.getters['pokemon/isLoadingEvolution'])
   const pokemonName = computed(() => store.getters['pokemon/name'])
   const pokemonSwiper = computed({
     get: () => store.getters['pokemon/swiper'],
@@ -79,13 +78,13 @@ export const usePokemon = () => {
   }
 
   const getPokemonEvolutionChain = async () => {
-    store.commit('pokemon/SET_IS_LOADING_EVOLUTION', true)
+    pokemonIsLoadingEvolution.value = true
     try {
       await store.dispatch('pokemon/getPokemonEvolutionChain')
     } catch (error) {
       console.error(error)
     } finally {
-      store.commit('pokemon/SET_IS_LOADING_EVOLUTION', false)
+      pokemonIsLoadingEvolution.value = false
     }
   }
 
@@ -95,40 +94,6 @@ export const usePokemon = () => {
     } catch (error) {
       console.error(error)
     }
-  }
-
-  const validatePokemonId = async (isMounted = false) => {
-    // Validate route param id exist
-    if (!route.params.id) return
-
-    // Disable pokemon swiper
-    if (isMounted) pokemonSwiper.value.disable()
-
-    // Get pokemon id from route params
-    let pokemonId = Number.parseInt(route.params.id)
-
-    // Validate pokemon id must between 1 and pokemonCount
-    if (pokemonId <= 0 || pokemonId > pokemonCount) {
-      if (pokemonId <= 0) {
-        pokemonId = 1
-      } else {
-        pokemonId = pokemonCount
-      }
-
-      router.replace({ name: 'pokedexInfo', params: { id: pokemonId } })
-      return
-    }
-
-    // Call get pokemon by id API
-    await getPokemonById(pokemonId)
-
-    // Reset pokemon form selected to default
-    if (pokemonVarietiesCount.value) {
-      pokemonFormSelected.value = pokemonVarietyOptions.value[0].value
-    }
-
-    // Enable pokemon swiper
-    if (isMounted) pokemonSwiper.value.enable()
   }
 
   return {
@@ -148,7 +113,6 @@ export const usePokemon = () => {
     pokemonGenus,
     pokemonHeight,
     pokemonId,
-    pokemonIsFavorite,
     pokemonIsLoading,
     pokemonIsLoadingEvolution,
     pokemonName,
@@ -156,7 +120,6 @@ export const usePokemon = () => {
     pokemonTypes,
     pokemonVarietiesCount,
     pokemonVarietyOptions,
-    pokemonWeight,
-    validatePokemonId
+    pokemonWeight
   }
 }

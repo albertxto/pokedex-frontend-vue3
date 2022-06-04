@@ -1,72 +1,10 @@
+import {
+  getIdFromPokeApiUrl, getPokemonImageUrlById, normalizePokeApiName
+} from '@/utils/stringFormat'
+
 export function PUSH_EVOLUTION (state, payload) {
   if (typeof payload === 'object') {
     state.evolutions.push(payload)
-  }
-}
-
-export function RESET (state) {
-  state.about = ''
-  state.baseExperience = 0
-  state.baseHappiness = 0
-  state.baseStats = []
-  state.eggGroups = []
-  state.genderRate = -1
-  state.genus = ''
-  state.height = 0
-  state.id = ''
-  state.image = ''
-  state.isLoading = true
-  state.isLoadingEvolution = false
-  state.name = ''
-  state.types = []
-  state.weight = 0
-}
-
-export function SET_ABOUT (state, payload) {
-  if (typeof payload === 'string' && payload) {
-    state.about = payload
-  } else {
-    state.about = ''
-  }
-}
-
-export function SET_BASE_EXPERIENCE (state, payload) {
-  if (typeof payload === 'number' && payload > 0) {
-    state.baseExperience = payload
-  } else {
-    state.baseExperience = 0
-  }
-}
-
-export function SET_BASE_HAPPINESS (state, payload) {
-  if (typeof payload === 'number' && payload > 0) {
-    state.baseHappiness = payload
-  } else {
-    state.baseHappiness = 0
-  }
-}
-
-export function SET_BASE_STATS (state, payload) {
-  if (Array.isArray(payload) && payload.length) {
-    state.baseStats = payload
-  } else {
-    state.baseStats = []
-  }
-}
-
-export function SET_EGG_GROUPS (state, payload) {
-  if (Array.isArray(payload) && payload.length) {
-    state.eggGroups = payload
-  } else {
-    state.eggGroups = []
-  }
-}
-
-export function SET_EVOLUTION_CHAIN_ID (state, payload) {
-  if (typeof payload === 'number' && payload > 0) {
-    state.evolutionChainId = payload
-  } else {
-    state.evolutionChainId = 0
   }
 }
 
@@ -86,46 +24,6 @@ export function SET_FORM_SELECTED (state, payload) {
   }
 }
 
-export function SET_GENDER_RATE (state, payload) {
-  if (typeof payload === 'number') {
-    state.genderRate = payload
-  } else {
-    state.genderRate = -1
-  }
-}
-
-export function SET_GENUS (state, payload) {
-  if (typeof payload === 'string' && payload) {
-    state.genus = payload
-  } else {
-    state.genus = ''
-  }
-}
-
-export function SET_HEIGHT (state, payload) {
-  if (typeof payload === 'number' && payload > 0) {
-    state.height = payload
-  } else {
-    state.height = 0
-  }
-}
-
-export function SET_ID (state, payload) {
-  if (typeof payload === 'number' && payload > 0) {
-    state.id = payload
-  } else {
-    state.id = ''
-  }
-}
-
-export function SET_IMAGE (state, payload) {
-  if (typeof payload === 'string' && payload) {
-    state.image = payload
-  } else {
-    state.image = ''
-  }
-}
-
 export function SET_IS_LOADING (state, payload) {
   if (typeof payload === 'boolean') {
     state.isLoading = payload
@@ -142,38 +40,66 @@ export function SET_IS_LOADING_EVOLUTION (state, payload) {
   }
 }
 
-export function SET_NAME (state, payload) {
-  if (typeof payload === 'string' && payload) {
-    state.name = payload
-  } else {
-    state.name = ''
-  }
+export function SET_POKEMON (state, payload) {
+  // Base experience
+  state.baseExperience = payload.base_experience
+
+  // Base stats
+  state.baseStats = payload.stats.map((status) => ({
+    label: status.stat.name,
+    value: status.base_stat
+  }))
+
+  // Measurement
+  state.height = payload.height
+  state.weight = payload.weight
+
+  // Name
+  state.name = normalizePokeApiName(payload.name)
+
+  // Types
+  state.types = payload.types.map((pokemonType) => pokemonType.type.name)
+}
+
+export function SET_POKEMON_SPECIES (state, payload) {
+  // About
+  state.about = payload.flavor_text_entries.find((flavorText) => (
+    flavorText.language.name === 'en' &&
+      (flavorText.version.name === 'sword' ||
+      flavorText.version.name === 'shield' ||
+      flavorText.version.name === 'ultra-sun' ||
+      flavorText.version.name === 'ultra-moon' ||
+      flavorText.version.name === 'x' ||
+      flavorText.version.name === 'y')
+  )).flavor_text
+
+  // Base happiness
+  state.baseHappiness = payload.base_happiness
+
+  // Egg groups
+  state.eggGroups = payload.egg_groups.map((eggGroup) => eggGroup.name)
+
+  // Evolution chain ID
+  state.evolutionChainId = Number.parseInt(getIdFromPokeApiUrl(payload.evolution_chain.url))
+
+  // Gender
+  state.genderRate = payload.gender_rate
+
+  // Genus
+  state.genus = payload.genera.find((genera) => genera.language.name === 'en').genus
+
+  // Varieties
+  state.varieties = payload.varieties.map((variety) => {
+    const pokemonId = getIdFromPokeApiUrl(variety.pokemon.url)
+    return {
+      isDefault: variety.is_default,
+      id: pokemonId,
+      image: getPokemonImageUrlById(pokemonId),
+      name: normalizePokeApiName(variety.pokemon.name)
+    }
+  })
 }
 
 export function SET_SWIPER (state, payload) {
   state.swiper = payload
-}
-
-export function SET_TYPES (state, payload) {
-  if (Array.isArray(payload) && payload.length) {
-    state.types = payload
-  } else {
-    state.types = []
-  }
-}
-
-export function SET_VARIETIES (state, payload) {
-  if (Array.isArray(payload) && payload.length) {
-    state.varieties = payload
-  } else {
-    state.varieties = []
-  }
-}
-
-export function SET_WEIGHT (state, payload) {
-  if (typeof payload === 'number' && payload > 0) {
-    state.weight = payload
-  } else {
-    state.weight = 0
-  }
 }

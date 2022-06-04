@@ -10,7 +10,6 @@ export default {
   genderRate: -1,
   genus: '',
   height: 0,
-  id: '',
   image: '',
   isLoading: true,
   isLoadingEvolution: false,
