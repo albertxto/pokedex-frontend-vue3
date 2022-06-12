@@ -13,7 +13,7 @@ const AppFooter = defineAsyncComponent(() => import('@/components/footer/AppFoot
       <AdminNavbar />
       <div class="w-full p-6 mx-auto h-fit md:p-10">
         <router-view />
-        <AppFooter />
+        <AppFooter class="pt-10" />
       </div>
     </div>
   </div>

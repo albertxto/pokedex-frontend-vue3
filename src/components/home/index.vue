@@ -1,6 +1,7 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
 
+const AppFooter = defineAsyncComponent(() => import('@/components/footer/AppFooter.vue'))
 const HomeNavbar = defineAsyncComponent(() => import('@/components/navbars/HomeNavbar.vue'))
 const NavigationCard = defineAsyncComponent(() => import('@/components/home/NavigationCard.vue'))
 </script>
@@ -50,5 +51,7 @@ const NavigationCard = defineAsyncComponent(() => import('@/components/home/Navi
         label="Type Effects"
       />
     </div>
+
+    <AppFooter class="pt-20" />
   </div>
 </template>

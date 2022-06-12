@@ -11,9 +11,9 @@ const githubUrl = import.meta.env.VITE_GITHUB_URL
 
 <template>
   <footer
-    class="w-full pb-6 bg-transparent"
+    class="w-full bg-transparent"
     :class="[
-      absolute ? 'absolute bottom-0' : 'relative pt-10'
+      absolute ? 'absolute bottom-0 pb-6' : 'relative'
     ]"
   >
     <div class="container px-6 mx-auto">
