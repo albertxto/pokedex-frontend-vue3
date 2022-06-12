@@ -1,3 +1,10 @@
+export const capitalize = (text = '') => {
+  return text
+    .split(' ')
+    .map((word) => `${word.charAt(0).toUpperCase()}${word.slice(1)}`)
+    .join(' ')
+}
+
 export const getIdFromPokeApiUrl = (url = '') => Number.parseInt(url.split('/')[6]) || null
 
 export const getPokemonImageUrlById = (id = '1') => {

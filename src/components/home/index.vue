@@ -14,7 +14,10 @@ const NavigationCard = defineAsyncComponent(() => import('@/components/home/Navi
       What Pokémon are you looking for?
     </h1>
 
-    <div class="grid items-center justify-between grid-cols-2 gap-6 mt-20 sm:gap-10">
+    <div
+      id="navigation-list"
+      class="grid items-center justify-between grid-cols-2 gap-6 mt-20 sm:gap-10"
+    >
       <NavigationCard
         color="success"
         label="Pokédex"
