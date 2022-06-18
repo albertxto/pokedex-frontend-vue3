@@ -13,18 +13,18 @@ describe('Pokedex List End-to-End Tests', () => {
     expect.elements('#pokedex-list a').count.toEqual(50)
 
     // Verifying the 1st Pokemon
-    const firstNavigationCard = element({
+    const firstPokedexCard = element({
       selector: '#pokedex-list a',
       index: 0
     })
-    expect(firstNavigationCard).text.toContain('#001')
+    expect(firstPokedexCard).text.toContain('#001')
 
     // Verifying the 50th Pokemon
-    const lastNavigationCard = element({
+    const lastPokedexCard = element({
       selector: '#pokedex-list a',
       index: 49
     })
-    expect(lastNavigationCard).text.toContain('#050')
+    expect(lastPokedexCard).text.toContain('#050')
   })
 
   after(browser => browser.end())
