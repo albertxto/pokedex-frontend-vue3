@@ -23,7 +23,10 @@ if (!pokemonList.value.length) {
       Pokédex
     </h1>
 
-    <div class="grid items-center justify-between grid-cols-2 gap-6 mt-6">
+    <div
+      id="pokedex-list"
+      class="grid items-center justify-between grid-cols-2 gap-6 mt-6"
+    >
       <template v-if="isLoadingField">
         <PokedexCardSkeleton
           v-for="index in 10"
@@ -50,6 +53,7 @@ if (!pokemonList.value.length) {
       class="mt-6 text-center"
     >
       <AppButton
+        id="load-more-button"
         color="primary"
         size="sm"
         :loading="isLoadingButton"

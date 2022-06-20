@@ -8,6 +8,16 @@ module.exports = {
     'plugin:vue/vue3-recommended',
     'standard'
   ],
+  globals: {
+    // ignore nightwatch globals
+    after: false,
+    before: false,
+    beforeEach: false,
+    describe: false,
+    element: false,
+    expect: false,
+    it: false
+  },
   parserOptions: {
     ecmaVersion: 2021,
     sourceType: 'module'
@@ -16,6 +26,7 @@ module.exports = {
     'vue'
   ],
   rules: {
+    'no-template-curly-in-string': 'off',
     'vue/multi-word-component-names': 'off'
   }
 }

@@ -9,7 +9,10 @@ const { pokemonBaseExperience, pokemonBaseHappiness } = usePokemon()
 </script>
 
 <template>
-  <PokedexSection label="Training">
+  <PokedexSection
+    id="pokemon-training"
+    label="Training"
+  >
     <PokedexField label="Base EXP">
       {{ pokemonBaseExperience }}
     </PokedexField>

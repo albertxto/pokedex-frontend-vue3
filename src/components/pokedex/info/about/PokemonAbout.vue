@@ -5,7 +5,10 @@ const { pokemonAbout } = usePokemon()
 </script>
 
 <template>
-  <p class="leading-relaxed">
+  <p
+    id="pokemon-about"
+    class="leading-relaxed"
+  >
     {{ pokemonAbout }}
   </p>
 </template>

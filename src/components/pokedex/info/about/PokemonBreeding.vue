@@ -12,7 +12,10 @@ const isPokemonGenderless = () => typeof pokemonGenders.value === 'string'
 </script>
 
 <template>
-  <PokedexSection label="Breeding">
+  <PokedexSection
+    id="pokemon-breeding"
+    label="Breeding"
+  >
     <PokedexField label="Gender">
       <template v-if="isPokemonGenderless()">
         {{ pokemonGenders }}

@@ -1,7 +1,7 @@
 import { computed } from 'vue'
 import { useStore } from 'vuex'
 import { useRoute, useRouter } from 'vue-router'
-import { pokedexNumberFormat } from '@/utils/stringFormat'
+import { capitalize, pokedexNumberFormat } from '@/utils/stringFormat'
 import { validatePokemonRoute } from '@/utils/validation'
 
 export const usePokemon = () => {
@@ -75,6 +75,9 @@ export const usePokemon = () => {
     if (pokemonVarietiesCount.value) {
       pokemonFormSelected.value = pokemonVarietyOptions.value[0].value
     }
+
+    // Set document title
+    document.title = `${capitalize(pokemonName.value)} - Pokédex`
   }
 
   const getPokemonEvolutionChain = async () => {
