@@ -53,6 +53,7 @@ if (!pokemonList.value.length) {
       class="mt-6 text-center"
     >
       <AppButton
+        id="load-more-button"
         color="primary"
         size="sm"
         :loading="isLoadingButton"

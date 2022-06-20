@@ -7,7 +7,10 @@ const { pokemonHeight, pokemonWeight } = usePokemon()
 <template>
   <div class="bg-white shadow-xl rounded-2xl dark:bg-slate-800">
     <div class="px-6 py-4">
-      <div class="grid grid-cols-2">
+      <div
+        id="pokemon-measurement"
+        class="grid grid-cols-2"
+      >
         <div>
           <div class="text-slate-400">
             Height

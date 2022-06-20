@@ -14,6 +14,7 @@ const pokemonStatLabel = (stat = '') => pokemonStats[stat]
 <template>
   <PokedexField
     v-for="(baseStat, index) in pokemonBaseStats"
+    :id="`base-stat-${baseStat.label}`"
     :key="index"
     :label="pokemonStatLabel(baseStat.label)"
   >
