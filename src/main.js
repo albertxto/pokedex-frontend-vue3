@@ -3,6 +3,7 @@ import '@/assets/styles/index.scss'
 import App from '@/App.vue'
 import router from '@/router'
 import store from '@/store'
+import { registerSW } from 'virtual:pwa-register'
 
 import { parseJwt } from '@/utils/stringFormat.js'
 
@@ -69,3 +70,17 @@ app.component('AppTd', AppTd)
 
 // Mount
 app.mount('#app')
+
+// Register SW
+if ('serviceWorker' in navigator) {
+  registerSW({
+    onNeedRefresh () {},
+    onOfflineReady () {},
+    onRegistered (r) {
+      // Configure periodic service worker updates every 1 hour
+      r && setInterval(() => {
+        r.update()
+      }, 3600000)
+    }
+  })
+}

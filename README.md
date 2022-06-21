@@ -26,12 +26,13 @@ This project is developed using Vue 3 in Vite and uses Vue 3 `<script setup>` SF
 - Update profile (must login first)
 - Change password (must login first)
 - Admin can create, edit, delete users (must login first)
+- Progressive Web Apps (in progress)
+- E2E testing (in progress)
 
 ## To Do
 
 - [ ] Unit testing
 - [ ] Component testing
-- [ ] E2E testing
 - [ ] Pokemon moves
 - [ ] List of abilities
 - [ ] List of items
@@ -41,6 +42,7 @@ This project is developed using Vue 3 in Vite and uses Vue 3 `<script setup>` SF
 ## Thanks
 
 - [Saepul Nahwan](https://dribbble.com/saepulnahwan23) for the [Pokedex App design](https://dribbble.com/shots/6545819-Pokedex-App)
+- [Alanyadk](https://pixabay.com/users/alanyadk-1919646/) for the [Pokeball vector design](https://pixabay.com/vectors/pokemon-pokeball-pokemon-go-1536849/)
 - [PokeAPI](https://pokeapi.co/) for the Pokemon RESTful API and images
 - [Creative Tim](https://www.creative-tim.com/) for the admin dashboard template
 - [Vue](https://vuejs.org/) for amazing JavaScript framework
