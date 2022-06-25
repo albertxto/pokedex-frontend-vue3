@@ -49,6 +49,7 @@ if (!pokemonList.value.length) {
 
     <LazyLoad
       v-if="isLoadMore"
+      id="load-more"
       class="mt-6"
       @intersect="getPokemonList(true)"
     />

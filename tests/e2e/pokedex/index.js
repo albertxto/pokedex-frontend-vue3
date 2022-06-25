@@ -28,9 +28,8 @@ describe('Pokedex List End-to-End Tests', () => {
   })
 
   it('should load more Pokemon', (browser) => {
-    // Get load more Pokemon button
-    const loadMoreButton = element('#load-more-button')
-    browser.click(loadMoreButton)
+    // Move to load more component
+    browser.moveToElement('#load-more', 10, 10)
 
     // Count Pokedex Card components
     expect.elements('#pokedex-list a').count.toEqual(100)
