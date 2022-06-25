@@ -1,12 +1,12 @@
 <script setup>
-import { defineAsyncComponent, reactive, ref } from 'vue'
+import { defineAsyncComponent, ref } from 'vue'
 
 const PokemonAbout = defineAsyncComponent(() => import('@/components/pokedex/info/about/index.vue'))
 const PokemonBaseStats = defineAsyncComponent(() => import('@/components/pokedex/info/baseStats/index.vue'))
 const PokemonEvolution = defineAsyncComponent(() => import('@/components/pokedex/info/evolution/index.vue'))
 
 const tab = ref('ABOUT')
-const tabs = reactive([
+const tabs = [
   {
     label: 'About',
     value: 'ABOUT'
@@ -24,7 +24,7 @@ const tabs = reactive([
     label: 'Moves',
     value: 'MOVES'
   }
-])
+]
 
 const onChangeTab = (newValue = 'ABOUT') => {
   tab.value = newValue
