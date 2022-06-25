@@ -5,7 +5,7 @@ import router from '@/router'
 import store from '@/store'
 import { registerSW } from 'virtual:pwa-register'
 
-import { parseJwt } from '@/utils/stringFormat.js'
+import { parseJwt } from '@/utils/stringFormat'
 
 const AppButton = defineAsyncComponent(() => import('@/components/shared/AppButton.vue'))
 const AppCard = defineAsyncComponent(() => import('@/components/shared/AppCard.vue'))

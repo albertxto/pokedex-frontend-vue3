@@ -1,5 +1,5 @@
 <script setup>
-import { usePokemon } from '@/composables/pokemon.js'
+import { usePokemon } from '@/composables/pokemon'
 
 const { pokemonHeight, pokemonWeight } = usePokemon()
 </script>

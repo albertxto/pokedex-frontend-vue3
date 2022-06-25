@@ -1,6 +1,6 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
-import { usePokemon } from '@/composables/pokemon.js'
+import { usePokemon } from '@/composables/pokemon'
 
 const PokemonType = defineAsyncComponent(() => import('@/components/pokedex/info/PokemonType.vue'))
 

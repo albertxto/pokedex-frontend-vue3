@@ -1,7 +1,7 @@
 <script setup>
 import { nextTick } from 'vue'
 import { useRoute } from 'vue-router'
-import { usePokemon } from '@/composables/pokemon.js'
+import { usePokemon } from '@/composables/pokemon'
 import { getPokemonImageUrlById } from '@/utils/stringFormat'
 
 const route = useRoute()

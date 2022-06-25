@@ -1,6 +1,6 @@
 import endpoints from '@/config/endpoints'
 import { axiosInstance } from '@/plugins/axios'
-import { parseJwt } from '@/utils/stringFormat.js'
+import { parseJwt } from '@/utils/stringFormat'
 
 export function login ({ commit }, payload = { email: '', password: '' }) {
   commit('SET_IS_LOADING', true)
