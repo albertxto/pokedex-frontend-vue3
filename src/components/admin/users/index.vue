@@ -6,10 +6,11 @@ import { useUser } from '@/composables/user'
 import { roles as userRolesConfig } from '@/config/user'
 
 const DeleteUserModal = defineAsyncComponent(() => import('@/components/admin/users/delete/DeleteUserModal.vue'))
+const LazyLoad = defineAsyncComponent(() => import('@/components/shared/LazyLoad.vue'))
 
 const { currentUserId, currentUserRole, isUserRoleAdmin } = useAuth()
 const { openModal } = useUser()
-const { getUserList, isLoadingButton, isLoadingField, isLoadMore, userList } = useUser()
+const { getUserList, isLoadingField, isLoadMore, userList } = useUser()
 
 const columnCount = computed(() => isUserRoleAdmin(currentUserRole.value) ? 5 : 4)
 const columns = computed(() => {
@@ -133,21 +134,13 @@ getUserList()
         </template>
       </AppTable>
     </div>
-
-    <div
-      v-if="isLoadMore"
-      class="mx-auto mt-6"
-    >
-      <AppButton
-        color="primary"
-        size="sm"
-        :loading="isLoadingButton"
-        @click="getUserList(true)"
-      >
-        Load More
-      </AppButton>
-    </div>
   </div>
+
+  <LazyLoad
+    v-if="isLoadMore"
+    class="mt-6"
+    @intersect="getUserList(true)"
+  />
 
   <DeleteUserModal v-if="isUserRoleAdmin(currentUserRole)" />
 </template>

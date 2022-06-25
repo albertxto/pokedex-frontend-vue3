@@ -2,13 +2,12 @@
 import { defineAsyncComponent } from 'vue'
 import { usePokemonList } from '@/composables/pokemonList'
 
+const LazyLoad = defineAsyncComponent(() => import('@/components/shared/LazyLoad.vue'))
 const PokedexCard = defineAsyncComponent(() => import('@/components/pokedex/list/PokedexCard.vue'))
 const PokedexCardSkeleton = defineAsyncComponent(() => import('@/components/shared/PokedexCardSkeleton.vue'))
 const PokedexListNavbar = defineAsyncComponent(() => import('@/components/navbars/PokedexListNavbar.vue'))
 
-const {
-  getPokemonList, isLoadingButton, isLoadingField, isLoadMore, pokemonList
-} = usePokemonList()
+const { getPokemonList, isLoadingField, isLoadMore, pokemonList } = usePokemonList()
 
 if (!pokemonList.value.length) {
   getPokemonList()
@@ -48,19 +47,10 @@ if (!pokemonList.value.length) {
       </template>
     </div>
 
-    <div
+    <LazyLoad
       v-if="isLoadMore"
-      class="mt-6 text-center"
-    >
-      <AppButton
-        id="load-more-button"
-        color="primary"
-        size="sm"
-        :loading="isLoadingButton"
-        @click="getPokemonList(true)"
-      >
-        Load More
-      </AppButton>
-    </div>
+      class="mt-6"
+      @intersect="getPokemonList(true)"
+    />
   </div>
 </template>

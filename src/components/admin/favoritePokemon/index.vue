@@ -2,12 +2,13 @@
 import { defineAsyncComponent } from 'vue'
 import { useFavoritePokemon } from '@/composables/favoritePokemon'
 
+const LazyLoad = defineAsyncComponent(() => import('@/components/shared/LazyLoad.vue'))
 const PokedexCardSkeleton = defineAsyncComponent(() => import('@/components/shared/PokedexCardSkeleton.vue'))
 const PokedexFavoriteCard = defineAsyncComponent(() => import('@/components/admin/favoritePokemon/PokedexFavoriteCard.vue'))
 const PokedexUnfavoriteModal = defineAsyncComponent(() => import('@/components/admin/favoritePokemon/PokedexUnfavoriteModal.vue'))
 
 const {
-  favoritePokemonList, getFavoritePokemonList, isLoadingButton, isLoadingField, isLoadMore
+  favoritePokemonList, getFavoritePokemonList, isLoadingField, isLoadMore
 } = useFavoritePokemon()
 
 getFavoritePokemonList()
@@ -54,19 +55,11 @@ getFavoritePokemonList()
       </template>
     </div>
 
-    <div
+    <LazyLoad
       v-if="isLoadMore"
-      class="text-center"
-    >
-      <AppButton
-        color="primary"
-        size="sm"
-        :loading="isLoadingButton"
-        @click="getFavoritePokemonList(true)"
-      >
-        Load More
-      </AppButton>
-    </div>
+      class="mt-6"
+      @intersect="getFavoritePokemonList(true)"
+    />
   </div>
 
   <PokedexUnfavoriteModal />
