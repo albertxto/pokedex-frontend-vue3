@@ -1,29 +1,40 @@
 <script setup>
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, onMounted, onUnmounted } from 'vue'
 import { ArrowLeftIcon, DesktopComputerIcon } from '@heroicons/vue/outline'
 import { useAuth } from '@/composables/auth'
+import { useNavbar } from '@/composables/navbar'
 import { usePokemon } from '@/composables/pokemon'
-import dottedImage from '@/assets/images/dotted.png'
 
+const BoxDecoration = defineAsyncComponent(() => import('@/components/headers/BoxDecoration.vue'))
 const DarkModeButton = defineAsyncComponent(() => import('@/components/headers/DarkModeButton.vue'))
+const DottedDecoration = defineAsyncComponent(() => import('@/components/headers/DottedDecoration.vue'))
 const NavigationButton = defineAsyncComponent(() => import('@/components/headers/NavigationButton.vue'))
 const PokedexFavorite = defineAsyncComponent(() => import('@/components/headers/PokedexFavorite.vue'))
 const PokemonFormSelect = defineAsyncComponent(() => import('@/components/pokedex/info/PokemonFormSelect.vue'))
 
 const { isAuthenticated } = useAuth()
+const { isNavbarScrolled, navbarComputedClass, navbarHandleScroll } = useNavbar()
 const { pokemonVarietiesCount } = usePokemon()
+
+onMounted(() => {
+  window.addEventListener('scroll', navbarHandleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', navbarHandleScroll)
+})
 </script>
 
 <template>
-  <nav class="z-50 flex flex-wrap items-center justify-between px-6 md:px-20">
+  <nav
+    class="fixed z-50 flex flex-wrap items-center justify-between w-full px-6 py-2 transition-colors md:px-20"
+    :class="navbarComputedClass"
+  >
     <div class="flex flex-wrap items-center justify-between w-full mx-auto">
-      <!-- Box decoration -->
-      <div class="absolute bg-white -z-2 -top-16 w-52 h-36 -rotate-12 -left-20 rounded-3xl opacity-10" />
-
       <!-- Left navbar -->
       <div class="flex items-center w-auto">
         <NavigationButton
-          force-white
+          :force-white="!isNavbarScrolled"
           :to="{ name: 'pokedex' }"
         >
           <ArrowLeftIcon class="w-6 h-6" />
@@ -33,12 +44,6 @@ const { pokemonVarietiesCount } = usePokemon()
       <!-- Pokemon forms -->
       <PokemonFormSelect v-if="pokemonVarietiesCount" />
 
-      <!-- Dotted decoration -->
-      <div
-        class="absolute top-0 w-20 h-12 bg-no-repeat bg-contain -z-2 opacity-20 left-2/3"
-        :style="{ backgroundImage: `url(${dottedImage})` }"
-      />
-
       <!-- Right navbar -->
       <div class="flex items-center bg-white bg-opacity-0">
         <ul class="flex flex-row gap-3 ml-auto list-none sm:gap-6">
@@ -47,18 +52,18 @@ const { pokemonVarietiesCount } = usePokemon()
             v-if="isAuthenticated"
             class="flex items-center"
           >
-            <PokedexFavorite />
+            <PokedexFavorite :force-white="!isNavbarScrolled" />
           </li>
 
           <!-- Dark mode -->
           <li class="flex items-center">
-            <DarkModeButton force-white />
+            <DarkModeButton :force-white="!isNavbarScrolled" />
           </li>
 
           <!-- Dashboard -->
           <li class="flex items-center">
             <NavigationButton
-              force-white
+              :force-white="!isNavbarScrolled"
               :to="{ name: 'dashboard' }"
             >
               <DesktopComputerIcon class="w-6 h-6" />
@@ -68,4 +73,8 @@ const { pokemonVarietiesCount } = usePokemon()
       </div>
     </div>
   </nav>
+
+  <BoxDecoration />
+
+  <DottedDecoration />
 </template>

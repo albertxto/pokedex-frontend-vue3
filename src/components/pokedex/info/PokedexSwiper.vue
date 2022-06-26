@@ -1,5 +1,5 @@
 <script setup>
-import { computed, nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { usePokemon } from '@/composables/pokemon'
 import { count as pokemonCount } from '@/config/pokemon'
@@ -57,8 +57,8 @@ onMounted(() => {
   })
 })
 
-onBeforeUnmount(() => {
-  // Remove event listener before unmount
+onUnmounted(() => {
+  // Remove event listener on unmounted
   window.removeEventListener('resize', onResize)
 })
 </script>

@@ -1,13 +1,27 @@
 <script setup>
-import { defineAsyncComponent } from 'vue'
+import { defineAsyncComponent, onMounted, onUnmounted } from 'vue'
 import { ArrowLeftIcon, DesktopComputerIcon } from '@heroicons/vue/outline'
+import { useNavbar } from '@/composables/navbar'
 
 const DarkModeButton = defineAsyncComponent(() => import('@/components/headers/DarkModeButton.vue'))
 const NavigationButton = defineAsyncComponent(() => import('@/components/headers/NavigationButton.vue'))
+
+const { navbarComputedClass, navbarHandleScroll } = useNavbar()
+
+onMounted(() => {
+  window.addEventListener('scroll', navbarHandleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', navbarHandleScroll)
+})
 </script>
 
 <template>
-  <nav class="z-50 flex flex-wrap items-center justify-between">
+  <nav
+    class="fixed z-50 flex flex-wrap items-center justify-between w-full px-6 py-2 md:px-20"
+    :class="navbarComputedClass"
+  >
     <div class="flex flex-wrap items-center justify-between w-full mx-auto">
       <!-- Left navbar -->
       <div class="flex items-center w-auto">

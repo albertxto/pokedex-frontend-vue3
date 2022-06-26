@@ -15,10 +15,10 @@ if (!pokemonList.value.length) {
 </script>
 
 <template>
-  <div class="container p-6 pokedex-slider">
-    <PokedexListNavbar />
+  <PokedexListNavbar />
 
-    <h1 class="mt-6 text-3xl font-bold">
+  <div class="container px-6 pb-6 pokedex-slider">
+    <h1 class="mt-20 text-3xl font-bold">
       Pokédex
     </h1>
 

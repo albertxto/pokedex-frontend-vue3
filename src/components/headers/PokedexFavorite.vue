@@ -7,6 +7,13 @@ import { useFavoritePokemon } from '@/composables/favoritePokemon'
 
 const PokedexFavoriteModal = defineAsyncComponent(() => import('@/components/headers/PokedexFavoriteModal.vue'))
 
+defineProps({
+  forceWhite: {
+    type: Boolean,
+    default: false
+  }
+})
+
 const route = useRoute()
 const { getIsFavoritePokemon, isFavorite, isLoadingButton, openModal } = useFavoritePokemon()
 
@@ -20,8 +27,8 @@ watch(() => route.params.id, () => {
 <template>
   <a
     href="javascript:void(0)"
-    class="flex items-center py-2 text-xs font-bold text-white"
-    :class="{ 'hover:text-slate-400': !isLoadingButton, 'cursor-default': isLoadingButton }"
+    class="flex items-center py-2 text-xs font-bold"
+    :class="{ 'text-white': forceWhite, 'hover:text-slate-400': !isLoadingButton, 'cursor-default': isLoadingButton }"
     @click.prevent="openModal"
   >
     <RefreshIcon
