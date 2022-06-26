@@ -57,6 +57,7 @@ module.exports = {
     colors,
     extend: {
       animation: {
+        'spin-fast': 'spin .5s linear infinite',
         'spin-slow': 'spin 5s linear infinite'
       },
       backgroundSize: {

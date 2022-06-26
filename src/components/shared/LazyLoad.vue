@@ -23,7 +23,7 @@ onMounted(() => {
   <div class="flex justify-center">
     <RefreshIcon
       ref="intersectRef"
-      class="w-10 h-10 animate-spin"
+      class="w-10 h-10 animate-spin-fast"
     />
   </div>
 </template>
