@@ -78,6 +78,11 @@ const routes = [
     component: () => import('@/views/pokedex/index.vue')
   },
   {
+    path: '/pokedex/search',
+    name: 'pokedexSearch',
+    component: () => import('@/views/pokedex/search.vue')
+  },
+  {
     path: '/pokedex/:id',
     name: 'pokedexInfo',
     component: () => import('@/views/pokedex/_id.vue')

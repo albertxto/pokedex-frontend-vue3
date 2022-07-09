@@ -1,14 +1,17 @@
 <script setup>
 import { defineAsyncComponent, onMounted, onUnmounted } from 'vue'
-import { ArrowLeftIcon, DesktopComputerIcon, SearchIcon } from '@heroicons/vue/outline'
+import { ArrowLeftIcon, DesktopComputerIcon } from '@heroicons/vue/outline'
 import { useNavbar } from '@/composables/navbar'
-import { usePokemonSearch } from '@/composables/pokemonSearch'
 
 const DarkModeButton = defineAsyncComponent(() => import('@/components/headers/DarkModeButton.vue'))
 const NavigationButton = defineAsyncComponent(() => import('@/components/headers/NavigationButton.vue'))
+const PokemonSearchInput = defineAsyncComponent(() => import('@/components/headers/PokemonSearchInput.vue'))
 
 const { navbarComputedClass, navbarHandleScroll } = useNavbar()
-const { pokemonSearchInput } = usePokemonSearch()
+
+const goBack = () => {
+  window.history.back()
+}
 
 onMounted(() => {
   window.addEventListener('scroll', navbarHandleScroll)
@@ -24,24 +27,25 @@ onUnmounted(() => {
     class="fixed z-50 flex flex-wrap items-center justify-between w-full px-6 py-2 md:px-20"
     :class="navbarComputedClass"
   >
-    <div class="flex flex-wrap items-center justify-between w-full mx-auto">
+    <div class="flex flex-wrap items-center justify-between w-full gap-6 mx-auto">
       <!-- Left navbar -->
       <div class="flex items-center w-auto">
-        <NavigationButton :to="{ name: 'home' }">
+        <NavigationButton
+          to="#"
+          @click="goBack"
+        >
           <ArrowLeftIcon class="w-6 h-6" />
         </NavigationButton>
+      </div>
+
+      <!-- Pokemon search input -->
+      <div class="flex flex-wrap flex-grow">
+        <PokemonSearchInput />
       </div>
 
       <!-- Right navbar -->
       <div class="flex items-center bg-white bg-opacity-0">
         <ul class="flex flex-row gap-3 ml-auto list-none sm:gap-6">
-          <!-- Search -->
-          <li class="flex items-center">
-            <NavigationButton :to="{ name: 'pokedexSearch', query: { name: pokemonSearchInput } }">
-              <SearchIcon class="w-6 h-6" />
-            </NavigationButton>
-          </li>
-
           <!-- Dark mode -->
           <li class="flex items-center">
             <DarkModeButton />

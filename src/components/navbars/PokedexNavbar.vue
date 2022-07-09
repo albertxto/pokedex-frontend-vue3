@@ -1,9 +1,10 @@
 <script setup>
 import { defineAsyncComponent, onMounted, onUnmounted } from 'vue'
-import { ArrowLeftIcon, DesktopComputerIcon } from '@heroicons/vue/outline'
+import { ArrowLeftIcon, DesktopComputerIcon, SearchIcon } from '@heroicons/vue/outline'
 import { useAuth } from '@/composables/auth'
 import { useNavbar } from '@/composables/navbar'
 import { usePokemon } from '@/composables/pokemon'
+import { usePokemonSearch } from '@/composables/pokemonSearch'
 
 const BoxDecoration = defineAsyncComponent(() => import('@/components/headers/BoxDecoration.vue'))
 const DarkModeButton = defineAsyncComponent(() => import('@/components/headers/DarkModeButton.vue'))
@@ -15,6 +16,7 @@ const PokemonFormSelect = defineAsyncComponent(() => import('@/components/pokede
 const { isAuthenticated } = useAuth()
 const { isNavbarScrolled, navbarComputedClass, navbarHandleScroll } = useNavbar()
 const { pokemonVarietiesCount } = usePokemon()
+const { pokemonSearchInput } = usePokemonSearch()
 
 onMounted(() => {
   window.addEventListener('scroll', navbarHandleScroll)
@@ -53,6 +55,16 @@ onUnmounted(() => {
             class="flex items-center"
           >
             <PokedexFavorite :force-white="!isNavbarScrolled" />
+          </li>
+
+          <!-- Search -->
+          <li class="flex items-center">
+            <NavigationButton
+              :force-white="!isNavbarScrolled"
+              :to="{ name: 'pokedexSearch', query: { name: pokemonSearchInput } }"
+            >
+              <SearchIcon class="w-6 h-6" />
+            </NavigationButton>
           </li>
 
           <!-- Dark mode -->
