@@ -1,7 +1,7 @@
 import { count as pokemonCount, limit as pokemonLimit } from '@/config/pokemon'
 import { pokeApiInstance } from '@/plugins/pokeapi'
 import {
-  getIdFromPokeApiUrl, getPokemonImageUrlById, normalizePokeApiName, pokedexNumberFormat
+  getIdFromPokeApiUrl, getPokemonImageUrlById, pokedexNumberFormat
 } from '@/utils/stringFormat'
 
 export function getPokemonList ({ commit, getters }, nextPage = false) {
@@ -33,7 +33,7 @@ export function getPokemonList ({ commit, getters }, nextPage = false) {
           return {
             id: pokemonId,
             image: getPokemonImageUrlById(pokemonId),
-            name: normalizePokeApiName(result.name),
+            name: result.name,
             number: pokedexNumberFormat(pokemonId)
           }
         })
