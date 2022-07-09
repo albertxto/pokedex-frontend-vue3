@@ -10,14 +10,14 @@ const onSearchPokemon = () => {
   router.replace({ name: 'pokedexSearch', query: { name: pokemonSearchInput.value } })
 
   // Remove list if input is empty
-  if (!pokemonSearchInput.value) {
+  if (!pokemonSearchInput.value || pokemonSearchInput.value.length <= 1) {
     pokemonSearchList.value = []
     return
   }
 
   // Search from pokemon.json file
   pokemonSearchList.value = pokemonData.filter((pokemon) => {
-    return pokemon.name.includes(pokemonSearchInput.value)
+    return pokemon.name.includes(pokemonSearchInput.value.toLowerCase())
   })
 }
 </script>

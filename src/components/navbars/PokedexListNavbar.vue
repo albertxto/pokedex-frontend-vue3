@@ -24,7 +24,7 @@ onUnmounted(() => {
     class="fixed z-50 flex flex-wrap items-center justify-between w-full px-6 py-2 md:px-20"
     :class="navbarComputedClass"
   >
-    <div class="flex flex-wrap items-center justify-between w-full mx-auto">
+    <div class="flex items-center justify-between w-full mx-auto">
       <!-- Left navbar -->
       <div class="flex items-center w-auto">
         <NavigationButton :to="{ name: 'home' }">

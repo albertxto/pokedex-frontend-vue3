@@ -6,7 +6,7 @@ export const useNavbar = () => {
 
   // Computed
   const navbarComputedClass = computed(() => {
-    if (isNavbarScrolled.value) return 'shadow-xl bg-slate-100 dark:bg-slate-800'
+    if (isNavbarScrolled.value) return 'shadow-xl bg-slate-100 dark:bg-slate-900'
     return 'bg-transparent'
   })
 

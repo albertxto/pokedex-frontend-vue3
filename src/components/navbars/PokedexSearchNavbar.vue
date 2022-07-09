@@ -27,7 +27,7 @@ onUnmounted(() => {
     class="fixed z-50 flex flex-wrap items-center justify-between w-full px-6 py-2 md:px-20"
     :class="navbarComputedClass"
   >
-    <div class="flex flex-wrap items-center justify-between w-full gap-6 mx-auto">
+    <div class="flex items-center justify-between w-full gap-6 mx-auto">
       <!-- Left navbar -->
       <div class="flex items-center w-auto">
         <NavigationButton
@@ -39,7 +39,7 @@ onUnmounted(() => {
       </div>
 
       <!-- Pokemon search input -->
-      <div class="flex flex-wrap flex-grow">
+      <div class="flex items-center flex-grow">
         <PokemonSearchInput />
       </div>
 
