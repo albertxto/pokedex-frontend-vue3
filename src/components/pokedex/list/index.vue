@@ -3,7 +3,7 @@ import { defineAsyncComponent } from 'vue'
 import { usePokemonList } from '@/composables/pokemonList'
 
 const LazyLoad = defineAsyncComponent(() => import('@/components/shared/LazyLoad.vue'))
-const PokedexCard = defineAsyncComponent(() => import('@/components/pokedex/list/PokedexCard.vue'))
+const PokedexCard = defineAsyncComponent(() => import('@/components/pokedex/PokedexCard.vue'))
 const PokedexCardSkeleton = defineAsyncComponent(() => import('@/components/shared/PokedexCardSkeleton.vue'))
 const PokedexListNavbar = defineAsyncComponent(() => import('@/components/navbars/PokedexListNavbar.vue'))
 
@@ -39,6 +39,7 @@ if (!pokemonList.value.length) {
         :key="index"
       >
         <PokedexCard
+          use-lazy-image
           :image="pokemon.image"
           :name="pokemon.name"
           :number="pokemon.number"

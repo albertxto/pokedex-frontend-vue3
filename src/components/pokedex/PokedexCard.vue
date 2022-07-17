@@ -1,6 +1,8 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, defineAsyncComponent } from 'vue'
 import pokeballImage from '@/assets/images/pokeball.png'
+
+const LazyImage = defineAsyncComponent(() => import('@/components/shared/LazyImage.vue'))
 
 const props = defineProps({
   image: {
@@ -18,6 +20,10 @@ const props = defineProps({
   pokemonId: {
     type: Number,
     default: null
+  },
+  useLazyImage: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -45,7 +51,14 @@ const isShowCard = computed(() => !!props.pokemonId)
         />
 
         <div class="relative flex flex-row-reverse">
+          <LazyImage
+            v-if="useLazyImage"
+            class="w-32 h-auto"
+            :alt="name"
+            :src="image"
+          />
           <img
+            v-else
             class="w-32 h-auto"
             :alt="name"
             :src="image"

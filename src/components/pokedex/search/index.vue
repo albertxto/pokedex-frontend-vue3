@@ -3,7 +3,7 @@ import { defineAsyncComponent } from 'vue'
 import { usePokemonSearch } from '@/composables/pokemonSearch'
 import { getPokemonImageUrlById, pokedexNumberFormat } from '@/utils/stringFormat'
 
-const PokedexSearchCard = defineAsyncComponent(() => import('@/components/pokedex/search/PokedexSearchCard.vue'))
+const PokedexCard = defineAsyncComponent(() => import('@/components/pokedex/PokedexCard.vue'))
 const PokedexSearchNavbar = defineAsyncComponent(() => import('@/components/navbars/PokedexSearchNavbar.vue'))
 
 const { pokemonSearchList } = usePokemonSearch()
@@ -21,7 +21,7 @@ const { pokemonSearchList } = usePokemonSearch()
         v-for="(pokemon, index) in pokemonSearchList"
         :key="index"
       >
-        <PokedexSearchCard
+        <PokedexCard
           :image="getPokemonImageUrlById(pokemon.id)"
           :name="pokemon.name"
           :number="pokedexNumberFormat(pokemon.id)"
