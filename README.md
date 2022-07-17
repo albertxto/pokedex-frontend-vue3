@@ -13,6 +13,7 @@ This project is developed using Vue 3 in Vite and uses Vue 3 `<script setup>` SF
 ## Features
 
 - List of Pokemon with lazy load image
+- Search Pokemon
 - Pokedex info using virtual slides
 - Pokemon about
 - Pokemon base stats
@@ -31,6 +32,8 @@ This project is developed using Vue 3 in Vite and uses Vue 3 `<script setup>` SF
 
 ## To Do
 
+- [ ] TypeScript
+- [ ] Replace Vuex with Pinia
 - [ ] Unit testing
 - [ ] Component testing
 - [ ] Pokemon moves
