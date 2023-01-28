@@ -65,7 +65,10 @@ export function SET_POKEMON_SPECIES (state, payload) {
   // About
   state.about = payload.flavor_text_entries.find((flavorText) => (
     flavorText.language.name === 'en' &&
-      (flavorText.version.name === 'sword' ||
+      (flavorText.version.name === 'scarlet' ||
+      flavorText.version.name === 'violet' ||
+      flavorText.version.name === 'legends-arceus' ||
+      flavorText.version.name === 'sword' ||
       flavorText.version.name === 'shield' ||
       flavorText.version.name === 'ultra-sun' ||
       flavorText.version.name === 'ultra-moon' ||
