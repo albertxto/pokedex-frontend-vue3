@@ -1,6 +1,6 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
-import { ChartBarIcon, ChartPieIcon, PresentationChartLineIcon, UserGroupIcon } from '@heroicons/vue/solid'
+import { ChartBarIcon, ChartPieIcon, PresentationChartLineIcon, UserGroupIcon } from '@heroicons/vue/24/solid'
 
 const CardStats = defineAsyncComponent(() => import('@/components/shared/CardStats.vue'))
 </script>

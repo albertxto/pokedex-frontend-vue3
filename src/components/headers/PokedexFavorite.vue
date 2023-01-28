@@ -1,8 +1,8 @@
 <script setup>
 import { defineAsyncComponent, watch } from 'vue'
 import { useRoute } from 'vue-router'
-import { HeartIcon as HeartIconOutline, RefreshIcon } from '@heroicons/vue/outline'
-import { HeartIcon as HeartIconSolid } from '@heroicons/vue/solid'
+import { ArrowPathIcon, HeartIcon as HeartIconOutline } from '@heroicons/vue/24/outline'
+import { HeartIcon as HeartIconSolid } from '@heroicons/vue/24/solid'
 import { useFavoritePokemon } from '@/composables/favoritePokemon'
 
 const PokedexFavoriteModal = defineAsyncComponent(() => import('@/components/headers/PokedexFavoriteModal.vue'))
@@ -31,7 +31,7 @@ watch(() => route.params.id, () => {
     :class="{ 'text-white': forceWhite, 'hover:text-slate-400': !isLoadingButton, 'cursor-default': isLoadingButton }"
     @click.prevent="openModal"
   >
-    <RefreshIcon
+    <ArrowPathIcon
       v-if="isLoadingButton"
       class="w-6 h-6 animate-spin"
     />

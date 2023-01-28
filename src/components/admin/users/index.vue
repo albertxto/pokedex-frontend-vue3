@@ -1,6 +1,6 @@
 <script setup>
 import { computed, defineAsyncComponent } from 'vue'
-import { PencilAltIcon, PlusIcon, TrashIcon } from '@heroicons/vue/solid'
+import { PencilSquareIcon, PlusIcon, TrashIcon } from '@heroicons/vue/24/solid'
 import { useAuth } from '@/composables/auth'
 import { useUser } from '@/composables/user'
 import { roles as userRolesConfig } from '@/config/user'
@@ -117,7 +117,7 @@ getUserList()
                   size="xs"
                   @click="navigate"
                 >
-                  <PencilAltIcon class="w-4 h-4" />
+                  <PencilSquareIcon class="w-4 h-4" />
                 </AppButton>
               </router-link>
 

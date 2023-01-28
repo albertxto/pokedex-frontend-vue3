@@ -1,6 +1,6 @@
 <script setup>
 import { defineAsyncComponent, onMounted, onUnmounted } from 'vue'
-import { ArrowLeftIcon, DesktopComputerIcon } from '@heroicons/vue/outline'
+import { ArrowLeftIcon, ComputerDesktopIcon } from '@heroicons/vue/24/outline'
 import { useNavbar } from '@/composables/navbar'
 
 const DarkModeButton = defineAsyncComponent(() => import('@/components/headers/DarkModeButton.vue'))
@@ -54,7 +54,7 @@ onUnmounted(() => {
           <!-- Dashboard -->
           <li class="flex items-center">
             <NavigationButton :to="{ name: 'dashboard' }">
-              <DesktopComputerIcon class="w-6 h-6" />
+              <ComputerDesktopIcon class="w-6 h-6" />
             </NavigationButton>
           </li>
         </ul>

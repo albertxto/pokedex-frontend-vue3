@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import { RefreshIcon } from '@heroicons/vue/outline'
+import { ArrowPathIcon } from '@heroicons/vue/24/outline'
 import { getButtonColor } from '@/config/colors'
 
 const props = defineProps({
@@ -62,7 +62,7 @@ const componentClass = computed(() => {
     :disabled="isDisabled"
     :type="type"
   >
-    <RefreshIcon
+    <ArrowPathIcon
       v-if="loading"
       class="w-4 h-4 animate-spin"
     />

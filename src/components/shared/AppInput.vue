@@ -1,6 +1,6 @@
 <script setup>
 import { computed, ref, useSlots } from 'vue'
-import { EyeIcon, EyeOffIcon } from '@heroicons/vue/solid'
+import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/solid'
 import { colorsRingFocus } from '@/config/colors'
 
 const props = defineProps({
@@ -103,7 +103,7 @@ const componentClass = computed(() => {
       size="xs"
       @click="toggleIsShowPassword"
     >
-      <EyeOffIcon
+      <EyeSlashIcon
         v-if="isShowPassword"
         class="w-4 h-4"
       />

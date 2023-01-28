@@ -1,5 +1,5 @@
 <script setup>
-import { TrashIcon } from '@heroicons/vue/solid'
+import { TrashIcon } from '@heroicons/vue/24/solid'
 import { useFavoritePokemon } from '@/composables/favoritePokemon'
 
 const props = defineProps({

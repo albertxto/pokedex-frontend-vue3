@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useStore } from 'vuex'
-import { MoonIcon, SunIcon } from '@heroicons/vue/outline'
+import { MoonIcon, SunIcon } from '@heroicons/vue/24/outline'
 
 defineProps({
   forceWhite: {

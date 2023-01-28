@@ -1,6 +1,6 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
-import { ArrowLeftIcon } from '@heroicons/vue/outline'
+import { ArrowLeftIcon } from '@heroicons/vue/24/outline'
 
 const DarkModeButton = defineAsyncComponent(() => import('@/components/headers/DarkModeButton.vue'))
 const NavigationButton = defineAsyncComponent(() => import('@/components/headers/NavigationButton.vue'))

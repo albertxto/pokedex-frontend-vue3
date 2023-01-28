@@ -1,6 +1,6 @@
 <script setup>
 import { computed, useSlots } from 'vue'
-import { CheckCircleIcon, ExclamationCircleIcon, XIcon } from '@heroicons/vue/solid'
+import { CheckCircleIcon, ExclamationCircleIcon, XMarkIcon } from '@heroicons/vue/24/solid'
 import { colorsBg, colorsBorders, colorsOutline } from '@/config/colors'
 
 const props = defineProps({
@@ -71,7 +71,7 @@ const hasRightSlot = computed(() => slots.right)
           :outline="outline"
           @click="dismiss"
         >
-          <XIcon class="w-4 h-4" />
+          <XMarkIcon class="w-4 h-4" />
         </AppButton>
       </div>
     </div>

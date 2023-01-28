@@ -1,5 +1,5 @@
 <script setup>
-import { ExclamationIcon } from '@heroicons/vue/outline'
+import { ExclamationIcon } from '@heroicons/vue/24/outline'
 import { useUser } from '@/composables/user'
 
 const { closeModal, deleteUser, isLoadingButton, isShowModal, userEmail } = useUser()

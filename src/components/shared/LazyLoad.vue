@@ -1,6 +1,6 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import { RefreshIcon } from '@heroicons/vue/outline'
+import { ArrowPathIcon } from '@heroicons/vue/24/outline'
 
 const emits = defineEmits(['intersect'])
 
@@ -21,7 +21,7 @@ onMounted(() => {
 
 <template>
   <div class="flex justify-center">
-    <RefreshIcon
+    <ArrowPathIcon
       ref="intersectRef"
       class="w-10 h-10 animate-spin-fast"
     />

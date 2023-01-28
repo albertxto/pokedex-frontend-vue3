@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { UserCircleIcon } from '@heroicons/vue/solid'
+import { UserCircleIcon } from '@heroicons/vue/24/solid'
 import { useAuth } from '@/composables/auth'
 
 const { logout } = useAuth()

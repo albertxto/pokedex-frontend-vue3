@@ -1,5 +1,5 @@
 <script setup>
-import { HeartIcon } from '@heroicons/vue/outline'
+import { HeartIcon } from '@heroicons/vue/24/outline'
 import { useFavoritePokemon } from '@/composables/favoritePokemon'
 
 const {

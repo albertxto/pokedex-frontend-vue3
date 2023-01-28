@@ -1,6 +1,6 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
-import { DatabaseIcon, HeartIcon, UserGroupIcon } from '@heroicons/vue/solid'
+import { CircleStackIcon, HeartIcon, UserGroupIcon } from '@heroicons/vue/24/solid'
 import { useFavoritePokemon } from '@/composables/favoritePokemon'
 import { useUser } from '@/composables/user'
 import { count as pokemonCount } from '@/config/pokemon'
@@ -23,7 +23,7 @@ getFavoritePokemonListCount()
         icon-color="bg-red-500"
       >
         <template #icon>
-          <DatabaseIcon class="w-5 h-5" />
+          <CircleStackIcon class="w-5 h-5" />
         </template>
       </CardStats>
 

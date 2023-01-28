@@ -1,9 +1,9 @@
 <script setup>
 import { defineAsyncComponent, ref } from 'vue'
-import { MenuIcon, XIcon } from '@heroicons/vue/outline'
+import { Bars3Icon, XMarkIcon } from '@heroicons/vue/24/outline'
 import {
-  DesktopComputerIcon, DeviceMobileIcon, HomeIcon, SearchCircleIcon, UsersIcon
-} from '@heroicons/vue/solid'
+  ComputerDesktopIcon, DevicePhoneMobileIcon, HomeIcon, MagnifyingGlassCircleIcon, UsersIcon
+} from '@heroicons/vue/24/solid'
 
 const DarkModeButton = defineAsyncComponent(() => import('@/components/headers/DarkModeButton.vue'))
 const UserDropdown = defineAsyncComponent(() => import('@/components/headers/UserDropdown.vue'))
@@ -23,7 +23,7 @@ const toggleCollapseShow = (classes) => {
         type="button"
         @click="toggleCollapseShow('bg-white dark:bg-slate-900 m-2 py-3 px-6')"
       >
-        <MenuIcon class="w-5 h-5" />
+        <Bars3Icon class="w-5 h-5" />
       </button>
 
       <!-- Brand -->
@@ -66,7 +66,7 @@ const toggleCollapseShow = (classes) => {
                 class="px-3 py-1 text-xl leading-none text-black bg-transparent border border-transparent border-solid rounded cursor-pointer dark:text-white md:hidden"
                 @click="toggleCollapseShow('hidden')"
               >
-                <XIcon class="w-5 h-5 hover:text-slate-400" />
+                <XMarkIcon class="w-5 h-5 hover:text-slate-400" />
               </button>
             </div>
           </div>
@@ -94,7 +94,7 @@ const toggleCollapseShow = (classes) => {
                 ]"
                 @click="navigate"
               >
-                <DesktopComputerIcon class="w-4 h-4 mr-2" />
+                <ComputerDesktopIcon class="w-4 h-4 mr-2" />
                 Dashboard
               </a>
             </router-link>
@@ -115,7 +115,7 @@ const toggleCollapseShow = (classes) => {
                 ]"
                 @click="navigate"
               >
-                <SearchCircleIcon class="w-4 h-4 mr-2" />
+                <MagnifyingGlassCircleIcon class="w-4 h-4 mr-2" />
                 Favorite Pokémon
               </a>
             </router-link>
@@ -168,7 +168,7 @@ const toggleCollapseShow = (classes) => {
               class="flex py-3 text-xs font-bold uppercase text-slate-700 dark:text-slate-300 hover:text-slate-500 dark:hover:text-slate-400"
               :to="{ 'name': 'pokedex' }"
             >
-              <DeviceMobileIcon class="w-4 h-4 mr-2" />
+              <DevicePhoneMobileIcon class="w-4 h-4 mr-2" />
               Pokédex
             </router-link>
           </li>

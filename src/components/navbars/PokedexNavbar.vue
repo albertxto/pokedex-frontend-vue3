@@ -1,6 +1,6 @@
 <script setup>
 import { defineAsyncComponent, onMounted, onUnmounted } from 'vue'
-import { ArrowLeftIcon, DesktopComputerIcon, SearchIcon } from '@heroicons/vue/outline'
+import { ArrowLeftIcon, ComputerDesktopIcon, MagnifyingGlassIcon } from '@heroicons/vue/24/outline'
 import { useAuth } from '@/composables/auth'
 import { useNavbar } from '@/composables/navbar'
 import { usePokemon } from '@/composables/pokemon'
@@ -63,7 +63,7 @@ onUnmounted(() => {
               :force-white="!isNavbarScrolled"
               :to="{ name: 'pokedexSearch', query: { name: pokemonSearchInput } }"
             >
-              <SearchIcon class="w-6 h-6" />
+              <MagnifyingGlassIcon class="w-6 h-6" />
             </NavigationButton>
           </li>
 
@@ -78,7 +78,7 @@ onUnmounted(() => {
               :force-white="!isNavbarScrolled"
               :to="{ name: 'dashboard' }"
             >
-              <DesktopComputerIcon class="w-6 h-6" />
+              <ComputerDesktopIcon class="w-6 h-6" />
             </NavigationButton>
           </li>
         </ul>

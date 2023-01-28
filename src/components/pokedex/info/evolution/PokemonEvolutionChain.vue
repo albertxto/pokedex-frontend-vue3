@@ -1,6 +1,6 @@
 <script setup>
 import { defineAsyncComponent } from 'vue'
-import { ArrowRightIcon } from '@heroicons/vue/solid'
+import { ArrowRightIcon } from '@heroicons/vue/24/solid'
 
 const PokemonEvolutionImage = defineAsyncComponent(() => import('@/components/pokedex/info/evolution/PokemonEvolutionImage.vue'))
 
