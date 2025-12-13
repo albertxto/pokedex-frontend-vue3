@@ -4030,5 +4030,73 @@
   {
     "name": "miraidon",
     "id": 1008
+  },
+  {
+    "name": "walking-wake",
+    "id": 1009
+  },
+  {
+    "name": "iron-leaves",
+    "id": 1010
+  },
+  {
+    "name": "dipplin",
+    "id": 1011
+  },
+  {
+    "name": "poltchageist",
+    "id": 1012
+  },
+  {
+    "name": "sinistcha",
+    "id": 1013
+  },
+  {
+    "name": "okidogi",
+    "id": 1014
+  },
+  {
+    "name": "munkidori",
+    "id": 1015
+  },
+  {
+    "name": "fezandipiti",
+    "id": 1016
+  },
+  {
+    "name": "ogerpon",
+    "id": 1017
+  },
+  {
+    "name": "archaludon",
+    "id": 1018
+  },
+  {
+    "name": "hydrapple",
+    "id": 1019
+  },
+  {
+    "name": "gouging-fire",
+    "id": 1020
+  },
+  {
+    "name": "raging-bolt",
+    "id": 1021
+  },
+  {
+    "name": "iron-boulder",
+    "id": 1022
+  },
+  {
+    "name": "iron-crown",
+    "id": 1023
+  },
+  {
+    "name": "terapagos",
+    "id": 1024
+  },
+  {
+    "name": "pecharunt",
+    "id": 1025
   }
 ]
