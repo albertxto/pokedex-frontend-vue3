@@ -146,6 +146,8 @@ export function setPokemonEvolution ({ commit, dispatch }, payload) {
           evolutionDetails.push('shown the scroll in the tower of darkness')
         } else if (evolutionDetail?.trigger?.name === 'tower-of-waters') {
           evolutionDetails.push('shown the scroll in the tower of waters')
+        } else if (evolutionDetail?.trigger?.name === 'other') {
+          evolutionDetails.push('other')
         }
         // Holding item
         if (evolutionDetail?.held_item?.name) {
