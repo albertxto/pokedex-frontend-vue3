@@ -4,6 +4,10 @@ import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/solid'
 import { colorsRingFocus } from '@/config/colors'
 
 const props = defineProps({
+  autofocus: {
+    type: Boolean,
+    default: false
+  },
   borderless: {
     type: Boolean,
     default: false
@@ -84,6 +88,7 @@ const componentClass = computed(() => {
       v-model.trim="computedValue"
       class="flex-1 block w-full text-sm border-gray-300 rounded dark:bg-slate-800 dark:border-gray-400"
       :class="componentClass"
+      :autofocus="autofocus"
       :disabled="disabled"
       :placeholder="placeholder"
       :type="computedType"

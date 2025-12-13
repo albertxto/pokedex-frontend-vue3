@@ -26,6 +26,7 @@ const onSearchPokemon = () => {
   <AppInput
     v-model="pokemonSearchInput"
     class="w-full"
+    autofocus
     placeholder="Search Pokémon"
     type="search"
     @input="onSearchPokemon"
