@@ -1,6 +1,6 @@
-export const count = 1008
+export const count = 1025
 
-export const limit = 50
+export const limit = 200
 
 export const stats = {
   hp: 'HP',
