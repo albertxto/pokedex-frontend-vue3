@@ -24,7 +24,7 @@ export const parseJwt = (token = '') => {
 }
 
 export const pokedexNumberFormat = (id = '1') => {
-  return `#${id.toString().padStart(3, '0')}`
+  return `#${id.toString().padStart(4, '0')}`
 }
 
 export const thousandSeparator = (number = 0) => {
